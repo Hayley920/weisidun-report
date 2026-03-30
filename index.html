@@ -8,37 +8,37 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",Arial,sans-serif;background:#f4f5f9;color:#222;font-size:14px}
-.hdr{background:linear-gradient(135deg,#19b394,#0e7a63);color:#fff;padding:20px 36px 16px}
+.hdr{background:linear-gradient(135deg,#00B96B,#008a50);color:#fff;padding:20px 36px 16px}
 .hdr-top{display:flex;align-items:center;gap:12px;margin-bottom:8px}
-.logo{width:42px;height:42px;background:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:#19b394}
+.logo{width:42px;height:42px;background:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:#00B96B}
 .hdr h1{font-size:19px;font-weight:700}
 .hdr-meta{font-size:11.5px;opacity:.88;padding-left:54px;display:flex;flex-wrap:wrap;gap:3px 16px}
 .nav{background:#fff;display:flex;align-items:center;padding:0 36px;border-bottom:2px solid #eee;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.07)}
 .nb{border:none;background:none;padding:13px 18px;font-size:13px;color:#666;border-bottom:3px solid transparent;cursor:pointer;font-weight:500;transition:all .2s;white-space:nowrap}
-.nb:hover{color:#19b394;background:#f0faf8}
-.nb.on{color:#19b394;border-bottom-color:#19b394;font-weight:700}
+.nb:hover{color:#00B96B;background:#f0faf8}
+.nb.on{color:#00B96B;border-bottom-color:#00B96B;font-weight:700}
 .month-bar{margin-left:auto;display:flex;align-items:center;gap:6px;padding:8px 0}
 .mb{border:1px solid #eee;background:#f8f8f8;padding:5px 14px;border-radius:20px;cursor:pointer;font-size:12px;color:#666;transition:all .2s}
-.mb:hover{border-color:#ff2442;color:#19b394}
-.mb.on{background:#19b394;color:#fff;border-color:#19b394;font-weight:600}
+.mb:hover{border-color:#ff2442;color:#00B96B}
+.mb.on{background:#00B96B;color:#fff;border-color:#00B96B;font-weight:600}
 .wrap{padding:20px 36px;max-width:1480px;margin:0 auto}
 .tab{display:none}.tab.on{display:block}
 .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
 .kpi{background:#fff;border-radius:12px;padding:16px 20px;box-shadow:0 2px 8px rgba(0,0,0,.06);position:relative;overflow:hidden}
 .kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
-.kpi.k-red::before{background:#19b394}.kpi.k-blue::before{background:#ff2442}
-.kpi.k-green::before{background:#4f6ef7}.kpi.k-orange::before{background:#4f6ef7}
+.kpi.k-red::before{background:#00B96B}.kpi.k-blue::before{background:#FF2442}
+.kpi.k-green::before{background:#4F6EF7}.kpi.k-orange::before{background:#4f6ef7}
 .kpi-icon{font-size:22px;margin-bottom:4px}
 .kpi-label{font-size:11px;color:#999;margin-bottom:3px}
 .kpi-value{font-size:26px;font-weight:800;color:#111;line-height:1}
 .kpi-unit{font-size:12px;font-weight:400;color:#bbb;margin-left:2px}
 .kpi-sub{margin-top:4px;font-size:11px;color:#bbb}
-.kpi.k-red .kpi-sub b{color:#19b394}.kpi.k-blue .kpi-sub b{color:#ff2442}
-.kpi.k-green .kpi-sub b{color:#4f6ef7}.kpi.k-orange .kpi-sub b{color:#4f6ef7}
+.kpi.k-red .kpi-sub b{color:#00B96B}.kpi.k-blue .kpi-sub b{color:#FF2442}
+.kpi.k-green .kpi-sub b{color:#4F6EF7}.kpi.k-orange .kpi-sub b{color:#4f6ef7}
 .sec{background:#fff;border-radius:12px;padding:20px 22px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
 .sec-hd{display:flex;align-items:center;gap:8px;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid #f0f0f0}
 .sec-ic{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px}
-.ic-r{background:#edfaf6}.ic-b{background:#eef1ff}.ic-g{background:#edfaf6}.ic-o{background:#fff5eb}.ic-p{background:#f5f0ff}
+.ic-r{background:#e6f9f2}.ic-b{background:#eef1ff}.ic-g{background:#edfaf6}.ic-o{background:#fff5eb}.ic-p{background:#f5f0ff}
 .sec-hd h2{font-size:14px;font-weight:700;color:#111}
 .sec-note{margin-left:auto;font-size:11px;color:#bbb}
 .tbl-wrap{overflow-x:auto}
@@ -48,16 +48,16 @@ th:first-child{text-align:left;padding-left:14px}
 td{padding:8px 10px;text-align:center;border-bottom:1px solid #f3f3f3}
 td:first-child{text-align:left;font-weight:500;padding-left:14px}
 tr:hover td{background:#fffbfb}
-.tr-total td{background:#f0faf8!important;font-weight:700;color:#19b394;border-top:2px solid #b2e8de}
+.tr-total td{background:#f0faf8!important;font-weight:700;color:#00B96B;border-top:2px solid #b2e8de}
 .td-amt{font-weight:600;color:#111}.td-pct{color:#888;font-size:11px}
-.td-zero{color:#d0d0d0}.td-total{font-weight:700;color:#19b394}
+.td-zero{color:#d0d0d0}.td-total{font-weight:700;color:#00B96B}
 .td-rank{font-weight:700;color:#bbb;font-size:11px}
 .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle}
 .chart-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .cbox{background:#f8f9fc;border-radius:9px;padding:10px}
 .trend-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .trend-item{background:#f8f9fc;border-radius:9px;padding:10px}
-.trend-title{font-size:12px;font-weight:700;color:#333;margin-bottom:6px;padding-left:6px;border-left:3px solid #19b394}
+.trend-title{font-size:12px;font-weight:700;color:#333;margin-bottom:6px;padding-left:6px;border-left:3px solid #00B96B}
 @media(max-width:900px){.wrap{padding:12px}.nav{padding:0 8px;flex-wrap:wrap}.month-bar{margin-left:0;padding:4px 0;width:100%;border-top:1px solid #f0f0f0}.kpi-row{grid-template-columns:1fr 1fr}.chart-2,.trend-grid{grid-template-columns:1fr}}
 </style>
 </head>
@@ -196,7 +196,7 @@ const ALL = {
 const IND_NAMES = ["美妆个护", "游戏", "3C及电器", "日用百货", "服装配饰", "家居建材", "生活服务", "医疗健康", "教育培训", "母婴", "互联网", "食品饮料", "房地产", "商务服务", "文体娱乐", "出行旅游", "餐饮", "通信", "金融行业", "汽车"];
 const MONTHS = ["2026-01","2026-02","2026-03"];
 const MONTH_LABELS = {"2026-01":"1月","2026-02":"2月","2026-03":"3月"};
-const COLORS = ['#ff2442','#4f6ef7','#19b394','#4f6ef7','#a259ff','#00bcd4','#e91e63','#3f51b5','#009688','#ff5722','#607d8b','#8bc34a','#795548','#9c27b0','#ffc107','#03a9f4','#673ab7','#ff7043','#26a69a','#ec407a'];
+const COLORS = ['#ff2442','#4f6ef7','#00B96B','#4f6ef7','#a259ff','#00bcd4','#e91e63','#3f51b5','#009688','#ff5722','#607d8b','#8bc34a','#795548','#9c27b0','#ffc107','#03a9f4','#673ab7','#ff7043','#26a69a','#ec407a'];
 let curMonth = "2026-03";
 const CHARTS = {};
 const W = v => (v/10000).toFixed(2);
@@ -273,9 +273,9 @@ function renderTotal(){
     xAxis:{type:'category',data:['1月','2月','3月']},
     yAxis:{type:'value',name:'万元'},
     series:[
-      {name:'一代自运营',type:'bar',stack:'S',data:zi3,itemStyle:{color:'#ff2442'}},
-      {name:'其他收量',type:'bar',stack:'S',data:sh3,itemStyle:{color:'#19b394'}},
-      {name:'走量消耗',type:'bar',stack:'S',data:zo3,itemStyle:{color:'#4f6ef7'},
+      {name:'一代自运营',type:'bar',stack:'S',data:zi3,itemStyle:{color:'#00B96B'}},
+      {name:'其他收量',type:'bar',stack:'S',data:sh3,itemStyle:{color:'#FF2442'}},
+      {name:'走量消耗',type:'bar',stack:'S',data:zo3,itemStyle:{color:'#4F6EF7'},
         label:{show:true,position:'top',formatter:p=>tot3[p.dataIndex]+'万',fontSize:10,fontWeight:700,color:'#555'}},
     ]
   });
@@ -289,9 +289,9 @@ function renderTotal(){
     series:[{type:'pie',radius:['38%','65%'],center:['50%','46%'],
       label:{formatter:'{b}\n{d}%',fontSize:11,lineHeight:16},
       data:[
-        {value:+(pd.zi/10000).toFixed(2),name:'一代自运营',itemStyle:{color:'#19b394'}},
-        {value:+(pd.shou/10000).toFixed(2),name:'其他收量',itemStyle:{color:'#ff2442'}},
-        {value:+(pd.zou/10000).toFixed(2),name:'走量消耗',itemStyle:{color:'#4f6ef7'}},
+        {value:+(pd.zi/10000).toFixed(2),name:'一代自运营',itemStyle:{color:'#00B96B'}},
+        {value:+(pd.shou/10000).toFixed(2),name:'其他收量',itemStyle:{color:'#FF2442'}},
+        {value:+(pd.zou/10000).toFixed(2),name:'走量消耗',itemStyle:{color:'#4F6EF7'}},
       ]
     }]
   });
@@ -325,9 +325,9 @@ function renderDetail(){
       <td class="td-total">${fmt(r.total)}</td>
       <td style="padding:5px 10px;min-width:100px">
         <div style="display:flex;height:6px;border-radius:3px;overflow:hidden">
-          <div style="width:${zp}%;background:#ff2442"></div>
-          <div style="width:${sp}%;background:#19b394"></div>
-          <div style="width:${zop}%;background:#4f6ef7"></div>
+          <div style="width:${zp}%;background:#00B96B"></div>
+          <div style="width:${sp}%;background:#FF2442"></div>
+          <div style="width:${zop}%;background:#4F6EF7"></div>
         </div>
         <div style="font-size:10px;color:#bbb;margin-top:2px">自${r.ziR}% 收${r.shouR}% 走${r.zouR}%</div>
       </td></tr>`;
@@ -387,8 +387,8 @@ function renderTrend(){
           label:{show:true,position:'top',formatter:p=>p.value>0?p.value:'',fontSize:9,color:'#555'}},
         {name:'自运营%',type:'line',yAxisIndex:1,data:ziRData,smooth:true,
           symbol:'circle',symbolSize:5,
-          lineStyle:{color:'#19b394',width:2},itemStyle:{color:'#19b394'},
-          label:{show:true,position:'top',formatter:p=>p.value>0?p.value+'%':'',fontSize:9,color:'#19b394'}},
+          lineStyle:{color:'#00B96B',width:2},itemStyle:{color:'#00B96B'},
+          label:{show:true,position:'top',formatter:p=>p.value>0?p.value+'%':'',fontSize:9,color:'#00B96B'}},
       ]
     });
   });
