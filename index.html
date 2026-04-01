@@ -387,8 +387,8 @@ function renderTrend(){
           label:{show:true,position:'top',formatter:p=>p.value>0?p.value:'',fontSize:9,color:'#555'}},
         {name:'自运营%',type:'line',yAxisIndex:1,data:ziRData,smooth:true,
           symbol:'circle',symbolSize:5,
-          lineStyle:{color:'#00B96B',width:2},itemStyle:{color:'#00B96B'},
-          label:{show:true,position:'top',formatter:p=>p.value>0?p.value+'%':'',fontSize:9,color:'#00B96B'}},
+          lineStyle:{color,width:2},itemStyle:{color},
+          label:{show:true,position:'top',formatter:p=>p.value>0?p.value+'%':'',fontSize:9,color}},
       ]
     });
   });
@@ -400,4 +400,4 @@ renderTrend();
 window.addEventListener('resize',()=>Object.values(CHARTS).forEach(c=>c&&c.resize()));
 </script>
 </body>
-</html>
+</html><!-- deploy 1775028456 -->
