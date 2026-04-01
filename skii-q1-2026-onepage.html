@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SK-II × 小红星 26Q1 投放复盘</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #f0eeff;
+  font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+  color: #000;
+}
+
+/* ===== 整体容器 ===== */
+.page {
+  width: 800px;
+  margin: 0 auto;
+  background: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ===== HEADER ===== */
+.header {
+  background: #fff;
+  padding: 48px 52px 0 52px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 线模板阶梯装饰 */
+.ladder {
+  position: absolute;
+  right: 0; top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0;
+  width: 320px;
+}
+.ladder-bar {
+  height: 14px;
+  border-radius: 2px 0 0 2px;
+}
+
+/* Logo 区 */
+.logo-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 32px;
+  position: relative; z-index: 2;
+}
+.xhs-logo {
+  background: #FF2442;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 6px;
+  letter-spacing: 0.05em;
+}
+.dept-label {
+  font-size: 11px;
+  color: #999;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* 主标题 */
+.main-en {
+  font-size: 13px;
+  font-weight: 700;
+  color: #9e76ff;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  position: relative; z-index: 2;
+}
+.main-title {
+  font-size: 52px;
+  font-weight: 900;
+  color: #000;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  position: relative; z-index: 2;
+  margin-bottom: 6px;
+}
+.main-title span { color: #9e76ff; }
+.main-sub {
+  font-size: 14px;
+  color: #666;
+  font-weight: 300;
+  margin-bottom: 28px;
+  position: relative; z-index: 2;
+  letter-spacing: 0.05em;
+}
+
+/* 时间 meta 条 */
+.meta-bar {
+  display: flex;
+  gap: 0;
+  margin: 0 -52px;
+  background: #9e76ff;
+  padding: 14px 52px;
+  position: relative; z-index: 2;
+}
+.meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-right: 32px;
+  border-right: 1px solid rgba(255,255,255,0.25);
+  margin-right: 32px;
+}
+.meta-item:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+.meta-label { font-size: 10px; color: rgba(255,255,255,0.65); letter-spacing: 0.12em; text-transform: uppercase; }
+.meta-val { font-size: 13px; font-weight: 700; color: #fff; }
+
+/* ===== SECTION COMMON ===== */
+.section {
+  padding: 36px 52px;
+  position: relative;
+}
+.section + .section {
+  border-top: 1px solid #f0eeff;
+}
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+.section-num {
+  width: 32px; height: 32px;
+  background: #9e76ff;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+.section-title-text {
+  font-size: 18px;
+  font-weight: 900;
+  color: #000;
+  letter-spacing: 0.02em;
+}
+.section-tag {
+  margin-left: auto;
+  font-size: 10px;
+  font-weight: 700;
+  color: #9e76ff;
+  background: #f0eeff;
+  padding: 4px 10px;
+  border-radius: 4px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* 右侧线模板竖条装饰 */
+.section-deco {
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 8px;
+  display: flex;
+  flex-direction: column;
+}
+.deco-seg { flex: 1; }
+
+/* ===== KPI GRID ===== */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.kpi-card {
+  background: #f8f6ff;
+  border: 1.5px solid #e8e0ff;
+  border-radius: 10px;
+  padding: 18px 16px 14px;
+  position: relative;
+  overflow: hidden;
+}
+.kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--accent, #9e76ff);
+}
+.kpi-big {
+  font-size: 32px;
+  font-weight: 900;
+  color: #9e76ff;
+  line-height: 1;
+  margin-bottom: 2px;
+  letter-spacing: -0.01em;
+}
+.kpi-big .unit {
+  font-size: 14px;
+  font-weight: 500;
+  color: #bbb;
+  letter-spacing: 0;
+}
+.kpi-name { font-size: 11px; color: #888; margin-top: 6px; line-height: 1.4; }
+.kpi-badge {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 3px;
+  background: #ede8ff;
+  color: #9e76ff;
+}
+.kpi-badge.yellow { background: #fff8e0; color: #b8860b; }
+.kpi-badge.teal { background: #e0f7f2; color: #0a7c6a; }
+
+/* ===== SPU BAR CHART ===== */
+.spu-list { display: flex; flex-direction: column; gap: 14px; }
+.spu-row { display: flex; align-items: center; gap: 12px; }
+.spu-rank {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 900;
+  flex-shrink: 0;
+}
+.rank-1 { background: #9e76ff; color: #fff; }
+.rank-2 { background: #dfd9ff; color: #9e76ff; }
+.rank-3 { background: #ffdf7a; color: #7a5a00; }
+.rank-4 { background: #f0f0f0; color: #888; }
+.spu-name { font-size: 12px; color: #333; width: 130px; flex-shrink: 0; line-height: 1.4; }
+.spu-bar-wrap { flex: 1; height: 22px; background: #f5f3ff; border-radius: 5px; overflow: hidden; position: relative; }
+.spu-bar { height: 100%; border-radius: 5px; display: flex; align-items: center; padding-left: 8px; }
+.spu-bar-label { font-size: 11px; font-weight: 700; color: #fff; }
+.spu-val { font-size: 13px; font-weight: 900; color: #9e76ff; width: 55px; text-align: right; flex-shrink: 0; }
+.spu-sub { font-size: 10px; color: #bbb; width: 38px; text-align: right; flex-shrink: 0; }
+
+/* ===== 双列布局 ===== */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+/* ===== 数据表格 ===== */
+.data-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.data-table th {
+  background: #9e76ff;
+  color: #fff;
+  font-weight: 700;
+  padding: 9px 10px;
+  text-align: left;
+  font-size: 11px;
+  letter-spacing: 0.03em;
+}
+.data-table th:first-child { border-radius: 6px 0 0 0; }
+.data-table th:last-child { border-radius: 0 6px 0 0; }
+.data-table td {
+  padding: 9px 10px;
+  border-bottom: 1px solid #f3f0ff;
+  color: #333;
+  vertical-align: middle;
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:nth-child(even) td { background: #faf8ff; }
+.num-cell { font-size: 15px; font-weight: 900; color: #9e76ff; }
+.tag-pill {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 3px;
+}
+.tag-good { background: #e0f7f2; color: #0a7c6a; }
+.tag-warn { background: #fff3e0; color: #c07000; }
+.tag-high { background: #ede8ff; color: #9e76ff; }
+.tag-low { background: #fce8ff; color: #b030c0; }
+
+/* 流水堆叠条 */
+.stack-bar { display: flex; height: 10px; border-radius: 5px; overflow: hidden; gap: 1px; }
+.stack-seg { height: 100%; }
+
+/* ===== 洞察卡片 ===== */
+.insight-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.insight-card {
+  border-radius: 10px;
+  padding: 16px 18px;
+  border-left: 4px solid #9e76ff;
+  background: #f8f6ff;
+}
+.insight-card.yellow { border-left-color: #ffdf7a; background: #fffdf0; }
+.insight-card.red { border-left-color: #ff6b6b; background: #fff5f5; }
+.insight-card.teal { border-left-color: #56c8b0; background: #f0faf8; }
+.insight-icon { font-size: 18px; margin-bottom: 6px; }
+.insight-title { font-size: 13px; font-weight: 900; color: #000; margin-bottom: 6px; line-height: 1.4; }
+.insight-body { font-size: 11px; color: #666; line-height: 1.7; }
+
+/* ===== FOOTER ===== */
+.footer {
+  background: #000;
+  padding: 22px 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer-left { display: flex; flex-direction: column; gap: 4px; }
+.footer-brand { font-size: 18px; font-weight: 900; color: #fff; letter-spacing: 0.05em; }
+.footer-sub { font-size: 10px; color: #666; letter-spacing: 0.12em; text-transform: uppercase; }
+.footer-right { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+.footer-date { font-size: 11px; color: #888; }
+.footer-disclaimer { font-size: 9px; color: #555; text-align: right; max-width: 280px; line-height: 1.5; }
+
+/* 右侧阶梯线条（section装饰） */
+.line-deco-right {
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 6px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 分隔标签 */
+.divider-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #9e76ff;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.divider-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, #dfd9ff, transparent);
+}
+
+/* 引导进店效率 mini bars */
+.eff-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.eff-label { font-size: 11px; color: #555; width: 120px; flex-shrink: 0; }
+.eff-bar-wrap { flex: 1; height: 16px; background: #f5f3ff; border-radius: 4px; overflow: hidden; }
+.eff-bar { height: 100%; border-radius: 4px; }
+.eff-val { font-size: 12px; font-weight: 700; color: #333; width: 40px; text-align: right; flex-shrink: 0; }
+.eff-cost { font-size: 10px; color: #bbb; width: 50px; text-align: right; flex-shrink: 0; }
+
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ===== HEADER ===== -->
+  <div class="header">
+    <!-- 线模板阶梯装饰 -->
+    <div class="ladder">
+      <div class="ladder-bar" style="width:280px;background:#dfd9ff;height:18px;margin-bottom:3px;"></div>
+      <div class="ladder-bar" style="width:240px;background:#9e76ff;height:8px;margin-bottom:3px;"></div>
+      <div class="ladder-bar" style="width:220px;background:#ffdf7a;height:5px;margin-bottom:3px;"></div>
+      <div class="ladder-bar" style="width:200px;background:#985946;height:4px;margin-bottom:3px;"></div>
+      <div class="ladder-bar" style="width:260px;background:#dfd9ff;height:12px;margin-bottom:3px;"></div>
+      <div class="ladder-bar" style="width:180px;background:#9e76ff;height:6px;margin-bottom:3px;"></div>
+      <div class="ladder-bar" style="width:300px;background:#dfd9ff;height:20px;margin-bottom:3px;"></div>
+      <div class="ladder-bar" style="width:150px;background:#ffdf7a;height:5px;"></div>
+    </div>
+
+    <div class="logo-row">
+      <div class="xhs-logo">小红书</div>
+      <span class="dept-label">Channel Business · 小红星</span>
+    </div>
+
+    <div class="main-en">XIAOHONGSHU · XIAOHONGXING · Q1 2026 REVIEW</div>
+    <div class="main-title">SK-II<br><span>26Q1</span> 投放复盘</div>
+    <div class="main-sub">2026.01.01 — 2026.03.31 · 小红星全周期数据汇总</div>
+
+    <div class="meta-bar">
+      <div class="meta-item">
+        <span class="meta-label">Brand</span>
+        <span class="meta-val">SK-II</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Period</span>
+        <span class="meta-val">2026 Q1</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Platform</span>
+        <span class="meta-val">小红星（三方）</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">SPU Count</span>
+        <span class="meta-val">4 个有效 SPU</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Data Source</span>
+        <span class="meta-val">RedBI · 笔记维度</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 1: 核心 KPI ===== -->
+  <div class="section" style="background:#fff;">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <div class="section-title-text">Q1 核心指标总览</div>
+      <div class="section-tag">OVERVIEW</div>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi-card" style="--accent:#9e76ff;">
+        <div class="kpi-big">1,403<span class="unit">万</span></div>
+        <div class="kpi-name">Q1 广告流水</div>
+        <div class="kpi-badge">小红星竞品表现</div>
+      </div>
+      <div class="kpi-card" style="--accent:#e8b4b8;">
+        <div class="kpi-big" style="color:#c87a9a;">931<span class="unit">万</span></div>
+        <div class="kpi-name">Q1 蒲公英流水</div>
+        <div class="kpi-badge" style="background:#fce8f5;color:#c87a9a;">内容种草</div>
+      </div>
+      <div class="kpi-card" style="--accent:#56c8b0;">
+        <div class="kpi-big" style="color:#56c8b0;">2,334<span class="unit">万</span></div>
+        <div class="kpi-name">Q1 商业化流水</div>
+        <div class="kpi-badge teal">广告+蒲公英合计</div>
+      </div>
+      <div class="kpi-card" style="--accent:#ffdf7a;">
+        <div class="kpi-big" style="color:#b8860b;">3,363<span class="unit">万</span></div>
+        <div class="kpi-name">Q1 总阅读量</div>
+        <div class="kpi-badge yellow">内容触达</div>
+      </div>
+      <div class="kpi-card" style="--accent:#9e76ff;">
+        <div class="kpi-big">153<span class="unit">%</span></div>
+        <div class="kpi-name">广告放大比</div>
+        <div class="kpi-badge">效率指标</div>
+      </div>
+      <div class="kpi-card" style="--accent:#9e76ff;">
+        <div class="kpi-big">7.8<span class="unit">%</span></div>
+        <div class="kpi-name">广告双列 CTR</div>
+        <div class="kpi-badge">点击效率</div>
+      </div>
+      <div class="kpi-card" style="--accent:#56c8b0;">
+        <div class="kpi-big" style="color:#56c8b0;">9.3<span class="unit">%</span></div>
+        <div class="kpi-name">小红星引导进店率</div>
+        <div class="kpi-badge teal">转化效率</div>
+      </div>
+      <div class="kpi-card" style="--accent:#9e76ff;">
+        <div class="kpi-big">7.4</div>
+        <div class="kpi-name">平均引导进店成本（元）</div>
+        <div class="kpi-badge">成本效率</div>
+      </div>
+    </div>
+
+    <!-- 线条装饰 -->
+    <div style="position:absolute;right:0;top:0;bottom:0;width:6px;display:flex;flex-direction:column;">
+      <div style="flex:3;background:#9e76ff;"></div>
+      <div style="flex:1;background:#ffdf7a;"></div>
+      <div style="flex:2;background:#dfd9ff;"></div>
+      <div style="flex:1;background:#985946;"></div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 2: SPU 表现 ===== -->
+  <div class="section" style="background:#faf8ff;">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <div class="section-title-text">SPU 广告流水排名</div>
+      <div class="section-tag">SPU PERFORMANCE</div>
+    </div>
+
+    <div class="divider-label">广告流水 · Q1 总量 1,403万</div>
+    <div class="spu-list" style="margin-bottom:28px;">
+      <div class="spu-row">
+        <div class="spu-rank rank-1">1</div>
+        <div class="spu-name">神仙水护肤精华露</div>
+        <div class="spu-bar-wrap">
+          <div class="spu-bar" style="width:100%;background:linear-gradient(90deg,#9e76ff,#b89aff);">
+            <span class="spu-bar-label">占比 77%</span>
+          </div>
+        </div>
+        <div class="spu-val">1,078万</div>
+        <div class="spu-sub" style="color:#9e76ff;font-weight:700;">放大2x</div>
+      </div>
+      <div class="spu-row">
+        <div class="spu-rank rank-2">2</div>
+        <div class="spu-name">全绿匠心面霜</div>
+        <div class="spu-bar-wrap">
+          <div class="spu-bar" style="width:21%;background:linear-gradient(90deg,#dfd9ff,#c8b8ff);">
+            <span class="spu-bar-label" style="color:#9e76ff;">16%</span>
+          </div>
+        </div>
+        <div class="spu-val">230万</div>
+        <div class="spu-sub" style="color:#ff6b6b;font-weight:700;">放大0.5x</div>
+      </div>
+      <div class="spu-row">
+        <div class="spu-rank rank-3">3</div>
+        <div class="spu-name">光蕴透防晒露</div>
+        <div class="spu-bar-wrap">
+          <div class="spu-bar" style="width:6.9%;background:linear-gradient(90deg,#ffdf7a,#ffe89a);">
+            <span class="spu-bar-label" style="color:#7a5a00;font-size:10px;">5%</span>
+          </div>
+        </div>
+        <div class="spu-val">75万</div>
+        <div class="spu-sub" style="color:#56c8b0;font-weight:700;">放大20x</div>
+      </div>
+      <div class="spu-row">
+        <div class="spu-rank rank-4">4</div>
+        <div class="spu-name">凯底赋能焕颜精华霜</div>
+        <div class="spu-bar-wrap">
+          <div class="spu-bar" style="width:1.9%;background:#e0e0e0;min-width:16px;">
+          </div>
+        </div>
+        <div class="spu-val">20万</div>
+        <div class="spu-sub" style="color:#9e76ff;font-weight:700;">放大0.2x</div>
+      </div>
+    </div>
+
+    <div class="divider-label">引导进店率 & 进店成本对比</div>
+    <div class="two-col">
+      <div>
+        <div style="font-size:11px;color:#888;margin-bottom:12px;font-weight:500;">进店率（越高越好）</div>
+        <div class="eff-row">
+          <div class="eff-label">凯底赋能焕颜精华霜</div>
+          <div class="eff-bar-wrap"><div class="eff-bar" style="width:100%;background:#56c8b0;"></div></div>
+          <div class="eff-val" style="color:#56c8b0;font-weight:900;">36.0%</div>
+        </div>
+        <div class="eff-row">
+          <div class="eff-label">光蕴透防晒露</div>
+          <div class="eff-bar-wrap"><div class="eff-bar" style="width:49.7%;background:#9e76ff;"></div></div>
+          <div class="eff-val" style="color:#9e76ff;font-weight:900;">17.9%</div>
+        </div>
+        <div class="eff-row">
+          <div class="eff-label">神仙水护肤精华露</div>
+          <div class="eff-bar-wrap"><div class="eff-bar" style="width:25.6%;background:#9e76ff;"></div></div>
+          <div class="eff-val">9.2%</div>
+        </div>
+        <div class="eff-row">
+          <div class="eff-label">全绿匠心面霜</div>
+          <div class="eff-bar-wrap"><div class="eff-bar" style="width:16.9%;background:#dfd9ff;"></div></div>
+          <div class="eff-val" style="color:#bbb;">6.1%</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;color:#888;margin-bottom:12px;font-weight:500;">引导进店成本（越低越好，元）</div>
+        <div class="eff-row">
+          <div class="eff-label">光蕴透防晒露</div>
+          <div class="eff-bar-wrap"><div class="eff-bar" style="width:32.8%;background:#56c8b0;"></div></div>
+          <div class="eff-val" style="color:#56c8b0;font-weight:900;">4.1</div>
+        </div>
+        <div class="eff-row">
+          <div class="eff-label">凯底赋能焕颜精华霜</div>
+          <div class="eff-bar-wrap"><div class="eff-bar" style="width:40.8%;background:#56c8b0;"></div></div>
+          <div class="eff-val" style="color:#56c8b0;font-weight:900;">5.1</div>
+        </div>
+        <div class="eff-row">
+          <div class="eff-label">神仙水护肤精华露</div>
+          <div class="eff-bar-wrap"><div class="eff-bar" style="width:58.4%;background:#9e76ff;"></div></div>
+          <div class="eff-val">7.3</div>
+        </div>
+        <div class="eff-row">
+          <div class="eff-label">全绿匠心面霜</div>
+          <div class="eff-bar-wrap"><div class="eff-bar" style="width:100%;background:#ff9090;"></div></div>
+          <div class="eff-val" style="color:#ff6b6b;font-weight:900;">12.5</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="position:absolute;right:0;top:0;bottom:0;width:6px;display:flex;flex-direction:column;">
+      <div style="flex:2;background:#dfd9ff;"></div>
+      <div style="flex:3;background:#9e76ff;"></div>
+      <div style="flex:1;background:#ffdf7a;"></div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 3: 流水结构 & 竞品 ===== -->
+  <div class="section" style="background:#fff;">
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <div class="section-title-text">流水结构 · 广告 vs 蒲公英</div>
+      <div class="section-tag">REVENUE STRUCTURE</div>
+    </div>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>SPU</th>
+          <th>广告流水</th>
+          <th>蒲公英流水</th>
+          <th>广告放大比</th>
+          <th>流水结构（广/蒲）</th>
+          <th>双列CTR</th>
+          <th>进店率</th>
+          <th>进店成本</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="spu-rank rank-1" style="display:inline-flex;width:20px;height:20px;font-size:10px;">1</span></td>
+          <td style="font-weight:700;">神仙水护肤精华露</td>
+          <td><span class="num-cell">1,078万</span></td>
+          <td style="color:#c87a9a;font-weight:700;">473万</td>
+          <td><span class="tag-pill tag-high">200%</span></td>
+          <td>
+            <div class="stack-bar">
+              <div class="stack-seg" style="width:69%;background:#9e76ff;border-radius:5px 0 0 5px;"></div>
+              <div class="stack-seg" style="width:31%;background:#f0b8d0;border-radius:0 5px 5px 0;"></div>
+            </div>
+            <div style="font-size:9px;color:#bbb;margin-top:2px;">广69% / 蒲31%</div>
+          </td>
+          <td>7.6%</td>
+          <td>9.2%</td>
+          <td>7.3</td>
+        </tr>
+        <tr>
+          <td><span class="spu-rank rank-2" style="display:inline-flex;width:20px;height:20px;font-size:10px;">2</span></td>
+          <td style="font-weight:700;">全绿匠心面霜</td>
+          <td><span class="num-cell">230万</span></td>
+          <td style="color:#c87a9a;font-weight:700;">447万</td>
+          <td><span class="tag-pill tag-warn">84%</span></td>
+          <td>
+            <div class="stack-bar">
+              <div class="stack-seg" style="width:34%;background:#9e76ff;border-radius:5px 0 0 5px;"></div>
+              <div class="stack-seg" style="width:66%;background:#f0b8d0;border-radius:0 5px 5px 0;"></div>
+            </div>
+            <div style="font-size:9px;color:#bbb;margin-top:2px;">广34% / 蒲66%</div>
+          </td>
+          <td>8.4%</td>
+          <td>6.1%</td>
+          <td style="color:#ff6b6b;font-weight:700;">12.5 ⚠️</td>
+        </tr>
+        <tr>
+          <td><span class="spu-rank rank-3" style="display:inline-flex;width:20px;height:20px;font-size:10px;">3</span></td>
+          <td style="font-weight:700;">光蕴透防晒露</td>
+          <td><span class="num-cell">75万</span></td>
+          <td style="color:#c87a9a;font-weight:700;">6万</td>
+          <td><span class="tag-pill tag-good" style="font-weight:900;">2,065%</span></td>
+          <td>
+            <div class="stack-bar">
+              <div class="stack-seg" style="width:92%;background:#9e76ff;border-radius:5px 0 0 5px;"></div>
+              <div class="stack-seg" style="width:8%;background:#f0b8d0;border-radius:0 5px 5px 0;"></div>
+            </div>
+            <div style="font-size:9px;color:#bbb;margin-top:2px;">广92% / 蒲8%</div>
+          </td>
+          <td>9.3%</td>
+          <td style="color:#56c8b0;font-weight:700;">17.9%</td>
+          <td style="color:#56c8b0;font-weight:700;">4.1 ✓</td>
+        </tr>
+        <tr>
+          <td><span class="spu-rank rank-4" style="display:inline-flex;width:20px;height:20px;font-size:10px;">4</span></td>
+          <td style="font-weight:700;">凯底赋能焕颜精华霜</td>
+          <td><span class="num-cell">20万</span></td>
+          <td style="color:#c87a9a;font-weight:700;">5万</td>
+          <td><span class="tag-pill" style="background:#f0f0f0;color:#888;">19%</span></td>
+          <td>
+            <div class="stack-bar">
+              <div class="stack-seg" style="width:80%;background:#9e76ff;border-radius:5px 0 0 5px;"></div>
+              <div class="stack-seg" style="width:20%;background:#f0b8d0;border-radius:0 5px 5px 0;"></div>
+            </div>
+            <div style="font-size:9px;color:#bbb;margin-top:2px;">广80% / 蒲20%</div>
+          </td>
+          <td>5.1%</td>
+          <td style="color:#56c8b0;font-weight:700;">36.0%</td>
+          <td style="color:#56c8b0;font-weight:700;">5.1 ✓</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="display:flex;gap:16px;margin-top:12px;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:5px;">
+        <div style="width:12px;height:8px;border-radius:2px;background:#9e76ff;"></div>
+        <span style="font-size:10px;color:#888;">广告流水占比</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:5px;">
+        <div style="width:12px;height:8px;border-radius:2px;background:#f0b8d0;"></div>
+        <span style="font-size:10px;color:#888;">蒲公英流水占比</span>
+      </div>
+      <span style="font-size:10px;color:#ccc;">* 放大比 >100% = 广告效率优于内容自然量</span>
+    </div>
+
+    <div style="position:absolute;right:0;top:0;bottom:0;width:6px;display:flex;flex-direction:column;">
+      <div style="flex:1;background:#ffdf7a;"></div>
+      <div style="flex:4;background:#9e76ff;"></div>
+      <div style="flex:1;background:#985946;"></div>
+      <div style="flex:2;background:#dfd9ff;"></div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 4: 洞察建议 ===== -->
+  <div class="section" style="background:#faf8ff;">
+    <div class="section-header">
+      <div class="section-num">04</div>
+      <div class="section-title-text">策略洞察 · Q2 优化建议</div>
+      <div class="section-tag">INSIGHTS & ACTIONS</div>
+    </div>
+
+    <div class="insight-grid">
+      <div class="insight-card teal">
+        <div class="insight-icon">🚀</div>
+        <div class="insight-title">防晒露：效率黑马，Q2 重点放量</div>
+        <div class="insight-body">广告放大比高达 <strong>2,065%</strong>，进店率17.9%（品牌最高），进店成本4.1（品牌最低）。搜索场域拉动显著，Q2 应加大搜索词出价与信息流预算，顺势抢占春夏防晒赛道红利。</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-icon">💪</div>
+        <div class="insight-title">神仙水：主力稳健，维持加投节奏</div>
+        <div class="insight-body">广告流水1,078万占品牌总量77%，放大比2x，CTR 7.6%，进店成本7.3，三项均衡。是 Q2 核心预算支柱，建议维持现有节奏并测试人群扩量方向。</div>
+      </div>
+      <div class="insight-card yellow">
+        <div class="insight-icon">✨</div>
+        <div class="insight-title">凯底面霜：进店率36%，内容质量标杆</div>
+        <div class="insight-body">虽体量小（20万），但进店率36% 为品牌第一。内容质量极强，建议加大蒲公英达人合作数量，配合定向放量，将潜力 SPU 孵化为第三增量支柱。</div>
+      </div>
+      <div class="insight-card red">
+        <div class="insight-icon">⚠️</div>
+        <div class="insight-title">面霜：广告效率待优化，进店成本偏高</div>
+        <div class="insight-body">蒲公英流水（447万）远超广告（230万），放大比仅84%，进店成本12.5偏高。建议拆分笔记测试高效创意，同时优化落地页提升转化率，目标将进店成本压至9以下。</div>
+      </div>
+    </div>
+
+    <!-- Q2 整体预判 -->
+    <div style="margin-top:16px;background:#9e76ff;border-radius:10px;padding:18px 22px;display:flex;align-items:center;gap:20px;">
+      <div style="font-size:28px;flex-shrink:0;">🎯</div>
+      <div>
+        <div style="font-size:13px;font-weight:900;color:#fff;margin-bottom:4px;">Q2 整体策略预判</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.8);line-height:1.8;">
+          ① 防晒露发力春夏旺季 &nbsp;|&nbsp; ② 神仙水维持稳投 &nbsp;|&nbsp; ③ 面霜创意优化降本 &nbsp;|&nbsp; ④ 凯底面霜加量试跑<br>
+          预计综合进店成本可从 <strong style="color:#ffdf7a;">7.4</strong> 下压至 <strong style="color:#ffdf7a;">6.5</strong> 以下，Q2 商业化流水目标可冲击 <strong style="color:#ffdf7a;">2,800万+</strong>
+        </div>
+      </div>
+    </div>
+
+    <div style="position:absolute;right:0;top:0;bottom:0;width:6px;display:flex;flex-direction:column;">
+      <div style="flex:3;background:#dfd9ff;"></div>
+      <div style="flex:2;background:#9e76ff;"></div>
+      <div style="flex:1;background:#ffdf7a;"></div>
+      <div style="flex:2;background:#985946;"></div>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <div class="footer">
+    <div class="footer-left">
+      <div class="footer-brand">SK-II × 小红星</div>
+      <div class="footer-sub">26Q1 Advertising Review Report · Channel Business Dept.</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:3px;align-items:center;">
+      <div style="display:flex;gap:4px;">
+        <div style="width:5px;height:5px;border-radius:50%;background:#9e76ff;"></div>
+        <div style="width:5px;height:5px;border-radius:50%;background:#ffdf7a;"></div>
+        <div style="width:5px;height:5px;border-radius:50%;background:#dfd9ff;"></div>
+        <div style="width:5px;height:5px;border-radius:50%;background:#985946;"></div>
+      </div>
+    </div>
+    <div class="footer-right">
+      <div class="footer-date">Generated: 2026.04.01</div>
+      <div class="footer-disclaimer">数据来源：RedBI 小红星竞品表现 + SPU整体复盘<br>数据周期：2026-01-01 ~ 2026-03-31 · 三方平台=小红星</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
