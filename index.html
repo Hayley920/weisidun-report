@@ -7,310 +7,300 @@
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",Arial,sans-serif;background:#f4f5f9;color:#222;font-size:14px}
-.hdr{background:linear-gradient(135deg,#00B96B,#008a50);color:#fff;padding:20px 36px 16px}
-.hdr-top{display:flex;align-items:center;gap:12px;margin-bottom:8px}
-.logo{width:42px;height:42px;background:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:#00B96B}
-.hdr h1{font-size:19px;font-weight:700}
-.hdr-meta{font-size:11.5px;opacity:.88;padding-left:54px;display:flex;flex-wrap:wrap;gap:3px 16px}
-.nav{background:#fff;display:flex;align-items:center;padding:0 36px;border-bottom:2px solid #eee;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.07)}
-.nb{border:none;background:none;padding:13px 18px;font-size:13px;color:#666;border-bottom:3px solid transparent;cursor:pointer;font-weight:500;transition:all .2s;white-space:nowrap}
-.nb:hover{color:#00B96B;background:#f0faf8}
+body{font-family:"PingFang SC","Helvetica Neue",Arial,sans-serif;background:#f5f6fa;color:#1a1a1a;font-size:14px}
+.hdr{background:#fff;position:relative;overflow:hidden;border-bottom:1px solid #eee}
+.hdr-inner{padding:22px 40px 18px;position:relative;z-index:2}
+.hdr-top{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+.logo{width:38px;height:38px;background:#00B96B;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;color:#fff;flex-shrink:0}
+.hdr h1{font-size:18px;font-weight:800;color:#111}
+.hdr-en{font-size:10px;font-weight:600;color:#bbb;letter-spacing:.15em;text-transform:uppercase;margin-top:2px}
+.hdr-meta{display:flex;flex-wrap:wrap;gap:4px 18px;font-size:11px;color:#aaa;padding-left:52px;margin-top:4px}
+.hdr-meta span::before{content:"·";margin-right:5px;color:#ddd}
+.hdr-steps{position:absolute;right:0;top:0;bottom:0;width:220px;display:flex;flex-direction:column;justify-content:center;gap:5px;align-items:flex-end;z-index:1}
+.hdr-step{border-radius:2px 0 0 2px}
+.nav{background:#fff;display:flex;align-items:center;padding:0 40px;border-bottom:2px solid #f0f0f0;position:sticky;top:0;z-index:100;box-shadow:0 1px 6px rgba(0,0,0,.06)}
+.nb{border:none;background:none;padding:14px 18px;font-size:13px;color:#888;border-bottom:3px solid transparent;cursor:pointer;font-weight:500;transition:all .2s;white-space:nowrap}
+.nb:hover{color:#00B96B}
 .nb.on{color:#00B96B;border-bottom-color:#00B96B;font-weight:700}
-.month-bar{margin-left:auto;display:flex;align-items:center;gap:6px;padding:8px 0}
-.mb{border:1px solid #eee;background:#f8f8f8;padding:5px 14px;border-radius:20px;cursor:pointer;font-size:12px;color:#666;transition:all .2s}
-.mb:hover{border-color:#ff2442;color:#00B96B}
-.mb.on{background:#00B96B;color:#fff;border-color:#00B96B;font-weight:600}
-.wrap{padding:20px 36px;max-width:1480px;margin:0 auto}
+.month-bar{margin-left:auto;display:flex;align-items:center;gap:5px;padding:8px 0}
+.mb{border:1.5px solid #e8e8e8;background:#fff;padding:4px 14px;border-radius:20px;cursor:pointer;font-size:12px;color:#888;transition:all .18s;font-weight:500}
+.mb:hover{border-color:#00B96B;color:#00B96B}
+.mb.on{background:#00B96B;color:#fff;border-color:#00B96B;font-weight:700}
+.wrap{padding:22px 40px;max-width:1440px;margin:0 auto}
 .tab{display:none}.tab.on{display:block}
-.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
-.kpi{background:#fff;border-radius:12px;padding:16px 20px;box-shadow:0 2px 8px rgba(0,0,0,.06);position:relative;overflow:hidden}
-.kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
-.kpi.k-red::before{background:#00B96B}.kpi.k-blue::before{background:#FF2442}
-.kpi.k-green::before{background:#4F6EF7}.kpi.k-orange::before{background:#4f6ef7}
-.kpi-icon{font-size:22px;margin-bottom:4px}
-.kpi-label{font-size:11px;color:#999;margin-bottom:3px}
-.kpi-value{font-size:26px;font-weight:800;color:#111;line-height:1}
-.kpi-unit{font-size:12px;font-weight:400;color:#bbb;margin-left:2px}
-.kpi-sub{margin-top:4px;font-size:11px;color:#bbb}
-.kpi.k-red .kpi-sub b{color:#00B96B}.kpi.k-blue .kpi-sub b{color:#FF2442}
-.kpi.k-green .kpi-sub b{color:#4F6EF7}.kpi.k-orange .kpi-sub b{color:#4f6ef7}
-.sec{background:#fff;border-radius:12px;padding:20px 22px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
-.sec-hd{display:flex;align-items:center;gap:8px;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid #f0f0f0}
-.sec-ic{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px}
-.ic-r{background:#e6f9f2}.ic-b{background:#eef1ff}.ic-g{background:#edfaf6}.ic-o{background:#fff5eb}.ic-p{background:#f5f0ff}
-.sec-hd h2{font-size:14px;font-weight:700;color:#111}
-.sec-note{margin-left:auto;font-size:11px;color:#bbb}
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
+.kpi{background:#fff;border-radius:10px;padding:18px 20px 14px;box-shadow:0 1px 6px rgba(0,0,0,.05);position:relative;overflow:hidden}
+.kpi-accent{position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:10px 0 0 10px}
+.kpi-step{position:absolute;right:0;top:0;bottom:0;width:54px;display:flex;flex-direction:column;justify-content:center;gap:3px;align-items:flex-end}
+.kpi-step-bar{border-radius:2px 0 0 2px}
+.kpi-icon{font-size:18px;margin-bottom:6px;opacity:.8}
+.kpi-label{font-size:10px;color:#bbb;margin-bottom:4px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.kpi-value{font-size:28px;font-weight:900;color:#111;line-height:1}
+.kpi-unit{font-size:13px;font-weight:400;color:#ccc;margin-left:2px}
+.kpi-sub{margin-top:5px;font-size:11px;color:#bbb}
+.sec{background:#fff;border-radius:10px;padding:20px 24px;margin-bottom:16px;box-shadow:0 1px 6px rgba(0,0,0,.05)}
+.sec-hd{display:flex;align-items:center;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid #f5f5f5}
+.sec-hd-accent{width:4px;height:18px;border-radius:2px;margin-right:10px;flex-shrink:0}
+.sec-hd h2{font-size:13px;font-weight:700;color:#111}
+.sec-note{margin-left:auto;font-size:10.5px;color:#ccc}
 .tbl-wrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:12px;min-width:560px}
-th{background:#f8f9fc;color:#555;font-weight:600;font-size:11px;padding:9px 10px;text-align:center;border-bottom:2px solid #eaecf2;white-space:nowrap}
-th:first-child{text-align:left;padding-left:14px}
-td{padding:8px 10px;text-align:center;border-bottom:1px solid #f3f3f3}
-td:first-child{text-align:left;font-weight:500;padding-left:14px}
-tr:hover td{background:#fffbfb}
-.tr-total td{background:#f0faf8!important;font-weight:700;color:#00B96B;border-top:2px solid #b2e8de}
-.td-amt{font-weight:600;color:#111}.td-pct{color:#888;font-size:11px}
-.td-zero{color:#d0d0d0}.td-total{font-weight:700;color:#00B96B}
-.td-rank{font-weight:700;color:#bbb;font-size:11px}
-.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle}
+table{width:100%;border-collapse:collapse;font-size:12px;min-width:500px}
+th{background:#fafafa;color:#999;font-weight:600;font-size:10.5px;padding:9px 12px;text-align:center;border-bottom:2px solid #f0f0f0;white-space:nowrap;letter-spacing:.03em}
+th:first-child{text-align:left;padding-left:16px}
+td{padding:9px 12px;text-align:center;border-bottom:1px solid #f7f7f7}
+td:first-child{text-align:left;font-weight:600;padding-left:16px;color:#333}
+tr:hover td{background:#fafffe}
+.tr-total td{background:#f4fcf8!important;font-weight:700;border-top:2px solid #d4f0e2}
+.tr-total td:first-child,.td-total{color:#00B96B;font-weight:800}
+.td-amt{font-weight:700;color:#111}.td-pct{color:#bbb;font-size:11px}
+.td-zero{color:#e8e8e8}.td-rank{color:#ddd;font-size:11px}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;vertical-align:middle}
 .chart-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.cbox{background:#f8f9fc;border-radius:9px;padding:10px}
-.trend-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.trend-item{background:#f8f9fc;border-radius:9px;padding:10px}
-.trend-title{font-size:12px;font-weight:700;color:#333;margin-bottom:6px;padding-left:6px;border-left:3px solid #00B96B}
-@media(max-width:900px){.wrap{padding:12px}.nav{padding:0 8px;flex-wrap:wrap}.month-bar{margin-left:0;padding:4px 0;width:100%;border-top:1px solid #f0f0f0}.kpi-row{grid-template-columns:1fr 1fr}.chart-2,.trend-grid{grid-template-columns:1fr}}
+.cbox{background:#fafafa;border-radius:8px;padding:12px}
+.trend-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.trend-item{background:#fafafa;border-radius:8px;padding:10px}
+.trend-title{font-size:11.5px;font-weight:700;color:#333;margin-bottom:6px;padding-left:8px;border-left:3px solid #00B96B}
+@media(max-width:960px){.wrap{padding:14px 16px}.nav{padding:0 10px;flex-wrap:wrap}.month-bar{margin-left:0;padding:4px 0;width:100%;border-top:1px solid #f5f5f5}.kpi-row{grid-template-columns:1fr 1fr}.chart-2,.trend-grid{grid-template-columns:1fr}.hdr-steps{display:none}.hdr-inner{padding:18px 20px 14px}.hdr-meta{padding-left:0}}
 </style>
 </head>
 <body>
 <div class="hdr">
-  <div class="hdr-top"><div class="logo">书</div><h1>微思敦集团 · 自运营数据报告</h1></div>
-  <div class="hdr-meta">
-    <span>📊 小红书CRM六合平台</span>
-    <span>🏢 武汉微思敦网络技术有限公司</span>
-    <span>📅 2026年 Q1（1月-3月）</span>
-    <span>🏭 20个专业号行业 · 全部经用户核验</span>
+  <div class="hdr-inner">
+    <div class="hdr-top">
+      <div style="width:42px;height:42px;flex-shrink:0;background:#FF2442;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:6px"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white"><path d="M22.405 9.879c.002.016.01.02.07.019h.725a.797.797 0 0 0 .78-.972.794.794 0 0 0-.884-.618.795.795 0 0 0-.692.794c0 .101-.002.666.001.777zm-11.509 4.808c-.203.001-1.353.004-1.685.003a2.528 2.528 0 0 1-.766-.126.025.025 0 0 0-.03.014L7.7 16.127a.025.025 0 0 0 .01.032c.111.06.336.124.495.124.66.01 1.32.002 1.981 0 .01 0 .02-.006.023-.015l.712-1.545a.025.025 0 0 0-.024-.036zM.477 9.91c-.071 0-.076.002-.076.01a.834.834 0 0 0-.01.08c-.027.397-.038.495-.234 3.06-.012.24-.034.389-.135.607-.026.057-.033.042.003.112.046.092.681 1.523.787 1.74.008.015.011.02.017.02.008 0 .033-.026.047-.044.147-.187.268-.391.371-.606.306-.635.44-1.325.486-1.706.014-.11.021-.22.03-.33l.204-2.616.022-.293c.003-.029 0-.033-.03-.034zm7.203 3.757a1.427 1.427 0 0 1-.135-.607c-.004-.084-.031-.39-.235-3.06a.443.443 0 0 0-.01-.082c-.004-.011-.052-.008-.076-.008h-1.48c-.03.001-.034.005-.03.034l.021.293c.076.982.153 1.964.233 2.946.05.4.186 1.085.487 1.706.103.215.223.419.37.606.015.018.037.051.048.049.02-.003.742-1.642.804-1.765.036-.07.03-.055.003-.112zm3.861-.913h-.872a.126.126 0 0 1-.116-.178l1.178-2.625a.025.025 0 0 0-.023-.035l-1.318-.003a.148.148 0 0 1-.135-.21l.876-1.954a.025.025 0 0 0-.023-.035h-1.56c-.01 0-.02.006-.024.015l-.926 2.068c-.085.169-.314.634-.399.938a.534.534 0 0 0-.02.191.46.46 0 0 0 .23.378.981.981 0 0 0 .46.119h.59c.041 0-.688 1.482-.834 1.972a.53.53 0 0 0-.023.172.465.465 0 0 0 .23.398c.15.092.342.12.475.12l1.66-.001c.01 0 .02-.006.023-.015l.575-1.28a.025.025 0 0 0-.024-.035zm-6.93-4.937H3.1a.032.032 0 0 0-.034.033c0 1.048-.01 2.795-.01 6.829 0 .288-.269.262-.28.262h-.74c-.04.001-.044.004-.04.047.001.037.465 1.064.555 1.263.01.02.03.033.051.033.157.003.767.009.938-.014.153-.02.3-.06.438-.132.3-.156.49-.419.595-.765.052-.172.075-.353.075-.533.002-2.33 0-4.66-.007-6.991a.032.032 0 0 0-.032-.032zm11.784 6.896c0-.014-.01-.021-.024-.022h-1.465c-.048-.001-.049-.002-.05-.049v-4.66c0-.072-.005-.07.07-.07h.863c.08 0 .075.004.075-.074V8.393c0-.082.006-.076-.08-.076h-3.5c-.064 0-.075-.006-.075.073v1.445c0 .083-.006.077.08.077h.854c.075 0 .07-.004.07.07v4.624c0 .095.008.084-.085.084-.37 0-1.11-.002-1.304 0-.048.001-.06.03-.06.03l-.697 1.519s-.014.025-.008.036c.006.01.013.008.058.008 1.748.003 3.495.002 5.243.002.03-.001.034-.006.035-.033v-1.539zm4.177-3.43c0 .013-.007.023-.02.024-.346.006-.692.004-1.037.004-.014-.002-.022-.01-.022-.024-.005-.434-.007-.869-.01-1.303 0-.072-.006-.071.07-.07l.733-.003c.041 0 .081.002.12.015.093.025.16.107.165.204.006.431.002 1.153.001 1.153zm2.67.244a1.953 1.953 0 0 0-.883-.222h-.18c-.04-.001-.04-.003-.042-.04V10.21c0-.132-.007-.263-.025-.394a1.823 1.823 0 0 0-.153-.53 1.533 1.533 0 0 0-.677-.71 2.167 2.167 0 0 0-1-.258c-.153-.003-.567 0-.72 0-.07 0-.068.004-.068-.065V7.76c0-.031-.01-.041-.046-.039H17.93s-.016 0-.023.007c-.006.006-.008.012-.008.023v.546c-.008.036-.057.015-.082.022h-.95c-.022.002-.028.008-.03.032v1.481c0 .09-.004.082.082.082h.913c.082 0 .072.128.072.128V11.19s.003.117-.06.117h-1.482c-.068 0-.06.082-.06.082v1.445s-.01.068.064.068h1.457c.082 0 .076-.006.076.079v3.225c0 .088-.007.081.082.081h1.43c.09 0 .082.007.082-.08v-3.27c0-.029.006-.035.033-.035l2.323-.003c.098 0 .191.02.28.061a.46.46 0 0 1 .274.407c.008.395.003.79.003 1.185 0 .259-.107.367-.33.367h-1.218c-.023.002-.029.008-.028.033.184.437.374.871.57 1.303a.045.045 0 0 0 .04.026c.17.005.34.002.51.003.15-.002.517.004.666-.01a2.03 2.03 0 0 0 .408-.075c.59-.18.975-.698.976-1.313v-1.981c0-.128-.01-.254-.034-.38 0 .078-.029-.641-.724-.998z"/></svg></div>
+      <div>
+        <h1>微思敦集团 · 自运营数据报告</h1>
+        <div class="hdr-en">WEISIDUN GROUP · SELF-OPERATION REPORT · 2026 Q1</div>
+      </div>
+    </div>
+    <div class="hdr-meta">
+      <span>小红书CRM六合平台</span>
+      <span>武汉微思敦网络技术有限公司</span>
+      <span>20个专业号行业</span>
+      <span>数据更新于 2026-04-14 10:00</span>
+    </div>
+  </div>
+  <div class="hdr-steps">
+    <div class="hdr-step" style="width:180px;height:34px;background:#dfd9ff"></div>
+    <div class="hdr-step" style="width:140px;height:7px;background:#ffdf7a"></div>
+    <div class="hdr-step" style="width:160px;height:5px;background:#985946"></div>
+    <div class="hdr-step" style="width:120px;height:7px;background:#9e76ff"></div>
+    <div class="hdr-step" style="width:200px;height:26px;background:#f0fdf8"></div>
   </div>
 </div>
-
 <div class="nav">
-  <button class="nb on" onclick="sw('total',this)">📋 集团总览</button>
-  <button class="nb" onclick="sw('detail',this)">🏭 行业拆分</button>
-  <button class="nb" onclick="sw('trend',this)">📈 行业趋势</button>
+  <button class="nb on" onclick="sw('total',this)">集团总览</button>
+  <button class="nb" onclick="sw('detail',this)">行业拆分</button>
+  <button class="nb" onclick="sw('trend',this)">行业趋势</button>
   <div class="month-bar">
-    <span style="font-size:11px;color:#999;margin-right:2px">月份：</span>
+    <span style="font-size:11px;color:#ccc;margin-right:2px">月份</span>
     <button class="mb" onclick="setMonth('2026-01',this)">1月</button>
     <button class="mb" onclick="setMonth('2026-02',this)">2月</button>
     <button class="mb on" onclick="setMonth('2026-03',this)">3月</button>
     <button class="mb" onclick="setMonth('all',this)">全季度</button>
   </div>
 </div>
-
 <div id="tab-total" class="tab on"><div class="wrap">
   <div class="kpi-row" id="kpi-row"></div>
   <div class="sec">
-    <div class="sec-hd"><div class="sec-ic ic-r">📊</div><h2>集团汇总（不分行业）</h2><span class="sec-note">单位：万元 | 三个月对比</span></div>
+    <div class="sec-hd"><div class="sec-hd-accent" style="background:#00B96B"></div><h2>集团消耗汇总（不分行业）</h2><span class="sec-note">单位：万元 · 三个月对比</span></div>
     <div class="tbl-wrap"><table>
       <thead><tr><th>月份</th><th>一代自运营</th><th>占比</th><th>其他收量</th><th>占比</th><th>走量消耗</th><th>占比</th><th>合计(万)</th></tr></thead>
       <tbody id="total-body"></tbody>
     </table></div>
   </div>
   <div class="sec">
-    <div class="sec-hd"><div class="sec-ic ic-b">📈</div><h2>月度消耗结构对比</h2></div>
+    <div class="sec-hd"><div class="sec-hd-accent" style="background:#9e76ff"></div><h2>月度消耗结构对比</h2></div>
     <div class="chart-2">
-      <div class="cbox"><div id="c-monthly-bar" style="height:280px"></div></div>
-      <div class="cbox"><div id="c-monthly-pie" style="height:280px"></div></div>
+      <div class="cbox"><div id="c-bar" style="height:280px"></div></div>
+      <div class="cbox"><div id="c-pie" style="height:280px"></div></div>
     </div>
   </div>
 </div></div>
-
 <div id="tab-detail" class="tab"><div class="wrap">
   <div class="sec">
-    <div class="sec-hd"><div class="sec-ic ic-g">🏭</div><h2>行业拆分汇总</h2><span class="sec-note" id="detail-note">单位：万元</span></div>
+    <div class="sec-hd"><div class="sec-hd-accent" style="background:#00B96B"></div><h2>行业拆分汇总</h2><span class="sec-note" id="detail-note">单位：万元</span></div>
     <div class="tbl-wrap"><table>
-      <thead><tr><th>排名</th><th>行业</th><th>一代自运营(万)</th><th>占比</th><th>其他收量(万)</th><th>占比</th><th>走量消耗(万)</th><th>占比</th><th>合计(万)</th><th>结构</th></tr></thead>
+      <thead><tr><th>#</th><th>行业</th><th>一代自运营(万)</th><th>占比</th><th>其他收量(万)</th><th>占比</th><th>走量(万)</th><th>占比</th><th>合计(万)</th><th>结构</th></tr></thead>
       <tbody id="detail-body"></tbody>
     </table></div>
   </div>
 </div></div>
-
 <div id="tab-trend" class="tab"><div class="wrap">
   <div class="sec">
-    <div class="sec-hd"><div class="sec-ic ic-o">🔍</div><h2>各行业月度趋势</h2>
-    <span class="sec-note">柱=自运营消耗(万，左轴) &nbsp;·&nbsp; 折线=自运营占比%(右轴)</span></div>
+    <div class="sec-hd"><div class="sec-hd-accent" style="background:#00B96B"></div><h2>各行业月度趋势</h2><span class="sec-note">柱=消耗(万，左轴) · 折线=自运营占比%(右轴)</span></div>
     <div class="trend-grid" id="trend-grid"></div>
   </div>
 </div></div>
-
 <script>
 const ALL = {
-  "2026-01": {
-    _total: {zi:29882196.94,shou:913204.39,zou:12622799.55,ziR:68.82,shouR:2.1,zouR:29.07},
-    "美妆个护": {zi:3990144.50,shou:0.00,zou:383430.95,ziR:91.23,shouR:0.0,zouR:8.77},
-    "服装配饰": {zi:3004992.21,shou:442007.69,zou:224955.72,ziR:81.84,shouR:12.04,zouR:6.13},
-    "食品饮料": {zi:942398.32,shou:0.00,zou:13707.74,ziR:98.57,shouR:0.0,zouR:1.43},
-    "3C及电器": {zi:5300963.64,shou:53020.41,zou:308619.23,ziR:93.61,shouR:0.94,zouR:5.45},
-    "日用百货": {zi:3663082.15,shou:4163.88,zou:131588.86,ziR:96.43,shouR:0.11,zouR:3.46},
-    "母婴": {zi:181548.45,shou:0.00,zou:3279.29,ziR:98.23,shouR:0.0,zouR:1.77},
-    "餐饮": {zi:136827.38,shou:0.00,zou:22983.77,ziR:85.62,shouR:0.0,zouR:14.38},
-    "互联网": {zi:755021.72,shou:96580.66,zou:176524.34,ziR:73.44,shouR:9.39,zouR:17.17},
-    "生活服务": {zi:1507118.66,shou:2207.57,zou:216888.26,ziR:87.31,shouR:0.13,zouR:12.56},
-    "出行旅游": {zi:161772.03,shou:30.32,zou:116072.26,ziR:58.22,shouR:0.01,zouR:41.77},
-    "商务服务": {zi:27642.43,shou:2872.13,zou:214438.02,ziR:11.28,shouR:1.17,zouR:87.54},
-    "文体娱乐": {zi:555465.46,shou:0.00,zou:23307.51,ziR:95.97,shouR:0.0,zouR:4.03},
-    "房地产": {zi:6966.91,shou:0.00,zou:444325.59,ziR:1.54,shouR:0.0,zouR:98.46},
-    "家居建材": {zi:2088106.32,shou:35240.03,zou:1566342.72,ziR:56.59,shouR:0.96,zouR:42.45},
-    "教育培训": {zi:901579.34,shou:8440.65,zou:162142.38,ziR:84.09,shouR:0.79,zouR:15.12},
-    "游戏": {zi:3369603.99,shou:0.00,zou:4336391.04,ziR:43.73,shouR:0.0,zouR:56.27},
-    "汽车": {zi:5403.88,shou:0.00,zou:662.07,ziR:89.09,shouR:0.0,zouR:10.91},
-    "通信": {zi:0.00,shou:0.00,zou:22897.79,ziR:0.0,shouR:0.0,zouR:100.0},
-    "金融行业": {zi:50665.54,shou:0.00,zou:2101.81,ziR:96.02,shouR:0.0,zouR:3.98},
-    "医疗健康": {zi:3214243.61,shou:260815.48,zou:4232188.76,ziR:41.7,shouR:3.38,zouR:54.91},
-  },
   "2026-02": {
     _total: {zi:34057801.09,shou:590995.46,zou:10989286.31,ziR:74.63,shouR:1.29,zouR:24.08},
     "美妆个护": {zi:5197662.22,shou:19461.34,zou:415166.65,ziR:92.28,shouR:0.35,zouR:7.37},
-    "服装配饰": {zi:3493785.90,shou:7260.15,zou:196703.40,ziR:94.48,shouR:0.2,zouR:5.32},
-    "食品饮料": {zi:1231730.98,shou:0.00,zou:2381.54,ziR:99.81,shouR:0.0,zouR:0.19},
+    "游戏": {zi:7596053.55,shou:0.00,zou:5471308.67,ziR:58.13,shouR:0.0,zouR:41.87},
     "3C及电器": {zi:3738802.03,shou:15874.03,zou:265263.51,ziR:93.01,shouR:0.39,zouR:6.6},
     "日用百货": {zi:4210322.55,shou:313941.89,zou:107444.95,ziR:90.9,shouR:6.78,zouR:2.32},
-    "母婴": {zi:405805.00,shou:0.00,zou:0.00,ziR:100.0,shouR:0.0,zouR:0.0},
-    "餐饮": {zi:130293.40,shou:0.00,zou:12544.45,ziR:91.22,shouR:0.0,zouR:8.78},
-    "互联网": {zi:1011068.21,shou:87618.91,zou:172202.81,ziR:79.56,shouR:6.89,zouR:13.55},
+    "服装配饰": {zi:3493785.90,shou:7260.15,zou:196703.40,ziR:94.48,shouR:0.2,zouR:5.32},
+    "家居建材": {zi:961141.35,shou:65633.72,zou:802178.83,ziR:52.55,shouR:3.59,zouR:43.86},
     "生活服务": {zi:1260529.10,shou:2145.89,zou:83857.51,ziR:93.61,shouR:0.16,zouR:6.23},
-    "出行旅游": {zi:51568.20,shou:0.00,zou:123790.54,ziR:29.41,shouR:0.0,zouR:70.59},
+    "医疗健康": {zi:3380880.00,shou:55467.76,zou:2682442.01,ziR:55.25,shouR:0.91,zouR:43.84},
+    "教育培训": {zi:481976.69,shou:18388.36,zou:104099.41,ziR:79.74,shouR:3.04,zouR:17.22},
+    "母婴": {zi:405805.00,shou:0.00,zou:0.00,ziR:100.0,shouR:0.0,zouR:0.0},
+    "互联网": {zi:1011068.21,shou:87618.91,zou:172202.81,ziR:79.56,shouR:6.89,zouR:13.55},
+    "食品饮料": {zi:1231730.98,shou:0.00,zou:2381.54,ziR:99.81,shouR:0.0,zouR:0.19},
+    "房地产": {zi:26137.92,shou:0.00,zou:394529.44,ziR:6.21,shouR:0.0,zouR:93.79},
     "商务服务": {zi:7850.43,shou:3034.75,zou:119919.01,ziR:6.0,shouR:2.32,zouR:91.68},
     "文体娱乐": {zi:716503.73,shou:0.00,zou:6704.84,ziR:99.07,shouR:0.0,zouR:0.93},
-    "房地产": {zi:26137.92,shou:0.00,zou:394529.44,ziR:6.21,shouR:0.0,zouR:93.79},
-    "家居建材": {zi:961141.35,shou:65633.72,zou:802178.83,ziR:52.55,shouR:3.59,zouR:43.86},
-    "教育培训": {zi:481976.69,shou:18388.36,zou:104099.41,ziR:79.74,shouR:3.04,zouR:17.22},
-    "游戏": {zi:7596053.55,shou:0.00,zou:5471308.67,ziR:58.13,shouR:0.0,zouR:41.87},
-    "汽车": {zi:0.00,shou:0.00,zou:0.00,ziR:0,shouR:0,zouR:0},
+    "出行旅游": {zi:51568.20,shou:0.00,zou:123790.54,ziR:29.41,shouR:0.0,zouR:70.59},
+    "餐饮": {zi:130293.40,shou:0.00,zou:12544.45,ziR:91.22,shouR:0.0,zouR:8.78},
     "通信": {zi:0.00,shou:0.00,zou:19804.30,ziR:0.0,shouR:0.0,zouR:100.0},
     "金融行业": {zi:155689.83,shou:0.00,zou:100.21,ziR:99.94,shouR:0.0,zouR:0.06},
-    "医疗健康": {zi:3380880.00,shou:55467.76,zou:2682442.01,ziR:55.25,shouR:0.91,zouR:43.84},
+    "汽车": {zi:0.00,shou:0.00,zou:0.00,ziR:0,shouR:0,zouR:0},
   },
   "2026-03": {
     _total: {zi:41844955.51,shou:1820881.54,zou:8135792.16,ziR:80.78,shouR:3.52,zouR:15.71},
     "美妆个护": {zi:10089979.99,shou:1220534.06,zou:456048.52,ziR:85.75,shouR:10.37,zouR:3.88},
-    "服装配饰": {zi:5066579.42,shou:9847.03,zou:245827.25,ziR:95.2,shouR:0.19,zouR:4.62},
-    "食品饮料": {zi:695123.41,shou:0.00,zou:6224.55,ziR:99.11,shouR:0.0,zouR:0.89},
+    "游戏": {zi:6281939.04,shou:31543.17,zou:4170607.90,ziR:59.92,shouR:0.3,zouR:39.78},
     "3C及电器": {zi:5018764.58,shou:79696.02,zou:330524.79,ziR:92.44,shouR:1.47,zouR:6.09},
     "日用百货": {zi:5287130.62,shou:233252.49,zou:141301.66,ziR:93.38,shouR:4.12,zouR:2.5},
-    "母婴": {zi:1140588.72,shou:22103.87,zou:0.00,ziR:98.1,shouR:1.9,zouR:0.0},
-    "餐饮": {zi:62310.50,shou:0.00,zou:22019.28,ziR:73.89,shouR:0.0,zouR:26.11},
-    "互联网": {zi:1043099.28,shou:0.00,zou:274244.92,ziR:79.18,shouR:0.0,zouR:20.82},
+    "服装配饰": {zi:5066579.42,shou:9847.03,zou:245827.25,ziR:95.2,shouR:0.19,zouR:4.62},
+    "家居建材": {zi:2283243.53,shou:218389.88,zou:1348769.59,ziR:59.3,shouR:5.67,zouR:35.03},
     "生活服务": {zi:2046315.26,shou:2454.34,zou:85752.54,ziR:95.87,shouR:0.11,zouR:4.02},
-    "出行旅游": {zi:16297.26,shou:0.00,zou:97487.84,ziR:14.32,shouR:0.0,zouR:85.68},
+    "医疗健康": {zi:1390063.94,shou:0.00,zou:18983.41,ziR:98.65,shouR:0.0,zouR:1.35},
+    "教育培训": {zi:855195.58,shou:1433.03,zou:222956.22,ziR:79.22,shouR:0.13,zouR:20.65},
+    "母婴": {zi:1140588.72,shou:22103.87,zou:0.00,ziR:98.1,shouR:1.9,zouR:0.0},
+    "互联网": {zi:1043099.28,shou:0.00,zou:274244.92,ziR:79.18,shouR:0.0,zouR:20.82},
+    "食品饮料": {zi:695123.41,shou:0.00,zou:6224.55,ziR:99.11,shouR:0.0,zouR:0.89},
+    "房地产": {zi:16853.69,shou:0.00,zou:547235.35,ziR:2.99,shouR:0.0,zouR:97.01},
     "商务服务": {zi:95162.75,shou:1627.65,zou:111053.22,ziR:45.79,shouR:0.78,zouR:53.43},
     "文体娱乐": {zi:416756.44,shou:0.00,zou:5448.28,ziR:98.71,shouR:0.0,zouR:1.29},
-    "房地产": {zi:16853.69,shou:0.00,zou:547235.35,ziR:2.99,shouR:0.0,zouR:97.01},
-    "家居建材": {zi:2283243.53,shou:218389.88,zou:1348769.59,ziR:59.3,shouR:5.67,zouR:35.03},
-    "教育培训": {zi:855195.58,shou:1433.03,zou:222956.22,ziR:79.22,shouR:0.13,zouR:20.65},
-    "游戏": {zi:6281939.04,shou:31543.17,zou:4170607.90,ziR:59.92,shouR:0.3,zouR:39.78},
-    "汽车": {zi:0.00,shou:0.00,zou:1299.62,ziR:0.0,shouR:0.0,zouR:100.0},
+    "出行旅游": {zi:16297.26,shou:0.00,zou:97487.84,ziR:14.32,shouR:0.0,zouR:85.68},
+    "餐饮": {zi:62310.50,shou:0.00,zou:22019.28,ziR:73.89,shouR:0.0,zouR:26.11},
     "通信": {zi:0.00,shou:0.00,zou:32227.65,ziR:0.0,shouR:0.0,zouR:100.0},
     "金融行业": {zi:39551.50,shou:0.00,zou:2818.37,ziR:93.35,shouR:0.0,zouR:6.65},
-    "医疗健康": {zi:1390063.94,shou:0.00,zou:18983.41,ziR:98.65,shouR:0.0,zouR:1.35},
+    "汽车": {zi:0.00,shou:0.00,zou:1299.62,ziR:0.0,shouR:0.0,zouR:100.0},
   },
   "2026-04": {
     _total: {zi:15305943.50,shou:484899.24,zou:3446834.18,ziR:78.28,shouR:2.48,zouR:17.63},
     "美妆个护": {zi:4335049.78,shou:40740.82,zou:216205.48,ziR:94.4,shouR:0.89,zouR:4.71},
-    "服装配饰": {zi:1394640.63,shou:14540.55,zou:266137.98,ziR:83.25,shouR:0.87,zouR:15.89},
-    "食品饮料": {zi:261296.16,shou:23692.47,zou:931.06,ziR:43.91,shouR:3.98,zouR:0.16},
+    "游戏": {zi:2410845.23,shou:58000.16,zou:1436888.41,ziR:61.73,shouR:1.49,zouR:36.79},
     "3C及电器": {zi:2497035.21,shou:164353.82,zou:101177.02,ziR:90.39,shouR:5.95,zouR:3.66},
     "日用百货": {zi:1028681.35,shou:102645.15,zou:29853.27,ziR:88.59,shouR:8.84,zouR:2.57},
-    "母婴": {zi:552169.67,shou:53521.86,zou:2809.74,ziR:90.74,shouR:8.8,zouR:0.46},
-    "餐饮": {zi:96191.70,shou:0.00,zou:6723.19,ziR:93.47,shouR:0.0,zouR:6.53},
-    "互联网": {zi:320872.94,shou:2.65,zou:95783.06,ziR:77.01,shouR:0.0,zouR:22.99},
+    "服装配饰": {zi:1394640.63,shou:14540.55,zou:266137.98,ziR:83.25,shouR:0.87,zouR:15.89},
+    "家居建材": {zi:896120.45,shou:12411.15,zou:782314.64,ziR:53.0,shouR:0.73,zouR:46.27},
     "生活服务": {zi:531598.28,shou:4218.49,zou:28726.29,ziR:94.16,shouR:0.75,zouR:5.09},
-    "出行旅游": {zi:6588.22,shou:3470.15,zou:36862.92,ziR:14.04,shouR:7.4,zouR:78.56},
+    "医疗健康": {zi:338385.00,shou:2.11,zou:867.27,ziR:99.74,shouR:0.0,zouR:0.26},
+    "教育培训": {zi:269855.90,shou:7290.41,zou:201465.65,ziR:55.75,shouR:1.51,zouR:41.62},
+    "母婴": {zi:552169.67,shou:53521.86,zou:2809.74,ziR:90.74,shouR:8.8,zouR:0.46},
+    "互联网": {zi:320872.94,shou:2.65,zou:95783.06,ziR:77.01,shouR:0.0,zouR:22.99},
+    "食品饮料": {zi:261296.16,shou:23692.47,zou:931.06,ziR:43.91,shouR:3.98,zouR:0.16},
+    "房地产": {zi:19845.44,shou:0.00,zou:198916.94,ziR:9.07,shouR:0.0,zouR:90.93},
     "商务服务": {zi:63300.44,shou:9.45,zou:25635.86,ziR:71.17,shouR:0.01,zouR:28.82},
     "文体娱乐": {zi:259718.99,shou:0.00,zou:2400.68,ziR:99.08,shouR:0.0,zouR:0.92},
-    "房地产": {zi:19845.44,shou:0.00,zou:198916.94,ziR:9.07,shouR:0.0,zouR:90.93},
-    "家居建材": {zi:896120.45,shou:12411.15,zou:782314.64,ziR:53.0,shouR:0.73,zouR:46.27},
-    "教育培训": {zi:269855.90,shou:7290.41,zou:201465.65,ziR:55.75,shouR:1.51,zouR:41.62},
-    "游戏": {zi:2410845.23,shou:58000.16,zou:1436888.41,ziR:61.73,shouR:1.49,zouR:36.79},
-    "汽车": {zi:0.00,shou:0.00,zou:0.00,ziR:0,shouR:0,zouR:0},
+    "出行旅游": {zi:6588.22,shou:3470.15,zou:36862.92,ziR:14.04,shouR:7.4,zouR:78.56},
+    "餐饮": {zi:96191.70,shou:0.00,zou:6723.19,ziR:93.47,shouR:0.0,zouR:6.53},
     "通信": {zi:0.00,shou:0.00,zou:8052.09,ziR:0.0,shouR:0.0,zouR:100.0},
     "金融行业": {zi:23748.11,shou:0.00,zou:149.75,ziR:99.37,shouR:0.0,zouR:0.63},
-    "医疗健康": {zi:338385.00,shou:2.11,zou:867.27,ziR:99.74,shouR:0.0,zouR:0.26},
+    "汽车": {zi:0.00,shou:0.00,zou:0.00,ziR:0,shouR:0,zouR:0},
   },
 };
+const MONTHS = ["2026-02", "2026-03", "2026-04"];
+const MONTH_LABELS = {"2026-02": "2月", "2026-03": "3月", "2026-04": "4月"};
 const IND_NAMES = ["美妆个护", "游戏", "3C及电器", "日用百货", "服装配饰", "家居建材", "生活服务", "医疗健康", "教育培训", "母婴", "互联网", "食品饮料", "房地产", "商务服务", "文体娱乐", "出行旅游", "餐饮", "通信", "金融行业", "汽车"];
-const MONTHS = ["2026-01", "2026-02", "2026-03", "2026-04"];
-const MONTH_LABELS = {"2026-01": "1月", "2026-02": "2月", "2026-03": "3月", "2026-04": "4月"};
-const COLORS = ['#ff2442','#4f6ef7','#00B96B','#4f6ef7','#a259ff','#00bcd4','#e91e63','#3f51b5','#009688','#ff5722','#607d8b','#8bc34a','#795548','#9c27b0','#ffc107','#03a9f4','#673ab7','#ff7043','#26a69a','#ec407a'];
 let curMonth = "2026-04";
 const CHARTS = {};
+const COLORS = ['#00B96B','#4f6ef7','#9e76ff','#ff8c42','#ffdf7a','#00bcd4','#e91e63','#3f51b5','#009688','#ff5722','#607d8b','#8bc34a','#795548','#985946','#ffc107','#03a9f4','#673ab7','#ff7043','#26a69a','#ec407a'];
 const W = v => (v/10000).toFixed(2);
-const fmt = v => v>0?W(v):"0.00";
+const fmt = v => v > 0 ? W(v) : "0.00";
 
-function sw(name,btn){
-  document.querySelectorAll('.tab').forEach(e=>e.classList.remove('on'));
-  document.querySelectorAll('.nb').forEach(e=>e.classList.remove('on'));
-  document.getElementById('tab-'+name).classList.add('on');
+function sw(name, btn) {
+  document.querySelectorAll('.tab').forEach(e => e.classList.remove('on'));
+  document.querySelectorAll('.nb').forEach(e => e.classList.remove('on'));
+  document.getElementById('tab-' + name).classList.add('on');
   btn.classList.add('on');
-  setTimeout(()=>Object.values(CHARTS).forEach(c=>c&&c.resize()),60);
+  setTimeout(() => Object.values(CHARTS).forEach(c => c && c.resize()), 60);
 }
-
-function setMonth(m,btn){
-  document.querySelectorAll('.mb').forEach(e=>e.classList.remove('on'));
+function setMonth(m, btn) {
+  document.querySelectorAll('.mb').forEach(e => e.classList.remove('on'));
   btn.classList.add('on');
-  curMonth=m;
-  renderTotal();
-  renderDetail();
+  curMonth = m; renderTotal(); renderDetail();
 }
-
-function getAllTotal(){
+function getAllTotal() {
   let zi=0,shou=0,zou=0;
-  MONTHS.forEach(m=>{zi+=ALL[m]._total.zi;shou+=ALL[m]._total.shou;zou+=ALL[m]._total.zou;});
-  const t=zi+shou+zou;
+  MONTHS.forEach(m => { zi+=ALL[m]._total.zi; shou+=ALL[m]._total.shou; zou+=ALL[m]._total.zou; });
+  const t = zi+shou+zou;
   return {zi,shou,zou,ziR:(zi/t*100).toFixed(2),shouR:(shou/t*100).toFixed(2),zouR:(zou/t*100).toFixed(2)};
 }
+function renderTotal() {
+  const isAll = curMonth === 'all';
+  const label = isAll ? 'Q1合计' : MONTH_LABELS[curMonth];
+  const d = isAll ? getAllTotal() : ALL[curMonth]._total;
+  const total = d.zi + d.shou + d.zou;
+  const kpis = [
+    {icon:'💰',label:'TOTAL SPEND',val:W(total),sub:label,ac:'#00B96B',sc:['#dfd9ff','#ffdf7a','#9e76ff']},
+    {icon:'⚡',label:'一代自运营',val:W(d.zi),sub:`占比 <b style="color:#00B96B">${d.ziR}%</b>`,ac:'#00B96B',sc:['#c8f5e2','#96eac7','#00B96B']},
+    {icon:'📥',label:'其他收量',val:W(d.shou),sub:`占比 <b style="color:#FF2442">${d.shouR}%</b>`,ac:'#FF2442',sc:['#ffd6db','#ffacb5','#FF2442']},
+    {icon:'🚀',label:'走量消耗',val:W(d.zou),sub:`占比 <b style="color:#4F6EF7">${d.zouR}%</b>`,ac:'#4F6EF7',sc:['#dde4ff','#bbc6ff','#4F6EF7']},
+  ];
+  document.getElementById('kpi-row').innerHTML = kpis.map(k => `
+    <div class="kpi">
+      <div class="kpi-accent" style="background:${k.ac}"></div>
+      <div class="kpi-step">
+        <div class="kpi-step-bar" style="width:42px;height:20px;background:${k.sc[0]}"></div>
+        <div class="kpi-step-bar" style="width:30px;height:5px;background:${k.sc[1]}"></div>
+        <div class="kpi-step-bar" style="width:36px;height:4px;background:${k.sc[2]}"></div>
+      </div>
+      <div class="kpi-icon">${k.icon}</div>
+      <div class="kpi-label">${k.label}</div>
+      <div class="kpi-value">${k.val}<span class="kpi-unit">万</span></div>
+      <div class="kpi-sub">${k.sub}</div>
+    </div>`).join('');
 
-function renderTotal(){
-  const isAll=curMonth==='all';
-  const label=isAll?'Q1合计':MONTH_LABELS[curMonth];
-  const d=isAll?getAllTotal():ALL[curMonth]._total;
-  const total=d.zi+d.shou+d.zou;
-  document.getElementById('kpi-row').innerHTML=`
-    <div class="kpi k-red"><div class="kpi-icon">💰</div><div class="kpi-label">总消耗</div>
-      <div class="kpi-value">${W(total)}<span class="kpi-unit">万</span></div>
-      <div class="kpi-sub">${label}</div></div>
-    <div class="kpi k-blue"><div class="kpi-icon">⚡</div><div class="kpi-label">一代自运营</div>
-      <div class="kpi-value">${W(d.zi)}<span class="kpi-unit">万</span></div>
-      <div class="kpi-sub">占比 <b>${d.ziR}%</b></div></div>
-    <div class="kpi k-green"><div class="kpi-icon">📥</div><div class="kpi-label">其他收量</div>
-      <div class="kpi-value">${W(d.shou)}<span class="kpi-unit">万</span></div>
-      <div class="kpi-sub">占比 <b>${d.shouR}%</b></div></div>
-    <div class="kpi k-orange"><div class="kpi-icon">🚀</div><div class="kpi-label">走量消耗</div>
-      <div class="kpi-value">${W(d.zou)}<span class="kpi-unit">万</span></div>
-      <div class="kpi-sub">占比 <b>${d.zouR}%</b></div></div>`;
-
-  let rows=MONTHS.map(m=>{
-    const r=ALL[m]._total;const t=r.zi+r.shou+r.zou;
+  const rows = MONTHS.map(m => {
+    const r = ALL[m]._total; const t = r.zi+r.shou+r.zou;
     return `<tr><td>${MONTH_LABELS[m]}</td>
       <td class="td-amt">${W(r.zi)}</td><td class="td-pct">${r.ziR}%</td>
       <td class="td-amt">${W(r.shou)}</td><td class="td-pct">${r.shouR}%</td>
       <td class="td-amt">${W(r.zou)}</td><td class="td-pct">${r.zouR}%</td>
       <td class="td-total">${W(t)}</td></tr>`;
   });
-  const at=getAllTotal();const atT=at.zi+at.shou+at.zou;
-  rows.push(`<tr class="tr-total"><td>Q1合计</td>
+  const at = getAllTotal(); const atT = at.zi+at.shou+at.zou;
+  rows.push(`<tr class="tr-total"><td>Q1 合计</td>
     <td>${W(at.zi)}</td><td>${at.ziR}%</td>
     <td>${W(at.shou)}</td><td>${at.shouR}%</td>
     <td>${W(at.zou)}</td><td>${at.zouR}%</td>
     <td>${W(atT)}</td></tr>`);
-  document.getElementById('total-body').innerHTML=rows.join('');
+  document.getElementById('total-body').innerHTML = rows.join('');
 
   const zi3=MONTHS.map(m=>+(ALL[m]._total.zi/10000).toFixed(2));
   const sh3=MONTHS.map(m=>+(ALL[m]._total.shou/10000).toFixed(2));
   const zo3=MONTHS.map(m=>+(ALL[m]._total.zou/10000).toFixed(2));
   const tot3=MONTHS.map(m=>+((ALL[m]._total.zi+ALL[m]._total.shou+ALL[m]._total.zou)/10000).toFixed(2));
-  if(!CHARTS.mbar)CHARTS.mbar=echarts.init(document.getElementById('c-monthly-bar'));
-  CHARTS.mbar.setOption({
-    title:{text:'月度消耗结构对比（万元）',left:'center',top:4,textStyle:{fontSize:12,fontWeight:700,color:'#333'}},
+  const mL = Object.values(MONTH_LABELS);
+  if (!CHARTS.bar) CHARTS.bar = echarts.init(document.getElementById('c-bar'));
+  CHARTS.bar.setOption({
+    title:{text:'月度消耗结构对比（万元）',left:'center',top:6,textStyle:{fontSize:12,fontWeight:700,color:'#333'}},
     tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
     legend:{bottom:0,data:['一代自运营','其他收量','走量消耗'],itemWidth:10,itemHeight:10,textStyle:{fontSize:11}},
-    grid:{left:50,right:10,bottom:40,top:44},
-    xAxis:{type:'category',data:['1月','2月','3月']},
-    yAxis:{type:'value',name:'万元'},
+    grid:{left:52,right:12,bottom:42,top:46},
+    xAxis:{type:'category',data:mL,axisTick:{show:false},axisLine:{lineStyle:{color:'#eee'}}},
+    yAxis:{type:'value',name:'万元',axisLine:{show:false},splitLine:{lineStyle:{color:'#f5f5f5'}}},
     series:[
-      {name:'一代自运营',type:'bar',stack:'S',data:zi3,itemStyle:{color:'#00B96B'}},
+      {name:'一代自运营',type:'bar',stack:'S',data:zi3,itemStyle:{color:'#00B96B'},barMaxWidth:50},
       {name:'其他收量',type:'bar',stack:'S',data:sh3,itemStyle:{color:'#FF2442'}},
       {name:'走量消耗',type:'bar',stack:'S',data:zo3,itemStyle:{color:'#4F6EF7'},
         label:{show:true,position:'top',formatter:p=>tot3[p.dataIndex]+'万',fontSize:10,fontWeight:700,color:'#555'}},
     ]
   });
-
-  const pd=isAll?at:d;
-  if(!CHARTS.mpie)CHARTS.mpie=echarts.init(document.getElementById('c-monthly-pie'));
-  CHARTS.mpie.setOption({
-    title:{text:label+'消耗结构',left:'center',top:4,textStyle:{fontSize:12,fontWeight:700,color:'#333'}},
+  const pd = isAll ? at : d;
+  if (!CHARTS.pie) CHARTS.pie = echarts.init(document.getElementById('c-pie'));
+  CHARTS.pie.setOption({
+    title:{text:label+' 消耗结构',left:'center',top:6,textStyle:{fontSize:12,fontWeight:700,color:'#333'}},
     tooltip:{trigger:'item',formatter:'{b}: {c}万元 ({d}%)'},
     legend:{bottom:0,itemWidth:10,itemHeight:10,textStyle:{fontSize:11}},
-    series:[{type:'pie',radius:['38%','65%'],center:['50%','46%'],
+    series:[{type:'pie',radius:['40%','66%'],center:['50%','46%'],
       label:{formatter:'{b}\n{d}%',fontSize:11,lineHeight:16},
+      itemStyle:{borderRadius:4,borderWidth:2,borderColor:'#fff'},
       data:[
         {value:+(pd.zi/10000).toFixed(2),name:'一代自运营',itemStyle:{color:'#00B96B'}},
         {value:+(pd.shou/10000).toFixed(2),name:'其他收量',itemStyle:{color:'#FF2442'}},
@@ -320,25 +310,25 @@ function renderTotal(){
   });
 }
 
-function renderDetail(){
-  const isAll=curMonth==='all';
-  const months=isAll?MONTHS:[curMonth];
-  document.getElementById('detail-note').textContent=(isAll?'Q1合计':MONTH_LABELS[curMonth])+' | 单位：万元 | 按合计排序';
-  const agg=IND_NAMES.map((name,idx)=>{
+function renderDetail() {
+  const isAll = curMonth === 'all';
+  const months = isAll ? MONTHS : [curMonth];
+  document.getElementById('detail-note').textContent = (isAll?'Q1合计':MONTH_LABELS[curMonth]) + ' · 单位：万元 · 按合计排序';
+  const agg = IND_NAMES.map((name, idx) => {
     let zi=0,shou=0,zou=0;
-    months.forEach(m=>{const r=ALL[m][name]||{zi:0,shou:0,zou:0};zi+=r.zi;shou+=r.shou;zou+=r.zou;});
-    const total=zi+shou+zou;
+    months.forEach(m => { const r=ALL[m][name]||{zi:0,shou:0,zou:0}; zi+=r.zi; shou+=r.shou; zou+=r.zou; });
+    const total = zi+shou+zou;
     return {name,idx,zi,shou,zou,total,
       ziR:total>0?(zi/total*100).toFixed(1):0,
       shouR:total>0?(shou/total*100).toFixed(1):0,
       zouR:total>0?(zou/total*100).toFixed(1):0};
   });
-  agg.sort((a,b)=>b.total-a.total);
-  let rows=agg.map((r,i)=>{
-    const color=COLORS[r.idx];
-    const zp=r.total>0?r.zi/r.total*100:0;
-    const sp=r.total>0?r.shou/r.total*100:0;
-    const zop=r.total>0?r.zou/r.total*100:0;
+  agg.sort((a,b) => b.total - a.total);
+  const rows = agg.map((r,i) => {
+    const color = COLORS[r.idx];
+    const zp = r.total>0?r.zi/r.total*100:0;
+    const sp = r.total>0?r.shou/r.total*100:0;
+    const zop = r.total>0?r.zou/r.total*100:0;
     return `<tr>
       <td class="td-rank">${i+1}</td>
       <td><span class="dot" style="background:${color}"></span>${r.name}</td>
@@ -346,81 +336,66 @@ function renderDetail(){
       <td class="${r.shou>0?'td-amt':'td-zero'}">${fmt(r.shou)}</td><td class="td-pct">${r.shouR}%</td>
       <td class="${r.zou>0?'td-amt':'td-zero'}">${fmt(r.zou)}</td><td class="td-pct">${r.zouR}%</td>
       <td class="td-total">${fmt(r.total)}</td>
-      <td style="padding:5px 10px;min-width:100px">
-        <div style="display:flex;height:6px;border-radius:3px;overflow:hidden">
+      <td style="padding:6px 12px;min-width:88px">
+        <div style="display:flex;height:5px;border-radius:3px;overflow:hidden">
           <div style="width:${zp}%;background:#00B96B"></div>
           <div style="width:${sp}%;background:#FF2442"></div>
           <div style="width:${zop}%;background:#4F6EF7"></div>
         </div>
-        <div style="font-size:10px;color:#bbb;margin-top:2px">自${r.ziR}% 收${r.shouR}% 走${r.zouR}%</div>
+        <div style="font-size:10px;color:#ccc;margin-top:2px">自${r.ziR}% 收${r.shouR}% 走${r.zouR}%</div>
       </td></tr>`;
   });
-  let tz=0,ts=0,tzo=0;agg.forEach(r=>{tz+=r.zi;ts+=r.shou;tzo+=r.zou;});
-  const ta=tz+ts+tzo;
+  let tz=0,ts=0,tzo=0; agg.forEach(r=>{tz+=r.zi;ts+=r.shou;tzo+=r.zou;});
+  const ta = tz+ts+tzo;
   rows.push(`<tr class="tr-total"><td>—</td><td>合计</td>
     <td>${fmt(tz)}</td><td>${ta>0?(tz/ta*100).toFixed(1):0}%</td>
     <td>${fmt(ts)}</td><td>${ta>0?(ts/ta*100).toFixed(1):0}%</td>
     <td>${fmt(tzo)}</td><td>${ta>0?(tzo/ta*100).toFixed(1):0}%</td>
     <td>${fmt(ta)}</td><td></td></tr>`);
-  document.getElementById('detail-body').innerHTML=rows.join('');
+  document.getElementById('detail-body').innerHTML = rows.join('');
 }
 
-function renderTrend(){
-  // 行业小图：柱=消耗(万,左轴) + 实线=自运营占比%(右轴)
-  const grid=document.getElementById('trend-grid');
-  grid.innerHTML='';
-  IND_NAMES.forEach((name,idx)=>{
-    const color=COLORS[idx];
-    const div=document.createElement('div');
-    div.className='trend-item';
-    const cid='tc'+idx;
-    div.innerHTML=`<div class="trend-title">${name}</div><div id="${cid}" style="height:170px"></div>`;
+function renderTrend() {
+  const grid = document.getElementById('trend-grid');
+  grid.innerHTML = '';
+  IND_NAMES.forEach((name, idx) => {
+    const color = COLORS[idx];
+    const div = document.createElement('div');
+    div.className = 'trend-item';
+    const cid = 'tc' + idx;
+    div.innerHTML = `<div class="trend-title">${name}</div><div id="${cid}" style="height:160px"></div>`;
     grid.appendChild(div);
-    const c=echarts.init(document.getElementById(cid));
-    CHARTS['i'+idx]=c;
-
-    const ziData=MONTHS.map(m=>+(ALL[m][name].zi/10000).toFixed(2));
-    const ziRData=MONTHS.map(m=>+ALL[m][name].ziR);
-
+    const c = echarts.init(document.getElementById(cid));
+    CHARTS['i' + idx] = c;
+    const mL = Object.values(MONTH_LABELS);
+    const ziData = MONTHS.map(m => +(ALL[m][name].zi/10000).toFixed(2));
+    const ziRData = MONTHS.map(m => +ALL[m][name].ziR);
     c.setOption({
-      tooltip:{
-        trigger:'axis',
-        formatter:params=>{
-          let s=`<b>${params[0].axisValue}</b><br/>`;
-          params.forEach(p=>{
-            const unit=p.seriesName.includes('%')?'%':'万';
-            s+=`${p.marker}${p.seriesName}：${p.value}${unit}<br/>`;
-          });
-          return s;
-        }
-      },
+      tooltip:{trigger:'axis',formatter:params=>{
+        let s=`<b>${params[0].axisValue}</b><br/>`;
+        params.forEach(p=>{const u=p.seriesName.includes('%')?'%':'万';s+=`${p.marker}${p.seriesName}：${p.value}${u}<br/>`;}); return s;
+      }},
       legend:{top:0,right:0,itemWidth:8,itemHeight:8,textStyle:{fontSize:9},
-        data:[{name:'消耗(万)',icon:'rect'},{name:'自运营%',icon:'line'}]
-      },
-      grid:{left:38,right:38,bottom:22,top:26},
-      xAxis:{type:'category',data:['1月','2月','3月'],axisLabel:{fontSize:10}},
+        data:[{name:'消耗(万)',icon:'rect'},{name:'自运营%',icon:'line'}]},
+      grid:{left:36,right:38,bottom:20,top:24},
+      xAxis:{type:'category',data:mL,axisLabel:{fontSize:10},axisTick:{show:false},axisLine:{lineStyle:{color:'#eee'}}},
       yAxis:[
-        {type:'value',name:'万',nameTextStyle:{fontSize:9},axisLabel:{fontSize:9},splitNumber:3,position:'left'},
-        {type:'value',name:'%',nameTextStyle:{fontSize:9},axisLabel:{fontSize:9,formatter:v=>v+'%'},
-          min:0,max:100,splitNumber:4,position:'right',
-          axisLine:{show:false},axisTick:{show:false},splitLine:{show:false}},
+        {type:'value',name:'万',nameTextStyle:{fontSize:9},axisLabel:{fontSize:9},splitNumber:3,axisLine:{show:false},splitLine:{lineStyle:{color:'#f5f5f5'}}},
+        {type:'value',name:'%',nameTextStyle:{fontSize:9},axisLabel:{fontSize:9,formatter:v=>v+'%'},min:0,max:100,splitNumber:4,position:'right',axisLine:{show:false},axisTick:{show:false},splitLine:{show:false}},
       ],
       series:[
-        {name:'消耗(万)',type:'bar',yAxisIndex:0,data:ziData,itemStyle:{color,opacity:0.85},
+        {name:'消耗(万)',type:'bar',yAxisIndex:0,data:ziData,itemStyle:{color,borderRadius:[3,3,0,0]},barMaxWidth:32,
           label:{show:true,position:'top',formatter:p=>p.value>0?p.value:'',fontSize:9,color:'#555'}},
-        {name:'自运营%',type:'line',yAxisIndex:1,data:ziRData,smooth:true,
-          symbol:'circle',symbolSize:5,
-          lineStyle:{color:'#00B96B',width:2},itemStyle:{color:'#00B96B'},
-          label:{show:true,position:'top',formatter:p=>p.value>0?p.value+'%':'',fontSize:9,color:'#00B96B'}},
+        {name:'自运营%',type:'line',yAxisIndex:1,data:ziRData,smooth:true,symbol:'circle',symbolSize:5,
+          lineStyle:{color,width:2},itemStyle:{color},
+          label:{show:true,position:'top',formatter:p=>p.value>0?p.value+'%':'',fontSize:9,color}},
       ]
     });
   });
 }
 
-renderTotal();
-renderDetail();
-renderTrend();
-window.addEventListener('resize',()=>Object.values(CHARTS).forEach(c=>c&&c.resize()));
+renderTotal(); renderDetail(); renderTrend();
+window.addEventListener('resize', () => Object.values(CHARTS).forEach(c => c && c.resize()));
 </script>
 </body>
-<!-- build:1776128489646519808 --></html>
+</html>
