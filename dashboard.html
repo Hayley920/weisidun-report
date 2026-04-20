@@ -8,28 +8,20 @@
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #0f1117; color: #e2e8f0; min-height: 100vh; }
-
-  /* ===== HEADER ===== */
   .header { background: linear-gradient(135deg, #1a1d2e 0%, #16213e 100%); border-bottom: 1px solid #2d3748; padding: 18px 28px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
   .header-left { display: flex; align-items: center; gap: 14px; }
   .logo { width: 36px; height: 36px; background: linear-gradient(135deg, #ff2d55, #ff6b35); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
   .title-block h1 { font-size: 18px; font-weight: 700; color: #f0f4ff; }
   .title-block p { font-size: 12px; color: #64748b; margin-top: 2px; }
-  .header-right { display: flex; align-items: center; gap: 16px; }
-  .last-update { font-size: 12px; color: #64748b; }
-
-  /* ===== DATE PICKER AREA ===== */
   .date-bar { background: #1a1d2e; border-bottom: 1px solid #2d3748; padding: 12px 28px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
   .date-group { display: flex; align-items: center; gap: 10px; }
   .date-label { font-size: 13px; color: #94a3b8; white-space: nowrap; }
-  .date-input { background: #0f1117; border: 1px solid #2d3748; border-radius: 6px; color: #e2e8f0; padding: 6px 10px; font-size: 13px; cursor: pointer; }
+  .date-input { background: #0f1117; border: 1px solid #2d3748; border-radius: 6px; color: #e2e8f0; padding: 6px 10px; font-size: 13px; }
   .date-input:focus { outline: none; border-color: #ff2d55; }
   .vs-badge { background: #2d3748; color: #94a3b8; padding: 4px 10px; border-radius: 20px; font-size: 12px; }
   .apply-btn { background: linear-gradient(135deg, #ff2d55, #ff6b35); color: #fff; border: none; border-radius: 6px; padding: 7px 18px; font-size: 13px; cursor: pointer; font-weight: 600; transition: opacity .2s; }
   .apply-btn:hover { opacity: .85; }
   .data-notice { font-size: 12px; color: #f59e0b; background: rgba(245,158,11,.1); border: 1px solid rgba(245,158,11,.2); border-radius: 4px; padding: 4px 10px; }
-
-  /* ===== KPI ROW ===== */
   .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; padding: 20px 28px 0; }
   .kpi-card { background: #1a1d2e; border: 1px solid #2d3748; border-radius: 12px; padding: 16px 20px; position: relative; overflow: hidden; transition: transform .2s; }
   .kpi-card:hover { transform: translateY(-2px); }
@@ -41,87 +33,63 @@
   .kpi-label { font-size: 12px; color: #64748b; margin-bottom: 8px; }
   .kpi-value { font-size: 26px; font-weight: 700; color: #f0f4ff; }
   .kpi-unit { font-size: 14px; color: #94a3b8; margin-left: 2px; font-weight: 400; }
-  .kpi-sub { font-size: 12px; margin-top: 6px; display: flex; align-items: center; gap: 4px; }
-  .up { color: #10b981; }
-  .down { color: #ef4444; }
-  .neutral { color: #94a3b8; }
-
-  /* ===== TABS ===== */
+  .kpi-sub { font-size: 12px; margin-top: 6px; color: #94a3b8; }
   .tabs { padding: 20px 28px 0; display: flex; gap: 4px; }
   .tab { padding: 8px 20px; border-radius: 8px 8px 0 0; cursor: pointer; font-size: 14px; color: #64748b; border: 1px solid transparent; border-bottom: none; transition: all .2s; }
   .tab.active { background: #1a1d2e; color: #f0f4ff; border-color: #2d3748; font-weight: 600; }
   .tab:hover:not(.active) { color: #94a3b8; }
-
-  /* ===== PANELS ===== */
   .panel { display: none; padding: 0 28px 28px; }
   .panel.active { display: block; }
   .panel-inner { background: #1a1d2e; border: 1px solid #2d3748; border-radius: 0 12px 12px 12px; padding: 20px; }
-
-  /* ===== CHART GRID ===== */
   .chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .chart-card { background: #0f1117; border: 1px solid #1e2a3a; border-radius: 10px; padding: 16px; }
   .chart-card.full { grid-column: 1 / -1; }
   .chart-title { font-size: 14px; font-weight: 600; color: #94a3b8; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
   .chart-title::before { content: ''; width: 3px; height: 14px; background: #ff2d55; border-radius: 2px; display: inline-block; }
-  .chart-box { width: 100%; height: 320px; }
-  .chart-box-lg { width: 100%; height: 400px; }
-
-  /* ===== TABLE ===== */
-  .table-wrap { overflow-x: auto; margin-top: 4px; }
+  .chart-box { width: 100%; height: 340px; }
+  .chart-box-lg { width: 100%; height: 440px; }
+  .table-wrap { overflow-x: auto; max-height: 520px; overflow-y: auto; }
   table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  thead th { background: #0f1117; color: #64748b; padding: 10px 12px; text-align: left; font-weight: 500; border-bottom: 1px solid #2d3748; white-space: nowrap; }
+  thead th { background: #0a0d14; color: #64748b; padding: 10px 12px; text-align: left; font-weight: 500; border-bottom: 1px solid #2d3748; white-space: nowrap; position: sticky; top: 0; z-index: 2; }
   tbody tr { border-bottom: 1px solid #1e2a3a; transition: background .15s; }
   tbody tr:hover { background: rgba(255,45,85,.04); }
   tbody td { padding: 9px 12px; color: #cbd5e1; white-space: nowrap; }
   tbody td.num { text-align: right; font-variant-numeric: tabular-nums; }
   tbody td.rank { color: #64748b; font-weight: 700; width: 36px; }
-  .bar-cell { display: flex; align-items: center; gap: 8px; }
-  .mini-bar { height: 6px; border-radius: 3px; background: linear-gradient(90deg, #ff2d55, #ff6b35); min-width: 4px; }
-
-  /* ===== SEARCH ===== */
+  .rank-medal { color: #f59e0b; }
+  .bar-mini { height: 6px; background: linear-gradient(90deg, #ff2d55, #ff6b35); border-radius: 3px; display: inline-block; }
+  .ind-tag { background: #1e2a3a; padding: 2px 8px; border-radius: 4px; font-size: 11px; color: #94a3b8; }
   .search-row { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
   .search-input { flex: 1; background: #0f1117; border: 1px solid #2d3748; border-radius: 6px; color: #e2e8f0; padding: 8px 14px; font-size: 13px; }
   .search-input:focus { outline: none; border-color: #ff2d55; }
   .filter-select { background: #0f1117; border: 1px solid #2d3748; border-radius: 6px; color: #e2e8f0; padding: 8px 12px; font-size: 13px; cursor: pointer; }
-  .filter-select:focus { outline: none; border-color: #ff2d55; }
-  .row-count { font-size: 12px; color: #64748b; }
-
-  /* ===== YoY/MoM TABLE ===== */
-  .compare-section { margin-top: 16px; }
-  .compare-notice { background: rgba(59,130,246,.08); border: 1px solid rgba(59,130,246,.2); border-radius: 8px; padding: 12px 16px; font-size: 13px; color: #93c5fd; margin-bottom: 14px; line-height: 1.6; }
-  .compare-notice strong { color: #60a5fa; }
-
-  /* ===== SCROLLBAR ===== */
-  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  .row-count { font-size: 12px; color: #64748b; white-space: nowrap; }
+  .compare-notice { background: rgba(59,130,246,.08); border: 1px solid rgba(59,130,246,.2); border-radius: 8px; padding: 14px 16px; font-size: 13px; color: #93c5fd; margin-bottom: 16px; line-height: 1.7; }
+  .compare-steps { margin-top: 8px; padding-left: 16px; }
+  .compare-steps li { margin-bottom: 4px; }
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
   ::-webkit-scrollbar-track { background: #0f1117; }
   ::-webkit-scrollbar-thumb { background: #2d3748; border-radius: 3px; }
-
-  /* ===== RESPONSIVE ===== */
   @media (max-width: 900px) {
     .kpi-row { grid-template-columns: repeat(2, 1fr); }
     .chart-grid { grid-template-columns: 1fr; }
     .chart-card.full { grid-column: 1; }
-    .header { flex-direction: column; align-items: flex-start; gap: 10px; }
   }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <div class="header">
   <div class="header-left">
     <div class="logo">📊</div>
     <div class="title-block">
       <h1>微思敦 · 业绩追踪看板</h1>
-      <p>数据来源：RedBI · 聚光高级定向维度分析 · 实时更新</p>
+      <p>数据来源：RedBI · 聚光高级定向维度分析 · analysisId=307139</p>
     </div>
   </div>
-  <div class="header-right">
-    <span class="last-update" id="lastUpdate">数据日期：加载中…</span>
-  </div>
+  <div style="font-size:12px;color:#64748b" id="lastUpdate">数据日期：2026-04-19</div>
 </div>
 
-<!-- DATE BAR -->
 <div class="date-bar">
   <div class="date-group">
     <span class="date-label">📅 当期</span>
@@ -129,62 +97,64 @@
   </div>
   <span class="vs-badge">VS</span>
   <div class="date-group">
-    <span class="date-label">📅 对比期</span>
+    <span class="date-label">📅 对比期（环比）</span>
     <input type="date" class="date-input" id="datePrev" value="2026-04-12">
   </div>
-  <button class="apply-btn" onclick="applyDateFilter()">🔄 刷新数据</button>
-  <div class="data-notice">⚠️ 同/环比对比需分别在 RedBI 拉取两期数据后对比，当前展示当期数据</div>
+  <div class="date-group">
+    <span class="date-label">📅 同期去年</span>
+    <input type="date" class="date-input" id="dateYoy" value="2025-04-19">
+  </div>
+  <button class="apply-btn" onclick="applyDate()">🔄 应用日期</button>
+  <span class="data-notice" id="dateNotice">⚠️ 当前为 2026-04-19 数据快照，切换日期需重拉 RedBI 数据</span>
 </div>
 
-<!-- KPI -->
 <div class="kpi-row">
   <div class="kpi-card red">
-    <div class="kpi-label">总现金消耗</div>
-    <div class="kpi-value" id="kpi-total">—<span class="kpi-unit">万元</span></div>
-    <div class="kpi-sub neutral" id="kpi-total-sub">加载中…</div>
+    <div class="kpi-label">总现金消耗（当期）</div>
+    <div class="kpi-value">13.06<span class="kpi-unit">亿元</span></div>
+    <div class="kpi-sub">数据日期：2026-04-19 | 环比需对比期数据</div>
   </div>
   <div class="kpi-card blue">
     <div class="kpi-label">活跃行业数</div>
-    <div class="kpi-value" id="kpi-industry">—</div>
-    <div class="kpi-sub neutral" id="kpi-industry-sub">加载中…</div>
+    <div class="kpi-value">26<span class="kpi-unit">个</span></div>
+    <div class="kpi-sub">TOP1：3c及电器（20.4%）</div>
   </div>
   <div class="kpi-card green">
-    <div class="kpi-label">活跃客户数 (Brand Tag)</div>
-    <div class="kpi-value" id="kpi-brand">—</div>
-    <div class="kpi-sub neutral" id="kpi-brand-sub">加载中…</div>
+    <div class="kpi-label">活跃 Brand 数</div>
+    <div class="kpi-value" id="kpi-brand-count">—</div>
+    <div class="kpi-sub">TOP1：水羊（6.00%）</div>
   </div>
   <div class="kpi-card purple">
-    <div class="kpi-label">Top1 行业消耗占比</div>
-    <div class="kpi-value" id="kpi-top1">—<span class="kpi-unit">%</span></div>
-    <div class="kpi-sub neutral" id="kpi-top1-sub">加载中…</div>
+    <div class="kpi-label">TOP3行业消耗占比</div>
+    <div class="kpi-value">46.4<span class="kpi-unit">%</span></div>
+    <div class="kpi-sub">3c + 美妆 + 日用百货</div>
   </div>
 </div>
 
-<!-- TABS -->
 <div class="tabs">
   <div class="tab active" onclick="switchTab('industry')">🏭 行业视图</div>
   <div class="tab" onclick="switchTab('brand')">🏷️ 客户视图</div>
   <div class="tab" onclick="switchTab('compare')">📈 同环比分析</div>
 </div>
 
-<!-- PANEL: INDUSTRY -->
+<!-- INDUSTRY PANEL -->
 <div class="panel active" id="panel-industry">
   <div class="panel-inner">
     <div class="chart-grid">
       <div class="chart-card">
-        <div class="chart-title">行业消耗排名（Top15）</div>
-        <div class="chart-box" id="chart-industry-bar"></div>
+        <div class="chart-title">行业消耗排名（Top15，单位：亿元）</div>
+        <div class="chart-box" id="chart-ind-bar"></div>
       </div>
       <div class="chart-card">
-        <div class="chart-title">行业消耗占比</div>
-        <div class="chart-box" id="chart-industry-pie"></div>
+        <div class="chart-title">行业消耗占比分布</div>
+        <div class="chart-box" id="chart-ind-pie"></div>
       </div>
       <div class="chart-card full">
-        <div class="chart-title">行业明细数据</div>
+        <div class="chart-title">行业明细（全部26个，按消耗降序）</div>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>#</th><th>行业</th><th>现金消耗（万元）</th><th>消耗占比</th><th>趋势条</th><th>活跃Brand数</th></tr></thead>
-            <tbody id="industry-table"></tbody>
+            <thead><tr><th>#</th><th>行业</th><th>现金消耗</th><th>占比</th><th>消耗趋势</th><th>活跃Brand数</th></tr></thead>
+            <tbody id="ind-table"></tbody>
           </table>
         </div>
       </div>
@@ -192,26 +162,24 @@
   </div>
 </div>
 
-<!-- PANEL: BRAND -->
+<!-- BRAND PANEL -->
 <div class="panel" id="panel-brand">
   <div class="panel-inner">
     <div class="search-row">
-      <input type="text" class="search-input" placeholder="🔍 搜索品牌名称…" id="brandSearch" oninput="filterBrandTable()">
-      <select class="filter-select" id="industryFilter" onchange="filterBrandTable()">
-        <option value="">全部行业</option>
-      </select>
-      <span class="row-count" id="brandRowCount"></span>
+      <input type="text" class="search-input" placeholder="🔍 搜索品牌名称…" id="brandSearch" oninput="filterBrand()">
+      <select class="filter-select" id="indFilter" onchange="filterBrand()"><option value="">全部行业</option></select>
+      <span class="row-count" id="brandCount">共 — 个品牌</span>
     </div>
     <div class="chart-grid">
       <div class="chart-card full">
-        <div class="chart-title">客户消耗 Top30（Brand Tag 汇总）</div>
+        <div class="chart-title">客户消耗 Top30（Brand Tag 汇总，单位：亿元）</div>
         <div class="chart-box-lg" id="chart-brand-bar"></div>
       </div>
       <div class="chart-card full">
-        <div class="chart-title">客户明细（Brand Tag 汇总，按消耗降序）</div>
+        <div class="chart-title">客户明细（Brand Tag 汇总 · 共 <span id="brand-total-count">—</span> 个品牌）</div>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>#</th><th>Brand Tag</th><th>一级行业</th><th>现金消耗（万元）</th><th>竞价消耗（万元）</th><th>定价消耗（万元）</th><th>消耗占比</th></tr></thead>
+            <thead><tr><th>#</th><th>Brand Tag</th><th>行业</th><th>现金消耗</th><th>竞价消耗</th><th>定价消耗</th><th>占比</th><th>消耗趋势</th></tr></thead>
             <tbody id="brand-table"></tbody>
           </table>
         </div>
@@ -220,468 +188,214 @@
   </div>
 </div>
 
-<!-- PANEL: COMPARE -->
+<!-- COMPARE PANEL -->
 <div class="panel" id="panel-compare">
   <div class="panel-inner">
     <div class="compare-notice">
       <strong>📌 同环比使用说明</strong><br>
-      当前看板数据为当期快照（<span id="cur-date-tip">2026-04-19</span>）。如需计算同比/环比：<br>
-      1. 在上方日期栏选择「当期」和「对比期」<br>
-      2. 点击「🔄 刷新数据」后，系统将分别从 RedBI 拉取两期数据进行对比<br>
-      3. 目前展示的是单期数据模式 — 功能说明见下方图表
+      本看板当前内嵌的是 2026-04-19 的数据快照。同环比计算需要两期数据：
+      <ul class="compare-steps">
+        <li>1. 在上方日期栏设置「当期」和「对比期（环比）/同期去年（同比）」</li>
+        <li>2. 点击「🔄 应用日期」后，系统自动识别日期变更</li>
+        <li>3. 如需实时对比，请联系数据看板维护方从 RedBI 重新拉取对应期数据并更新看板</li>
+        <li>4. 下方图表使用<strong>模拟对比数据</strong>展示看板框架，真实数据接入后自动替换</li>
+      </ul>
     </div>
-    <div class="compare-section">
-      <div class="chart-grid">
-        <div class="chart-card full">
-          <div class="chart-title">行业消耗 — 当期 vs 对比期（示意，需双期数据）</div>
-          <div class="chart-box-lg" id="chart-compare-industry"></div>
-        </div>
-        <div class="chart-card full">
-          <div class="chart-title">客户消耗 Top20 — 当期 vs 对比期（示意，需双期数据）</div>
-          <div class="chart-box-lg" id="chart-compare-brand"></div>
-        </div>
+    <div class="chart-grid">
+      <div class="chart-card full">
+        <div class="chart-title">行业消耗环比对比（当期 vs 对比期，模拟数据框架）</div>
+        <div class="chart-box-lg" id="chart-comp-ind"></div>
+      </div>
+      <div class="chart-card full">
+        <div class="chart-title">客户消耗 Top15 对比（当期 vs 对比期，模拟数据框架）</div>
+        <div class="chart-box-lg" id="chart-comp-brand"></div>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-// ============================================================
-// RAW DATA (embedded from RedBI snapshot 2026-04-19)
-// ============================================================
-const RAW_DATA = [
-  ["美妆个护","水羊",59847115.78],
-  ["母婴","澳优乳业",54140497.68],
-  ["日用百货","长鹏宠物",40521409.04003],
-  ["美妆个护","宝洁",37462538.73],
-  ["3c及电器","宝洁集团",30635044.5],
-  ["日用百货","上海吉列有限公司",24058076.34],
-  ["日用百货","名创优品",23873322.26007],
-  ["3c及电器","方太集团",23201758.80026],
-  ["日用百货","健合-宠物",19609180.18],
-  ["3c及电器","九阳",18627301.07],
-  ["3c及电器","凯度集团",22775554.18],  // 合并两行凯度
-  ["医疗健康","美团-医药健康-医美-用增",12167091.23],
-  ["3c及电器","安克集团",12095611.7],
-  ["生活服务","玫瑰星座",11331468.76],
-  ["医疗健康","深圳市瑞霖医药有限公司",10937343.64],
-  ["3c及电器","公牛集团",10900949.76],
-  ["服装配饰","山下有松",10416435.78969],
-  ["3c及电器","小度集团",10256307.74],
-  ["游戏","祖龙游戏",10236956.8099],
-  ["服装配饰","维多利亚的秘密",9851594.91],
-  ["服装配饰","森马",9641181.16],
-  ["食品饮料","霸王茶姬",12617411.34],  // 合并两行霸王茶姬
-  ["服装配饰","美力城",8383867.62],
-  ["互联网","唯品会-用增",8114567.7],
-  ["3c及电器","小熊",7949837.51],
-  ["3c及电器","猿辅导-小猿-教辅工具",7787591.54],
-  ["美妆个护","水羊（含港+KIKO）",14056019.67],  // 水羊合并
-  ["3c及电器","小米集团",7447444.51],
-  ["美妆个护","贝泰妮集团",7419605.22],
-  ["游戏","灵犀互娱",7370058.95],
-  ["服装配饰","柏丽德/APM",7127614.58],
-  ["游戏","波克城市",6963159.72],
-  ["服装配饰","麦瑞克",6845577.46],
-  ["日用百货","全棉时代",6806424.19],
-  ["服装配饰","猫人MIIOW",6542032],
-  ["美妆个护","卡姿兰",6449778.4],
-  ["商务服务","途鸽-留学生求职",6166576.1],
-  ["母婴","露乐集团",5882634.62],
-  ["3c及电器","倍思集团",5819099.05],
-  ["医疗健康","曼秀雷敦",5802835.9],
-  ["日用百货","gulsha古尔莎",5549632.88],
-  ["游戏","腾讯游戏",8300322.65],  // 腾讯游戏合并
-  ["游戏","炫动游戏",5090638.01],
-  ["服装配饰","百丽集团",4995796.98],
-  ["3c及电器","海信集团",4853717.35],
-  ["游戏","波克科技",4851114.01],
-  ["家居建材","梦百合集团",4848616.81999],
-  ["互联网","任意门-SOUL",4720816.37],
-  ["文体娱乐","名创优品",4658864.37097],
-  ["金融行业","蚂蚁-蚂蚁保",8945558.77],  // 蚂蚁合并
-  ["游戏","爱的番茄",4572019.76],
-  ["服装配饰","NIKE",4523345.17],
-  ["日用百货","希望树",4517391.78],
-  ["3c及电器","韶音集团",4515141.42],
-  ["3c及电器","闪魔集团",4493028.62],
-  ["家居建材","生活家装饰集团",4396164.54],
-  ["3c及电器","石头科技集团",4153428.24],
-  ["母婴","恒安集团",4103683.89],
-  ["家居建材","九牧",4079162.35],
-  ["家居建材","莫川设计",3941309.08],
-  ["游戏","叠纸游戏",7131352.66],  // 叠纸合并
-  ["日用百货","恒清石集团",6730647.79],  // 恒清石合并
-  ["3c及电器","JMGO坚果投影",3704745.58],
-  ["游戏","四三九九",3680280.88],
-  ["3c及电器","安吉尔",3672710.16],
-  ["医疗健康","高德美-注射类",3658741.2],
-  ["母婴","英氏",3624637.11],
-  ["家居建材","CCFARTS可机洗地毯",3600645.88],
-  ["生活服务","花嫁丽舍",3590404.23],
-  ["游戏","必凡娱乐",3590139.16],
-  ["家居建材","博洛尼整装集团",3560366.25],
-  ["家居建材","金意陶瓷砖",3314357.29],
-  ["3c及电器","极米投影",3314318.82],
-  ["医疗健康","广西花红药业",3265294.33],
-  ["美妆个护","Fancl集团",3239300.36],
-  ["美妆个护","强生",3199662.61],
-  ["美妆个护","HFP",3173560.88],
-  ["出行旅游","金沙中国有限公司",3151082.91],
-  ["服装配饰","鄂尔多斯集团",3097393.07],
-  ["3c及电器","CONFU康夫",3085558.37],
-  ["3c及电器","学而思-学习机",4187967.99],  // 学而思合并
-  ["3c及电器","小度-学习机",2931775.94],
-  ["美妆个护","科赴",2929941.79],
-  ["3c及电器","HOTATA好太太",2886620.39],
-  ["出行旅游","长隆集团-乐园",2883332.6],
-  ["商务服务","孔墨-学历教育",2877998.34],
-  ["食品饮料","樂道NOTO",2857123.72],
-  ["食品饮料","汤臣倍健-保健品",2823902.25],
-  ["日用百货","维达",2816790.72],
-  ["3c及电器","cleer集团",2774526.34],
-  ["3c及电器","松下集团",2757397.09],
-  ["服装配饰","老庙黄金",2689232],
-  ["美妆个护","上海吉列（美妆）",6210131.46],
-];
+const TOTAL = 1305846195.65;
+const IND_DATA = [{"industry": "3c及电器", "cash": 266437530.54025972, "brandCount": 193}, {"industry": "美妆个护", "cash": 174345115.92999995, "brandCount": 126}, {"industry": "日用百货", "cash": 164663323.47010046, "brandCount": 196}, {"industry": "服装配饰", "cash": 133950646.99969, "brandCount": 409}, {"industry": "家居建材", "cash": 86042119.29029009, "brandCount": 463}, {"industry": "母婴", "cash": 83698022.64, "brandCount": 56}, {"industry": "游戏", "cash": 83458939.25989996, "brandCount": 57}, {"industry": "食品饮料", "cash": 56121284.62020013, "brandCount": 194}, {"industry": "医疗健康", "cash": 55005573.099999994, "brandCount": 153}, {"industry": "生活服务", "cash": 38937027.89996997, "brandCount": 337}, {"industry": "教育培训", "cash": 33644268.99000001, "brandCount": 246}, {"industry": "互联网", "cash": 33187593.08000001, "brandCount": 103}, {"industry": "商务服务", "cash": 25648435.520000003, "brandCount": 225}, {"industry": "出行旅游", "cash": 21103363.15000001, "brandCount": 179}, {"industry": "文体娱乐", "cash": 16181654.241069997, "brandCount": 71}, {"industry": "金融行业", "cash": 13201685.449999997, "brandCount": 27}, {"industry": "餐饮", "cash": 9663775.77, "brandCount": 67}, {"industry": "房地产", "cash": 7148552.9501, "brandCount": 64}, {"industry": "交通工具", "cash": 1150152.2, "brandCount": 27}, {"industry": "汽车", "cash": 837718.11, "brandCount": 28}, {"industry": "文化传媒", "cash": 614468.9, "brandCount": 4}, {"industry": "通信", "cash": 424771.95999999996, "brandCount": 8}, {"industry": "机构", "cash": 234047.75999999998, "brandCount": 3}, {"industry": "其他", "cash": 78504.05, "brandCount": 3}, {"industry": "手作/兴趣玩物", "cash": 45900.0, "brandCount": 3}, {"industry": "工农业", "cash": 21719.77, "brandCount": 2}];
+const BRAND_DATA = [{"brand": "水羊", "cash": 78351786.03999998, "bidbuy": 78351786.03999998, "fixed": 0.0, "industry": "美妆个护"}, {"brand": "澳优乳业", "cash": 55011182.870000005, "bidbuy": 55011182.870000005, "fixed": 0.0, "industry": "母婴"}, {"brand": "长鹏宠物", "cash": 40521409.04003, "bidbuy": 34898914.04, "fixed": 5622495.00003, "industry": "日用百货"}, {"brand": "宝洁", "cash": 37462538.73, "bidbuy": 37462538.73, "fixed": 0.0, "industry": "美妆个护"}, {"brand": "宝洁集团", "cash": 31044567.5, "bidbuy": 31044567.5, "fixed": 0.0, "industry": "3c及电器"}, {"brand": "上海吉列有限公司", "cash": 30268207.8, "bidbuy": 30268207.8, "fixed": 0.0, "industry": "日用百货"}, {"brand": "名创优品", "cash": 28731129.051039997, "bidbuy": 26385429.05, "fixed": 2345700.00104, "industry": "日用百货"}, {"brand": "方太集团", "cash": 23264525.38026, "bidbuy": 19862362.299999997, "fixed": 3402163.08026, "industry": "3c及电器"}, {"brand": "凯度集团", "cash": 22775554.18, "bidbuy": 22775554.18, "fixed": 0.0, "industry": "3c及电器"}, {"brand": "健合-宠物", "cash": 19609180.18, "bidbuy": 19609180.18, "fixed": 0.0, "industry": "日用百货"}, {"brand": "九阳", "cash": 19380847.009999998, "bidbuy": 19380847.009999998, "fixed": 0.0, "industry": "3c及电器"}, {"brand": "霸王茶姬", "cash": 17727852.57, "bidbuy": 17727852.57, "fixed": 0.0, "industry": "食品饮料"}, {"brand": "玫瑰星座", "cash": 14393060.1, "bidbuy": 14393060.1, "fixed": 0.0, "industry": "生活服务"}, {"brand": "美团-医药健康-医美-用增", "cash": 12167091.23, "bidbuy": 12167091.23, "fixed": 0.0, "industry": "医疗健康"}, {"brand": "安克集团", "cash": 12095611.7, "bidbuy": 12095611.7, "fixed": 0.0, "industry": "3c及电器"}, {"brand": "公牛集团", "cash": 10950949.76, "bidbuy": 10950949.76, "fixed": 0.0, "industry": "3c及电器"}, {"brand": "深圳市瑞霖医药有限公司", "cash": 10937343.64, "bidbuy": 10613343.64, "fixed": 324000.0, "industry": "医疗健康"}, {"brand": "祖龙游戏", "cash": 10613210.859900001, "bidbuy": 9653210.860000001, "fixed": 959999.9999, "industry": "游戏"}, {"brand": "山下有松", "cash": 10416435.78969, "bidbuy": 6955235.79, "fixed": 3461199.99969, "industry": "服装配饰"}, {"brand": "小度集团", "cash": 10256307.74, "bidbuy": 10256307.74, "fixed": 0.0, "industry": "3c及电器"}, {"brand": "森马", "cash": 10179330.28, "bidbuy": 10179330.28, "fixed": 0.0, "industry": "服装配饰"}, {"brand": "维多利亚的秘密", "cash": 10059594.91, "bidbuy": 10059594.91, "fixed": 0.0, "industry": "服装配饰"}, {"brand": "波克城市", "cash": 9517257.1, "bidbuy": 9517257.1, "fixed": 0.0, "industry": "游戏"}, {"brand": "腾讯游戏", "cash": 9445435.84, "bidbuy": 7633936.64, "fixed": 1811499.2, "industry": "游戏"}, {"brand": "海信集团", "cash": 9338046.700000001, "bidbuy": 9258046.700000001, "fixed": 80000.0, "industry": "3c及电器"}, {"brand": "百丽集团", "cash": 9151534.610000001, "bidbuy": 9151534.610000001, "fixed": 0.0, "industry": "服装配饰"}, {"brand": "贝泰妮集团", "cash": 8464351.23, "bidbuy": 8423451.23, "fixed": 40900.0, "industry": "美妆个护"}, {"brand": "美力城", "cash": 8383867.62, "bidbuy": 8083867.62, "fixed": 300000.0, "industry": "服装配饰"}, {"brand": "唯品会-用增", "cash": 8114567.7, "bidbuy": 8114567.7, "fixed": 0.0, "industry": "互联网"}, {"brand": "小熊", "cash": 7949837.51, "bidbuy": 7889837.51, "fixed": 60000.0, "industry": "3c及电器"}, {"brand": "猿辅导-小猿-教辅工具", "cash": 7787591.54, "bidbuy": 7787591.54, "fixed": 0.0, "industry": "3c及电器"}, {"brand": "小米集团", "cash": 7580777.48, "bidbuy": 7550777.48, "fixed": 30000.0, "industry": "3c及电器"}, {"brand": "麦瑞克", "cash": 7574056.4, "bidbuy": 7436656.4, "fixed": 137400.0, "industry": "服装配饰"}, {"brand": "叠纸游戏", "cash": 7428434.850000001, "bidbuy": 7428434.850000001, "fixed": 0.0, "industry": "游戏"}, {"brand": "灵犀互娱", "cash": 7380836.11, "bidbuy": 7380836.11, "fixed": 0.0, "industry": "游戏"}, {"brand": "柏丽德/APM", "cash": 7127614.58, "bidbuy": 7127614.58, "fixed": 0.0, "industry": "服装配饰"}, {"brand": "恒清石集团", "cash": 6830255.85, "bidbuy": 6830255.85, "fixed": 0.0, "industry": "日用百货"}, {"brand": "全棉时代", "cash": 6806424.19, "bidbuy": 6796424.19, "fixed": 10000.0, "industry": "日用百货"}, {"brand": "猫人MIIOW", "cash": 6542032.0, "bidbuy": 6275332.0, "fixed": 266700.0, "industry": "服装配饰"}, {"brand": "卡姿兰", "cash": 6449778.4, "bidbuy": 6449778.4, "fixed": 0.0, "industry": "美妆个护"}, {"brand": "途鸽-留学生求职-语言及留学", "cash": 6167608.609999999, "bidbuy": 5827608.609999999, "fixed": 340000.0, "industry": "商务服务"}, {"brand": "孔墨-学历教育", "cash": 6156141.399999999, "bidbuy": 6156141.399999999, "fixed": 0.0, "industry": "商务服务"}, {"brand": "倍思集团", "cash": 6077527.31, "bidbuy": 6077527.31, "fixed": 0.0, "industry": "3c及电器"}, {"brand": "露乐集团", "cash": 5882634.62, "bidbuy": 5882634.62, "fixed": 0.0, "industry": "母婴"}, {"brand": "曼秀雷敦", "cash": 5802835.9, "bidbuy": 5802835.9, "fixed": 0.0, "industry": "医疗健康"}, {"brand": "恒安集团", "cash": 5700199.52, "bidbuy": 5700199.52, "fixed": 0.0, "industry": "母婴"}, {"brand": "梦百合集团", "cash": 5605518.88999, "bidbuy": 3832118.8899999997, "fixed": 1773399.99999, "industry": "家居建材"}, {"brand": "gulsha古尔莎", "cash": 5549632.88, "bidbuy": 5549632.88, "fixed": 0.0, "industry": "日用百货"}, {"brand": "四三九九", "cash": 5508672.34, "bidbuy": 5508672.34, "fixed": 0.0, "industry": "游戏"}, {"brand": "生活家装饰集团", "cash": 5388367.05, "bidbuy": 5368367.05, "fixed": 20000.0, "industry": "家居建材"}, {"brand": "爱空间集团", "cash": 5356411.33, "bidbuy": 4902172.159999999, "fixed": 454239.17, "industry": "家居建材"}, {"brand": "安吉尔", "cash": 5301817.890000001, "bidbuy": 5301817.890000001, "fixed": 0.0, "industry": "3c及电器"}, {"brand": "NIKE", "cash": 5130448.37, "bidbuy": 5130448.37, "fixed": 0.0, "industry": "服装配饰"}, {"brand": "炫动游戏", "cash": 5090638.01, "bidbuy": 4950638.01, "fixed": 140000.0, "industry": "游戏"}, {"brand": "波克科技", "cash": 4885534.6, "bidbuy": 4885534.6, "fixed": 0.0, "industry": "游戏"}, {"brand": "任意门-SOUL", "cash": 4720816.37, "bidbuy": 4720816.37, "fixed": 0.0, "industry": "互联网"}, {"brand": "蚂蚁-蚂蚁保-品牌", "cash": 4612849.05, "bidbuy": 4612849.05, "fixed": 0.0, "industry": "金融行业"}, {"brand": "花嫁丽舍", "cash": 4579504.3, "bidbuy": 4474504.3, "fixed": 105000.0, "industry": "生活服务"}, {"brand": "爱的番茄", "cash": 4572019.76, "bidbuy": 4572019.76, "fixed": 0.0, "industry": "游戏"}, {"brand": "科赴", "cash": 4529351.01, "bidbuy": 4529351.01, "fixed": 0.0, "industry": "美妆个护"}, {"brand": "莫川设计", "cash": 4529309.08, "bidbuy": 4487309.08, "fixed": 42000.0, "industry": "家居建材"}, {"brand": "希望树", "cash": 4517391.78, "bidbuy": 4517391.78, "fixed": 0.0, "industry": "日用百货"}, {"brand": "韶音集团", "cash": 4515141.42, "bidbuy": 3297160.78, "fixed": 1217980.64, "industry": "3c及电器"}, {"brand": "闪魔集团", "cash": 4493028.62, "bidbuy": 4493028.62, "fixed": 0.0, "industry": "3c及电器"}, {"brand": "鄂尔多斯集团", "cash": 4466265.4, "bidbuy": 4466265.4, "fixed": 0.0, "industry": "服装配饰"}, {"brand": "蚂蚁金服", "cash": 4332709.72, "bidbuy": 4332709.72, "fixed": 0.0, "industry": "金融行业"}, {"brand": "石头科技集团", "cash": 4153428.24, "bidbuy": 4153428.24, "fixed": 0.0, "industry": "3c及电器"}, {"brand": "九牧", "cash": 4079162.35, "bidbuy": 4079162.35, "fixed": 0.0, "industry": "家居建材"}, {"brand": "金沙中国有限公司", "cash": 3961971.25, "bidbuy": 1996971.25, "fixed": 1965000.0, "industry": "出行旅游"}, {"brand": "英氏", "cash": 3720061.63, "bidbuy": 3720061.63, "fixed": 0.0, "industry": "母婴"}, {"brand": "JMGO坚果投影", "cash": 3704745.58, "bidbuy": 3704745.58, "fixed": 0.0, "industry": "3c及电器"}, {"brand": "高德美-注射类", "cash": 3658741.2, "bidbuy": 3658741.2, "fixed": 0.0, "industry": "医疗健康"}, {"brand": "住范儿集团", "cash": 3615491.06, "bidbuy": 3615491.06, "fixed": 0.0, "industry": "家居建材"}, {"brand": "CCFARTS可机洗地毯", "cash": 3600645.88, "bidbuy": 3600645.88, "fixed": 0.0, "industry": "家居建材"}, {"brand": "博洛尼整装集团", "cash": 3590366.22, "bidbuy": 3218920.52, "fixed": 371445.7, "industry": "家居建材"}, {"brand": "必凡娱乐", "cash": 3590139.16, "bidbuy": 3590139.16, "fixed": 0.0, "industry": "游戏"}, {"brand": "松下集团", "cash": 3446976.42, "bidbuy": 3446976.42, "fixed": 0.0, "industry": "3c及电器"}, {"brand": "金意陶瓷砖", "cash": 3314357.29, "bidbuy": 3314357.29, "fixed": 0.0, "industry": "家居建材"}, {"brand": "极米投影", "cash": 3314318.82, "bidbuy": 3314318.82, "fixed": 0.0, "industry": "3c及电器"}, {"brand": "HFP", "cash": 3280787.1999999997, "bidbuy": 3280787.1999999997, "fixed": 0.0, "industry": "美妆个护"}, {"brand": "广西壮族自治区花红药业集团股份公司", "cash": 3265294.33, "bidbuy": 3265294.33, "fixed": 0.0, "industry": "医疗健康"}, {"brand": "Fancl集团", "cash": 3239300.36, "bidbuy": 3210422.02, "fixed": 28878.34, "industry": "美妆个护"}, {"brand": "天坛集团", "cash": 3206334.9499999997, "bidbuy": 3206334.9499999997, "fixed": 0.0, "industry": "家居建材"}, {"brand": "强生", "cash": 3199662.61, "bidbuy": 3199662.61, "fixed": 0.0, "industry": "美妆个护"}, {"brand": "汤臣倍健-保健品", "cash": 3133594.7800000003, "bidbuy": 3133594.7800000003, "fixed": 0.0, "industry": "食品饮料"}, {"brand": "长隆集团-乐园", "cash": 3092001.59, "bidbuy": 3092001.59, "fixed": 0.0, "industry": "出行旅游"}, {"brand": "CONFU康夫", "cash": 3085558.37, "bidbuy": 3085558.37, "fixed": 0.0, "industry": "3c及电器"}, {"brand": "海尔集团", "cash": 3055576.22, "bidbuy": 3055576.22, "fixed": 0.0, "industry": "3c及电器"}, {"brand": "学而思-学习机种草-教辅工具", "cash": 2942432.23, "bidbuy": 1697896.47, "fixed": 1244535.76, "industry": "3c及电器"}, {"brand": "小度-学习机-教辅工具", "cash": 2931775.94, "bidbuy": 2931775.94, "fixed": 0.0, "industry": "3c及电器"}, {"brand": "大改造家集团", "cash": 2903201.17, "bidbuy": 2903201.17, "fixed": 0.0, "industry": "家居建材"}, {"brand": "HOTATA好太太", "cash": 2886620.39, "bidbuy": 2646620.39, "fixed": 240000.0, "industry": "3c及电器"}, {"brand": "橙啦-雅思-语言及留学", "cash": 2870198.04, "bidbuy": 2870198.04, "fixed": 0.0, "industry": "教育培训"}, {"brand": "樂道NOTO", "cash": 2857123.72, "bidbuy": 2817123.72, "fixed": 40000.0, "industry": "食品饮料"}, {"brand": "维达", "cash": 2816790.72, "bidbuy": 2816790.72, "fixed": 0.0, "industry": "日用百货"}, {"brand": "cleer集团", "cash": 2774526.34, "bidbuy": 2754526.34, "fixed": 20000.0, "industry": "3c及电器"}, {"brand": "歌力思集团", "cash": 2721293.2199999997, "bidbuy": 2472558.41, "fixed": 248734.81, "industry": "服装配饰"}, {"brand": "老庙黄金", "cash": 2689232.0, "bidbuy": 2689232.0, "fixed": 0.0, "industry": "服装配饰"}, {"brand": "中兴集团", "cash": 2669306.86, "bidbuy": 2669306.86, "fixed": 0.0, "industry": "3c及电器"}, {"brand": "巨人游戏", "cash": 2597965.48, "bidbuy": 2597965.48, "fixed": 0.0, "industry": "游戏"}];
 
-// ============================================================
-// 真实数据 — 按brand_tag聚合后的完整列表（Top部分）
-// 使用简化的行业+brand数据
-// ============================================================
-const BRAND_DATA_FULL = [
-  {brand:"水羊", industry:"美妆个护", cash:73903460.45},
-  {brand:"澳优乳业", industry:"母婴", cash:54140497.68},
-  {brand:"长鹏宠物", industry:"日用百货", cash:40521409.04},
-  {brand:"宝洁", industry:"美妆个护", cash:37462538.73},
-  {brand:"宝洁集团", industry:"3c及电器", cash:30635044.5},
-  {brand:"名创优品", industry:"日用百货", cash:28532186.63},
-  {brand:"上海吉列有限公司", industry:"日用百货", cash:30268207.8},
-  {brand:"方太集团", industry:"3c及电器", cash:23201758.8},
-  {brand:"健合-宠物", industry:"日用百货", cash:19609180.18},
-  {brand:"九阳", industry:"3c及电器", cash:18627301.07},
-  {brand:"凯度集团", industry:"3c及电器", cash:22775554.18},
-  {brand:"美团-医药健康-医美-用增", industry:"医疗健康", cash:12167091.23},
-  {brand:"安克集团", industry:"3c及电器", cash:12095611.7},
-  {brand:"玫瑰星座", industry:"生活服务", cash:11331468.76},
-  {brand:"深圳市瑞霖医药有限公司", industry:"医疗健康", cash:10937343.64},
-  {brand:"公牛集团", industry:"3c及电器", cash:10900949.76},
-  {brand:"山下有松", industry:"服装配饰", cash:10416435.79},
-  {brand:"小度集团", industry:"3c及电器", cash:10256307.74},
-  {brand:"祖龙游戏", industry:"游戏", cash:10236956.81},
-  {brand:"维多利亚的秘密", industry:"服装配饰", cash:9851594.91},
-  {brand:"森马", industry:"服装配饰", cash:9641181.16},
-  {brand:"霸王茶姬", industry:"食品饮料", cash:12617411.34},
-  {brand:"美力城", industry:"服装配饰", cash:8383867.62},
-  {brand:"唯品会-用增", industry:"互联网", cash:8114567.7},
-  {brand:"小熊", industry:"3c及电器", cash:7949837.51},
-  {brand:"猿辅导-小猿-教辅工具", industry:"3c及电器", cash:7787591.54},
-  {brand:"小米集团", industry:"3c及电器", cash:7447444.51},
-  {brand:"贝泰妮集团", industry:"美妆个护", cash:7419605.22},
-  {brand:"灵犀互娱", industry:"游戏", cash:7370058.95},
-  {brand:"柏丽德/APM", industry:"服装配饰", cash:7127614.58},
-  {brand:"叠纸游戏", industry:"游戏", cash:7131352.66},
-  {brand:"波克城市", industry:"游戏", cash:6963159.72},
-  {brand:"麦瑞克", industry:"服装配饰", cash:6845577.46},
-  {brand:"全棉时代", industry:"日用百货", cash:6806424.19},
-  {brand:"猫人MIIOW", industry:"服装配饰", cash:6542032},
-  {brand:"卡姿兰", industry:"美妆个护", cash:6449778.4},
-  {brand:"恒清石集团", industry:"日用百货", cash:6730647.79},
-  {brand:"途鸽-留学生求职", industry:"商务服务", cash:6166576.1},
-  {brand:"露乐集团", industry:"母婴", cash:5882634.62},
-  {brand:"倍思集团", industry:"3c及电器", cash:5819099.05},
-  {brand:"曼秀雷敦", industry:"医疗健康", cash:5802835.9},
-  {brand:"gulsha古尔莎", industry:"日用百货", cash:5549632.88},
-  {brand:"腾讯游戏", industry:"游戏", cash:8300322.65},
-  {brand:"炫动游戏", industry:"游戏", cash:5090638.01},
-  {brand:"百丽集团", industry:"服装配饰", cash:4995796.98},
-  {brand:"海信集团", industry:"3c及电器", cash:4853717.35},
-  {brand:"波克科技", industry:"游戏", cash:4851114.01},
-  {brand:"梦百合集团", industry:"家居建材", cash:4848616.82},
-  {brand:"任意门-SOUL", industry:"互联网", cash:4720816.37},
-  {brand:"蚂蚁-蚂蚁保", industry:"金融行业", cash:8945558.77},
-];
+// ====== KPI ======
+(function() {
+  const brandCount = new Set(BRAND_DATA.map(d => d.brand)).size;
+  document.getElementById('kpi-brand-count').innerHTML = brandCount + '<span class="kpi-unit">个</span>';
+  document.getElementById('brand-total-count').textContent = BRAND_DATA.length + '（Top100）';
+  document.getElementById('brandCount').textContent = `共 ${BRAND_DATA.length} 个品牌（Top100）`;
+})();
 
-// ============================================================
-// COMPUTE INDUSTRY AGGREGATION
-// ============================================================
-function aggregateIndustry(data) {
-  const map = {};
-  const brandMap = {};
-  data.forEach(([industry, brand, cash]) => {
-    if (!map[industry]) { map[industry] = 0; brandMap[industry] = new Set(); }
-    map[industry] += cash;
-    brandMap[industry].add(brand);
-  });
-  return Object.entries(map)
-    .map(([industry, cash]) => ({ industry, cash, brandCount: brandMap[industry].size }))
-    .sort((a, b) => b.cash - a.cash);
-}
+// ====== CHARTS ======
+function fmtAyi(v) { return (v/1e8).toFixed(4)+'亿'; }
+function fmtAyiShort(v) { return (v/1e8).toFixed(2)+'亿'; }
 
-function aggregateBrand(data) {
-  const map = {};
-  data.forEach(([industry, brand, cash]) => {
-    if (!map[brand]) map[brand] = { industry, cash: 0 };
-    map[brand].cash += cash;
-  });
-  return Object.entries(map)
-    .map(([brand, v]) => ({ brand, industry: v.industry, cash: v.cash }))
-    .sort((a, b) => b.cash - a.cash);
-}
-
-const industryAgg = aggregateIndustry(RAW_DATA);
-const brandAgg = aggregateBrand(RAW_DATA);
-const totalCash = industryAgg.reduce((s, d) => s + d.cash, 0);
-
-// ============================================================
-// KPI
-// ============================================================
-function initKPI() {
-  document.getElementById('kpi-total').innerHTML =
-    (totalCash / 1e8).toFixed(2) + '<span class="kpi-unit">亿元</span>';
-  document.getElementById('kpi-total-sub').innerHTML =
-    '<span class="neutral">当期累计（2026-04-19数据）</span>';
-
-  document.getElementById('kpi-industry').textContent = industryAgg.length;
-  document.getElementById('kpi-industry-sub').innerHTML =
-    `<span class="neutral">已记录行业类别</span>`;
-
-  const brandCount = new Set(RAW_DATA.map(r => r[1])).size;
-  document.getElementById('kpi-brand').textContent = brandCount;
-  document.getElementById('kpi-brand-sub').innerHTML =
-    `<span class="neutral">活跃 Brand Tag 数</span>`;
-
-  const top1Pct = (industryAgg[0].cash / totalCash * 100).toFixed(1);
-  document.getElementById('kpi-top1').innerHTML =
-    top1Pct + '<span class="kpi-unit">%</span>';
-  document.getElementById('kpi-top1-sub').innerHTML =
-    `<span class="neutral">${industryAgg[0].industry}</span>`;
-
-  document.getElementById('lastUpdate').textContent = '数据日期：2026-04-19';
-}
-
-// ============================================================
-// CHART: INDUSTRY BAR
-// ============================================================
-function initIndustryBar() {
-  const chart = echarts.init(document.getElementById('chart-industry-bar'));
-  const top15 = industryAgg.slice(0, 15);
-  chart.setOption({
-    backgroundColor: 'transparent',
-    grid: { left: 100, right: 20, top: 10, bottom: 30 },
-    tooltip: {
-      trigger: 'axis',
-      formatter: p => `${p[0].name}<br/>现金消耗：<b>${(p[0].value / 1e8).toFixed(2)}亿元</b>`
-    },
-    xAxis: { type: 'value', axisLabel: { color: '#64748b', formatter: v => (v/1e8).toFixed(1)+'亿' }, splitLine: { lineStyle: { color: '#1e2a3a' } } },
-    yAxis: { type: 'category', data: top15.map(d => d.industry).reverse(), axisLabel: { color: '#94a3b8', fontSize: 12 } },
-    series: [{
-      type: 'bar', data: top15.map(d => d.cash).reverse(),
-      itemStyle: { color: { type: 'linear', x: 0, y: 0, x2: 1, y2: 0, colorStops: [{ offset: 0, color: '#ff2d55' }, { offset: 1, color: '#ff6b35' }] }, borderRadius: [0, 4, 4, 0] },
-      label: { show: true, position: 'right', color: '#94a3b8', fontSize: 11, formatter: p => (p.value/1e8).toFixed(2)+'亿' }
+function initIndBar() {
+  const c = echarts.init(document.getElementById('chart-ind-bar'));
+  const top15 = IND_DATA.slice(0,15);
+  c.setOption({
+    backgroundColor:'transparent',
+    grid:{left:90,right:60,top:8,bottom:30},
+    tooltip:{trigger:'axis',formatter:p=>`${p[0].name}<br/>消耗：<b>${fmtAyi(p[0].value)}</b><br/>占比：<b>${(p[0].value/TOTAL*100).toFixed(1)}%</b>`},
+    xAxis:{type:'value',axisLabel:{color:'#64748b',formatter:v=>(v/1e8).toFixed(1)+'亿'},splitLine:{lineStyle:{color:'#1e2a3a'}}},
+    yAxis:{type:'category',data:top15.map(d=>d.industry).reverse(),axisLabel:{color:'#94a3b8',fontSize:12}},
+    series:[{type:'bar',data:top15.map(d=>d.cash).reverse(),
+      itemStyle:{color:{type:'linear',x:0,y:0,x2:1,y2:0,colorStops:[{offset:0,color:'#ff2d55'},{offset:1,color:'#ff6b35'}]},borderRadius:[0,4,4,0]},
+      label:{show:true,position:'right',color:'#94a3b8',fontSize:10,formatter:p=>`${(p.value/TOTAL*100).toFixed(1)}%`}
     }]
   });
-  window.addEventListener('resize', () => chart.resize());
+  window.addEventListener('resize',()=>c.resize());
 }
 
-// ============================================================
-// CHART: INDUSTRY PIE
-// ============================================================
-function initIndustryPie() {
-  const chart = echarts.init(document.getElementById('chart-industry-pie'));
-  const colors = ['#ff2d55','#ff6b35','#f59e0b','#10b981','#3b82f6','#8b5cf6','#ec4899','#06b6d4','#84cc16','#f97316','#6366f1','#14b8a6','#e11d48','#7c3aed','#0ea5e9'];
-  const top10 = industryAgg.slice(0, 10);
-  const others = industryAgg.slice(10).reduce((s, d) => s + d.cash, 0);
-  const pieData = [...top10.map((d, i) => ({ name: d.industry, value: d.cash, itemStyle: { color: colors[i % colors.length] } })), { name: '其他', value: others, itemStyle: { color: '#374151' } }];
-  chart.setOption({
-    backgroundColor: 'transparent',
-    tooltip: { trigger: 'item', formatter: p => `${p.name}<br/>${(p.value/1e8).toFixed(2)}亿 (${p.percent}%)` },
-    legend: { orient: 'vertical', right: 0, top: 'center', textStyle: { color: '#94a3b8', fontSize: 11 }, itemWidth: 10, itemHeight: 10 },
-    series: [{
-      type: 'pie', radius: ['42%', '70%'], center: ['38%', '50%'],
-      data: pieData,
-      label: { show: false },
-      emphasis: { label: { show: true, fontSize: 13, fontWeight: 700, color: '#f0f4ff' } }
-    }]
+function initIndPie() {
+  const c = echarts.init(document.getElementById('chart-ind-pie'));
+  const colors=['#ff2d55','#ff6b35','#f59e0b','#10b981','#3b82f6','#8b5cf6','#ec4899','#06b6d4','#84cc16','#f97316','#6366f1','#14b8a6','#e11d48','#7c3aed','#0ea5e9','#fb923c'];
+  const top12=IND_DATA.slice(0,12);
+  const others=IND_DATA.slice(12).reduce((s,d)=>s+d.cash,0);
+  const pd=[...top12.map((d,i)=>{return{name:d.industry,value:d.cash,itemStyle:{color:colors[i]}};}),{name:'其他',value:others,itemStyle:{color:'#374151'}}];
+  c.setOption({
+    backgroundColor:'transparent',
+    tooltip:{trigger:'item',formatter:p=>`${p.name}<br/>${fmtAyi(p.value)} (${p.percent}%)`},
+    legend:{orient:'vertical',right:0,top:'center',textStyle:{color:'#94a3b8',fontSize:11},itemWidth:10,itemHeight:10},
+    series:[{type:'pie',radius:['40%','68%'],center:['35%','50%'],data:pd,label:{show:false},emphasis:{label:{show:true,fontSize:13,fontWeight:700,color:'#f0f4ff'}}}]
   });
-  window.addEventListener('resize', () => chart.resize());
+  window.addEventListener('resize',()=>c.resize());
 }
 
-// ============================================================
-// TABLE: INDUSTRY
-// ============================================================
-function initIndustryTable() {
-  const tbody = document.getElementById('industry-table');
-  const maxCash = industryAgg[0].cash;
-  tbody.innerHTML = industryAgg.map((d, i) => {
-    const pct = (d.cash / totalCash * 100).toFixed(1);
-    const barW = Math.round(d.cash / maxCash * 120);
+function initIndTable() {
+  const tbody=document.getElementById('ind-table');
+  const maxC=IND_DATA[0].cash;
+  tbody.innerHTML=IND_DATA.map((d,i)=>{
+    const pct=(d.cash/TOTAL*100).toFixed(2);
+    const bw=Math.round(d.cash/maxC*100);
+    const medal=i===0?'🥇':i===1?'🥈':i===2?'🥉':'';
     return `<tr>
-      <td class="rank">${i + 1}</td>
+      <td class="rank">${medal||i+1}</td>
       <td>${d.industry}</td>
-      <td class="num">${(d.cash / 1e8).toFixed(4)}亿</td>
+      <td class="num">${fmtAyi(d.cash)}</td>
       <td class="num">${pct}%</td>
-      <td><div class="bar-cell"><div class="mini-bar" style="width:${barW}px"></div><span style="font-size:11px;color:#64748b">${pct}%</span></div></td>
+      <td><span class="bar-mini" style="width:${bw}px"></span></td>
       <td class="num">${d.brandCount}</td>
     </tr>`;
   }).join('');
 }
 
-// ============================================================
-// CHART: BRAND BAR (Top30)
-// ============================================================
-let allBrands = BRAND_DATA_FULL;
-let filteredBrands = allBrands;
+// Brand
+let filteredBrands=[...BRAND_DATA];
 let brandChart;
-
 function initBrandBar(data) {
-  if (!brandChart) {
-    brandChart = echarts.init(document.getElementById('chart-brand-bar'));
-    window.addEventListener('resize', () => brandChart.resize());
-  }
-  const top30 = data.slice(0, 30);
+  if(!brandChart) { brandChart=echarts.init(document.getElementById('chart-brand-bar')); window.addEventListener('resize',()=>brandChart.resize()); }
+  const top30=data.slice(0,30);
   brandChart.setOption({
-    backgroundColor: 'transparent',
-    grid: { left: 130, right: 20, top: 10, bottom: 30 },
-    tooltip: {
-      trigger: 'axis',
-      formatter: p => `${p[0].name}<br/>现金消耗：<b>${(p[0].value / 1e8).toFixed(4)}亿元</b>`
-    },
-    xAxis: { type: 'value', axisLabel: { color: '#64748b', formatter: v => (v/1e8).toFixed(2)+'亿' }, splitLine: { lineStyle: { color: '#1e2a3a' } } },
-    yAxis: { type: 'category', data: top30.map(d => d.brand).reverse(), axisLabel: { color: '#94a3b8', fontSize: 11 } },
-    series: [{
-      type: 'bar', data: top30.map(d => d.cash).reverse(),
-      itemStyle: { color: { type: 'linear', x: 0, y: 0, x2: 1, y2: 0, colorStops: [{ offset: 0, color: '#3b82f6' }, { offset: 1, color: '#60a5fa' }] }, borderRadius: [0, 4, 4, 0] },
-      label: { show: true, position: 'right', color: '#94a3b8', fontSize: 10, formatter: p => (p.value/1e8).toFixed(4)+'亿' }
+    backgroundColor:'transparent',
+    grid:{left:140,right:60,top:8,bottom:30},
+    tooltip:{trigger:'axis',formatter:p=>`${p[0].name}<br/>消耗：<b>${fmtAyi(p[0].value)}</b> (${(p[0].value/TOTAL*100).toFixed(2)}%)`},
+    xAxis:{type:'value',axisLabel:{color:'#64748b',formatter:v=>(v/1e8).toFixed(2)+'亿'},splitLine:{lineStyle:{color:'#1e2a3a'}}},
+    yAxis:{type:'category',data:top30.map(d=>d.brand).reverse(),axisLabel:{color:'#94a3b8',fontSize:11}},
+    series:[{type:'bar',data:top30.map(d=>d.cash).reverse(),
+      itemStyle:{color:{type:'linear',x:0,y:0,x2:1,y2:0,colorStops:[{offset:0,color:'#3b82f6'},{offset:1,color:'#60a5fa'}]},borderRadius:[0,4,4,0]},
+      label:{show:true,position:'right',color:'#94a3b8',fontSize:10,formatter:p=>`${(p.value/TOTAL*100).toFixed(2)}%`}
     }]
-  }, true);
+  },true);
 }
 
 function initBrandTable(data) {
-  const tbody = document.getElementById('brand-table');
-  const maxCash = data[0] ? data[0].cash : 1;
-  document.getElementById('brandRowCount').textContent = `共 ${data.length} 个品牌`;
-  tbody.innerHTML = data.map((d, i) => {
-    const pct = (d.cash / totalCash * 100).toFixed(2);
+  const tbody=document.getElementById('brand-table');
+  const maxC=data[0]?data[0].cash:1;
+  document.getElementById('brandCount').textContent=`共 ${data.length} 个品牌`;
+  tbody.innerHTML=data.map((d,i)=>{
+    const pct=(d.cash/TOTAL*100).toFixed(2);
+    const bw=Math.round(d.cash/maxC*80);
     return `<tr>
-      <td class="rank">${i + 1}</td>
+      <td class="rank">${i+1}</td>
       <td>${d.brand}</td>
-      <td><span style="background:#1e2a3a;padding:2px 8px;border-radius:4px;font-size:12px;color:#94a3b8">${d.industry}</span></td>
-      <td class="num">${(d.cash / 1e8).toFixed(4)}亿</td>
-      <td class="num">${d.bidbuy !== undefined ? (d.bidbuy/1e8).toFixed(4)+'亿' : '—'}</td>
-      <td class="num">${d.fixed !== undefined ? (d.fixed/1e8).toFixed(4)+'亿' : '—'}</td>
+      <td><span class="ind-tag">${d.industry}</span></td>
+      <td class="num">${fmtAyi(d.cash)}</td>
+      <td class="num">${fmtAyi(d.bidbuy)}</td>
+      <td class="num">${fmtAyi(d.fixed)}</td>
       <td class="num">${pct}%</td>
+      <td><span class="bar-mini" style="width:${bw}px;background:linear-gradient(90deg,#3b82f6,#60a5fa)"></span></td>
     </tr>`;
   }).join('');
 }
 
-function filterBrandTable() {
-  const q = document.getElementById('brandSearch').value.toLowerCase();
-  const ind = document.getElementById('industryFilter').value;
-  filteredBrands = allBrands.filter(d => {
-    const matchQ = !q || d.brand.toLowerCase().includes(q);
-    const matchI = !ind || d.industry === ind;
-    return matchQ && matchI;
-  });
+function initIndFilter() {
+  const sel=document.getElementById('indFilter');
+  const inds=[...new Set(BRAND_DATA.map(d=>d.industry))].sort();
+  inds.forEach(ind=>{ const o=document.createElement('option'); o.value=ind; o.textContent=ind; sel.appendChild(o); });
+}
+
+function filterBrand() {
+  const q=document.getElementById('brandSearch').value.toLowerCase();
+  const ind=document.getElementById('indFilter').value;
+  filteredBrands=BRAND_DATA.filter(d=>(!q||d.brand.toLowerCase().includes(q))&&(!ind||d.industry===ind));
   initBrandBar(filteredBrands);
   initBrandTable(filteredBrands);
 }
 
-function initIndustryFilter() {
-  const sel = document.getElementById('industryFilter');
-  const industries = [...new Set(allBrands.map(d => d.industry))].sort();
-  industries.forEach(ind => {
-    const opt = document.createElement('option');
-    opt.value = ind; opt.textContent = ind;
-    sel.appendChild(opt);
-  });
-}
-
-// ============================================================
-// CHART: COMPARE (示意图)
-// ============================================================
-function initCompareCharts() {
-  // Industry compare
-  const c1 = echarts.init(document.getElementById('chart-compare-industry'));
-  const top8 = industryAgg.slice(0, 8);
-  // 模拟上期数据（展示框架用）
-  const prevFactor = 0.92;
+// Compare charts
+let compInited=false;
+function initCompare() {
+  if(compInited) return; compInited=true;
+  const top8=IND_DATA.slice(0,8);
+  const c1=echarts.init(document.getElementById('chart-comp-ind'));
   c1.setOption({
-    backgroundColor: 'transparent',
-    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-    legend: { data: ['当期', '对比期（需拉取）'], textStyle: { color: '#94a3b8' }, top: 0 },
-    grid: { left: 90, right: 20, top: 40, bottom: 30 },
-    xAxis: { type: 'value', axisLabel: { color: '#64748b', formatter: v => (v/1e8).toFixed(1)+'亿' }, splitLine: { lineStyle: { color: '#1e2a3a' } } },
-    yAxis: { type: 'category', data: top8.map(d => d.industry).reverse(), axisLabel: { color: '#94a3b8', fontSize: 12 } },
-    series: [
-      { name: '当期', type: 'bar', data: top8.map(d => d.cash).reverse(), barMaxWidth: 18, itemStyle: { color: '#ff2d55', borderRadius: [0, 4, 4, 0] } },
-      { name: '对比期（需拉取）', type: 'bar', data: top8.map(d => d.cash * prevFactor).reverse(), barMaxWidth: 18, itemStyle: { color: '#374151', borderRadius: [0, 4, 4, 0] } }
+    backgroundColor:'transparent',
+    tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
+    legend:{data:['当期（2026-04-19）','对比期（待拉取）'],textStyle:{color:'#94a3b8'},top:0},
+    grid:{left:90,right:20,top:44,bottom:30},
+    xAxis:{type:'value',axisLabel:{color:'#64748b',formatter:v=>(v/1e8).toFixed(1)+'亿'},splitLine:{lineStyle:{color:'#1e2a3a'}}},
+    yAxis:{type:'category',data:top8.map(d=>d.industry).reverse(),axisLabel:{color:'#94a3b8',fontSize:12}},
+    series:[
+      {name:'当期（2026-04-19）',type:'bar',data:top8.map(d=>d.cash).reverse(),barMaxWidth:16,itemStyle:{color:'#ff2d55',borderRadius:[0,4,4,0]}},
+      {name:'对比期（待拉取）',type:'bar',data:top8.map(d=>d.cash*0.91).reverse(),barMaxWidth:16,itemStyle:{color:'#374151',borderRadius:[0,4,4,0]}}
     ]
   });
-
-  // Brand compare
-  const c2 = echarts.init(document.getElementById('chart-compare-brand'));
-  const top10brands = allBrands.slice(0, 10);
+  const top12b=BRAND_DATA.slice(0,12);
+  const c2=echarts.init(document.getElementById('chart-comp-brand'));
   c2.setOption({
-    backgroundColor: 'transparent',
-    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-    legend: { data: ['当期', '对比期（需拉取）'], textStyle: { color: '#94a3b8' }, top: 0 },
-    grid: { left: 140, right: 20, top: 40, bottom: 30 },
-    xAxis: { type: 'value', axisLabel: { color: '#64748b', formatter: v => (v/1e8).toFixed(2)+'亿' }, splitLine: { lineStyle: { color: '#1e2a3a' } } },
-    yAxis: { type: 'category', data: top10brands.map(d => d.brand).reverse(), axisLabel: { color: '#94a3b8', fontSize: 12 } },
-    series: [
-      { name: '当期', type: 'bar', data: top10brands.map(d => d.cash).reverse(), barMaxWidth: 16, itemStyle: { color: '#3b82f6', borderRadius: [0, 4, 4, 0] } },
-      { name: '对比期（需拉取）', type: 'bar', data: top10brands.map(d => d.cash * prevFactor).reverse(), barMaxWidth: 16, itemStyle: { color: '#374151', borderRadius: [0, 4, 4, 0] } }
+    backgroundColor:'transparent',
+    tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
+    legend:{data:['当期（2026-04-19）','对比期（待拉取）'],textStyle:{color:'#94a3b8'},top:0},
+    grid:{left:140,right:20,top:44,bottom:30},
+    xAxis:{type:'value',axisLabel:{color:'#64748b',formatter:v=>(v/1e8).toFixed(2)+'亿'},splitLine:{lineStyle:{color:'#1e2a3a'}}},
+    yAxis:{type:'category',data:top12b.map(d=>d.brand).reverse(),axisLabel:{color:'#94a3b8',fontSize:12}},
+    series:[
+      {name:'当期（2026-04-19）',type:'bar',data:top12b.map(d=>d.cash).reverse(),barMaxWidth:14,itemStyle:{color:'#3b82f6',borderRadius:[0,4,4,0]}},
+      {name:'对比期（待拉取）',type:'bar',data:top12b.map(d=>d.cash*0.91).reverse(),barMaxWidth:14,itemStyle:{color:'#374151',borderRadius:[0,4,4,0]}}
     ]
   });
-
-  window.addEventListener('resize', () => { c1.resize(); c2.resize(); });
+  window.addEventListener('resize',()=>{c1.resize();c2.resize();});
 }
 
-// ============================================================
-// TABS
-// ============================================================
+// Tabs
 function switchTab(name) {
-  document.querySelectorAll('.tab').forEach((t, i) => {
-    const names = ['industry', 'brand', 'compare'];
-    t.classList.toggle('active', names[i] === name);
+  ['industry','brand','compare'].forEach((n,i)=>{
+    document.querySelectorAll('.tab')[i].classList.toggle('active',n===name);
+    document.getElementById('panel-'+n).classList.toggle('active',n===name);
   });
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.getElementById('panel-' + name).classList.add('active');
-
-  if (name === 'compare') {
-    setTimeout(initCompareCharts, 50);
-  }
-  if (name === 'brand') {
-    setTimeout(() => { initBrandBar(filteredBrands); brandChart && brandChart.resize(); }, 50);
-  }
+  if(name==='compare') setTimeout(initCompare,60);
+  if(name==='brand') setTimeout(()=>brandChart&&brandChart.resize(),60);
 }
 
-// ============================================================
-// DATE FILTER (placeholder — real impl needs API call)
-// ============================================================
-function applyDateFilter() {
-  const cur = document.getElementById('dateCur').value;
-  const prev = document.getElementById('datePrev').value;
-  document.getElementById('cur-date-tip').textContent = cur;
-  document.getElementById('lastUpdate').textContent = `数据日期：${cur}`;
-  document.querySelector('.data-notice').textContent =
-    `⚠️ 当期：${cur} | 对比期：${prev} — 如需实时更新，请在 RedBI 重新拉取两期数据后刷新`;
-  alert(`日期已切换：\n当期 ${cur}\n对比期 ${prev}\n\n如需实时数据，请前往 RedBI 重新拉取对应日期数据后更新看板。`);
+// Date
+function applyDate() {
+  const cur=document.getElementById('dateCur').value;
+  const prev=document.getElementById('datePrev').value;
+  const yoy=document.getElementById('dateYoy').value;
+  document.getElementById('lastUpdate').textContent='数据日期：'+cur;
+  document.getElementById('dateNotice').textContent=`⚠️ 当期：${cur} | 环比：${prev} | 同比：${yoy} — 如需实时数据，请重拉 RedBI 并更新看板`;
+  compInited=false;
 }
 
-// ============================================================
-// INIT
-// ============================================================
-(function() {
-  initKPI();
-  initIndustryBar();
-  initIndustryPie();
-  initIndustryTable();
-  initIndustryFilter();
-  initBrandBar(allBrands);
-  initBrandTable(allBrands);
-})();
+// Init
+initIndBar();
+initIndPie();
+initIndTable();
+initIndFilter();
+initBrandBar(BRAND_DATA);
+initBrandTable(BRAND_DATA);
 </script>
-<!-- build:1776655291487887497 --></body>
+<!-- build:1776655449080146600 --></body>
 </html>
