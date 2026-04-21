@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>微思敦 · 自运营数据报告 2026 Q1</title>
+<title>微思敦 · 自运营数据报告 2026年1-4月</title>
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -67,7 +67,7 @@ tr:hover td{background:#fffbfb}
   <div class="hdr-meta">
     <span>📊 小红书CRM六合平台</span>
     <span>🏢 武汉微思敦网络技术有限公司</span>
-    <span>📅 2026年 Q1（1月-3月）</span>
+    <span>📅 2026年 1月-4月</span>
     <span>🏭 20个专业号行业 · 全部经用户核验</span>
   </div>
 </div>
@@ -80,8 +80,9 @@ tr:hover td{background:#fffbfb}
     <span style="font-size:11px;color:#999;margin-right:2px">月份：</span>
     <button class="mb" onclick="setMonth('2026-01',this)">1月</button>
     <button class="mb" onclick="setMonth('2026-02',this)">2月</button>
-    <button class="mb on" onclick="setMonth('2026-03',this)">3月</button>
-    <button class="mb" onclick="setMonth('all',this)">全季度</button>
+    <button class="mb" onclick="setMonth('2026-03',this)">3月</button>
+    <button class="mb on" onclick="setMonth('2026-04',this)">4月</button>
+    <button class="mb" onclick="setMonth('all',this)">全部</button>
   </div>
 </div>
 
@@ -123,6 +124,29 @@ tr:hover td{background:#fffbfb}
 
 <script>
 const ALL = {
+  "2026-01": {
+    _total: {zi:29882196.94,shou:913204.39,zou:12622799.55,ziR:68.82,shouR:2.1,zouR:29.07},
+    "美妆个护": {zi:3990144.50,shou:0.00,zou:383430.95,ziR:91.23,shouR:0.0,zouR:8.77},
+    "服装配饰": {zi:3004992.21,shou:442007.69,zou:224955.72,ziR:81.84,shouR:12.04,zouR:6.13},
+    "食品饮料": {zi:942398.32,shou:0.00,zou:13707.74,ziR:98.57,shouR:0.0,zouR:1.43},
+    "3C及电器": {zi:5300963.64,shou:53020.41,zou:308619.23,ziR:93.61,shouR:0.94,zouR:5.45},
+    "日用百货": {zi:3663082.15,shou:4163.88,zou:131588.86,ziR:96.43,shouR:0.11,zouR:3.46},
+    "母婴": {zi:181548.45,shou:0.00,zou:3279.29,ziR:98.23,shouR:0.0,zouR:1.77},
+    "餐饮": {zi:136827.38,shou:0.00,zou:22983.77,ziR:85.62,shouR:0.0,zouR:14.38},
+    "互联网": {zi:755021.72,shou:96580.66,zou:176524.34,ziR:73.44,shouR:9.39,zouR:17.17},
+    "生活服务": {zi:1507118.66,shou:2207.57,zou:216888.26,ziR:87.31,shouR:0.13,zouR:12.56},
+    "出行旅游": {zi:161772.03,shou:30.32,zou:116072.26,ziR:58.22,shouR:0.01,zouR:41.77},
+    "商务服务": {zi:27642.43,shou:2872.13,zou:214438.02,ziR:11.28,shouR:1.17,zouR:87.54},
+    "文体娱乐": {zi:555465.46,shou:0.00,zou:23307.51,ziR:95.97,shouR:0.0,zouR:4.03},
+    "房地产": {zi:6966.91,shou:0.00,zou:444325.59,ziR:1.54,shouR:0.0,zouR:98.46},
+    "家居建材": {zi:2088106.32,shou:35240.03,zou:1566342.72,ziR:56.59,shouR:0.96,zouR:42.45},
+    "教育培训": {zi:901579.34,shou:8440.65,zou:162142.38,ziR:84.09,shouR:0.79,zouR:15.12},
+    "游戏": {zi:3369603.99,shou:0.00,zou:4336391.04,ziR:43.73,shouR:0.0,zouR:56.27},
+    "汽车": {zi:5403.88,shou:0.00,zou:662.07,ziR:89.09,shouR:0.0,zouR:10.91},
+    "通信": {zi:0.00,shou:0.00,zou:22897.79,ziR:0.0,shouR:0.0,zouR:100.0},
+    "金融行业": {zi:50665.54,shou:0.00,zou:2101.81,ziR:96.02,shouR:0.0,zouR:3.98},
+    "医疗健康": {zi:3214243.61,shou:260815.48,zou:4232188.76,ziR:41.7,shouR:3.38,zouR:54.91},
+  },
   "2026-02": {
     _total: {zi:34057801.09,shou:590995.46,zou:10989286.31,ziR:74.63,shouR:1.29,zouR:24.08},
     "美妆个护": {zi:5197662.22,shou:19461.34,zou:415166.65,ziR:92.28,shouR:0.35,zouR:7.37},
@@ -173,19 +197,19 @@ const ALL = {
     _total: {zi:25515743.06,shou:713930.17,zou:5435610.02,ziR:79.18,shouR:2.22,zouR:16.87},
     "美妆个护": {zi:7932470.10,shou:855.24,zou:332614.16,ziR:95.97,shouR:0.01,zouR:4.02},
     "服装配饰": {zi:2423900.28,shou:18656.80,zou:409797.11,ziR:84.98,shouR:0.65,zouR:14.37},
-    "食品饮料": {zi:344478.33,shou:51944.43,zou:1885.89,ziR:36.09,shouR:5.44,zouR:0.2},
+    "食品饮料": {zi:344478.33,shou:51944.43,zou:1885.89,ziR:36.09,shouR:5.44,zouR:0.20},
     "3C及电器": {zi:4222353.36,shou:110883.29,zou:155801.79,ziR:94.06,shouR:2.47,zouR:3.47},
     "日用百货": {zi:1712683.91,shou:428304.47,zou:42973.20,ziR:78.42,shouR:19.61,zouR:1.97},
     "母婴": {zi:909721.81,shou:0.00,zou:5004.34,ziR:99.45,shouR:0.0,zouR:0.55},
     "餐饮": {zi:144334.05,shou:0.00,zou:11816.21,ziR:92.43,shouR:0.0,zouR:7.57},
     "互联网": {zi:403131.82,shou:2.65,zou:139188.81,ziR:74.33,shouR:0.0,zouR:25.67},
     "生活服务": {zi:834595.12,shou:5511.39,zou:45410.83,ziR:94.25,shouR:0.62,zouR:5.13},
-    "出行旅游": {zi:10318.97,shou:6166.48,zou:56964.09,ziR:14.05,shouR:8.4,zouR:77.56},
-    "商务服务": {zi:133772.67,shou:11.20,zou:47502.91,ziR:73.79,shouR:0.01,zouR:26.2},
+    "出行旅游": {zi:10318.97,shou:6166.48,zou:56964.09,ziR:14.05,shouR:8.40,zouR:77.56},
+    "商务服务": {zi:133772.67,shou:11.20,zou:47502.91,ziR:73.79,shouR:0.01,zouR:26.20},
     "文体娱乐": {zi:409816.20,shou:23284.56,zou:3903.73,ziR:93.78,shouR:5.33,zouR:0.89},
     "房地产": {zi:31973.78,shou:0.00,zou:319093.17,ziR:9.11,shouR:0.0,zouR:90.89},
     "家居建材": {zi:1502466.05,shou:16952.76,zou:1188403.72,ziR:55.49,shouR:0.63,zouR:43.89},
-    "教育培训": {zi:520122.49,shou:3151.28,zou:269911.03,ziR:65.13,shouR:0.39,zouR:33.8},
+    "教育培训": {zi:520122.49,shou:3151.28,zou:269911.03,ziR:65.13,shouR:0.39,zouR:33.80},
     "游戏": {zi:3456401.31,shou:48205.62,zou:2386072.69,ziR:58.68,shouR:0.82,zouR:40.51},
     "汽车": {zi:0.00,shou:0.00,zou:0.00,ziR:0,shouR:0,zouR:0},
     "通信": {zi:0.00,shou:0.00,zou:9746.77,ziR:0.0,shouR:0.0,zouR:100.0},
@@ -194,8 +218,8 @@ const ALL = {
   },
 };
 const IND_NAMES = ["美妆个护", "游戏", "3C及电器", "日用百货", "服装配饰", "家居建材", "生活服务", "医疗健康", "教育培训", "母婴", "互联网", "食品饮料", "房地产", "商务服务", "文体娱乐", "出行旅游", "餐饮", "通信", "金融行业", "汽车"];
-const MONTHS = ["2026-02", "2026-03", "2026-04"];
-const MONTH_LABELS = {"2026-02": "2月", "2026-03": "3月", "2026-04": "4月"};
+const MONTHS = ["2026-01", "2026-02", "2026-03", "2026-04"];
+const MONTH_LABELS = {"2026-01": "1月", "2026-02": "2月", "2026-03": "3月", "2026-04": "4月"};
 const COLORS = ['#ff2442','#4f6ef7','#00B96B','#4f6ef7','#a259ff','#00bcd4','#e91e63','#3f51b5','#009688','#ff5722','#607d8b','#8bc34a','#795548','#9c27b0','#ffc107','#03a9f4','#673ab7','#ff7043','#26a69a','#ec407a'];
 let curMonth = "2026-04";
 const CHARTS = {};
@@ -227,7 +251,7 @@ function getAllTotal(){
 
 function renderTotal(){
   const isAll=curMonth==='all';
-  const label=isAll?'Q1合计':MONTH_LABELS[curMonth];
+  const label=isAll?'1-4月合计':MONTH_LABELS[curMonth];
   const d=isAll?getAllTotal():ALL[curMonth]._total;
   const total=d.zi+d.shou+d.zou;
   document.getElementById('kpi-row').innerHTML=`
@@ -253,7 +277,7 @@ function renderTotal(){
       <td class="td-total">${W(t)}</td></tr>`;
   });
   const at=getAllTotal();const atT=at.zi+at.shou+at.zou;
-  rows.push(`<tr class="tr-total"><td>Q1合计</td>
+  rows.push(`<tr class="tr-total"><td>1-4月合计</td>
     <td>${W(at.zi)}</td><td>${at.ziR}%</td>
     <td>${W(at.shou)}</td><td>${at.shouR}%</td>
     <td>${W(at.zou)}</td><td>${at.zouR}%</td>
@@ -270,7 +294,7 @@ function renderTotal(){
     tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
     legend:{bottom:0,data:['一代自运营','其他收量','走量消耗'],itemWidth:10,itemHeight:10,textStyle:{fontSize:11}},
     grid:{left:50,right:10,bottom:40,top:44},
-    xAxis:{type:'category',data:['1月','2月','3月']},
+    xAxis:{type:'category',data:['1月','2月','3月','4月']},
     yAxis:{type:'value',name:'万元'},
     series:[
       {name:'一代自运营',type:'bar',stack:'S',data:zi3,itemStyle:{color:'#00B96B'}},
@@ -300,7 +324,7 @@ function renderTotal(){
 function renderDetail(){
   const isAll=curMonth==='all';
   const months=isAll?MONTHS:[curMonth];
-  document.getElementById('detail-note').textContent=(isAll?'Q1合计':MONTH_LABELS[curMonth])+' | 单位：万元 | 按合计排序';
+  document.getElementById('detail-note').textContent=(isAll?'1-4月合计':MONTH_LABELS[curMonth])+' | 单位：万元 | 按合计排序';
   const agg=IND_NAMES.map((name,idx)=>{
     let zi=0,shou=0,zou=0;
     months.forEach(m=>{const r=ALL[m][name]||{zi:0,shou:0,zou:0};zi+=r.zi;shou+=r.shou;zou+=r.zou;});
@@ -375,7 +399,7 @@ function renderTrend(){
         data:[{name:'消耗(万)',icon:'rect'},{name:'自运营%',icon:'line'}]
       },
       grid:{left:38,right:38,bottom:22,top:26},
-      xAxis:{type:'category',data:['1月','2月','3月'],axisLabel:{fontSize:10}},
+      xAxis:{type:'category',data:['1月','2月','3月','4月'],axisLabel:{fontSize:10}},
       yAxis:[
         {type:'value',name:'万',nameTextStyle:{fontSize:9},axisLabel:{fontSize:9},splitNumber:3,position:'left'},
         {type:'value',name:'%',nameTextStyle:{fontSize:9},axisLabel:{fontSize:9,formatter:v=>v+'%'},
@@ -400,4 +424,5 @@ renderTrend();
 window.addEventListener('resize',()=>Object.values(CHARTS).forEach(c=>c&&c.resize()));
 </script>
 </body>
-<!-- build:1776733329143393280 --></html>
+<!-- build:1776733403873612955 --></html>
+<!-- generated: 2026-04-21T09:02:00.000000 -->
