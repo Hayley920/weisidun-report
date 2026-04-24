@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>微思敦 · 自运营数据报告 2026 Q1</title>
-<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<title>微思敦 · 自运营数据报告</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",Arial,sans-serif;background:#f4f5f9;color:#222;font-size:14px}
@@ -13,28 +12,36 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue"
 .logo{width:42px;height:42px;background:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:#00B96B}
 .hdr h1{font-size:19px;font-weight:700}
 .hdr-meta{font-size:11.5px;opacity:.88;padding-left:54px;display:flex;flex-wrap:wrap;gap:3px 16px}
-.nav{background:#fff;display:flex;align-items:center;padding:0 36px;border-bottom:2px solid #eee;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.07)}
+.nav{background:#fff;display:flex;align-items:center;padding:0 36px;border-bottom:2px solid #eee;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.07);flex-wrap:wrap;gap:4px}
 .nb{border:none;background:none;padding:13px 18px;font-size:13px;color:#666;border-bottom:3px solid transparent;cursor:pointer;font-weight:500;transition:all .2s;white-space:nowrap}
 .nb:hover{color:#00B96B;background:#f0faf8}
 .nb.on{color:#00B96B;border-bottom-color:#00B96B;font-weight:700}
-.month-bar{margin-left:auto;display:flex;align-items:center;gap:6px;padding:8px 0}
-.mb{border:1px solid #eee;background:#f8f8f8;padding:5px 14px;border-radius:20px;cursor:pointer;font-size:12px;color:#666;transition:all .2s}
-.mb:hover{border-color:#ff2442;color:#00B96B}
-.mb.on{background:#00B96B;color:#fff;border-color:#00B96B;font-weight:600}
+.ctrl-row{display:flex;align-items:center;gap:4px;padding:4px 0;margin-left:auto;flex-wrap:wrap}
+.ctrl-label{font-size:10px;color:#aaa;margin-right:4px}
+.preset-btn{border:1px solid #eee;background:#f8f8f8;padding:3px 10px;border-radius:14px;cursor:pointer;font-size:11px;color:#666;transition:all .15s;white-space:nowrap}
+.preset-btn:hover{border-color:#00B96B;color:#00B96B}
+.preset-btn.on{background:#00B96B;color:#fff;border-color:#00B96B;font-weight:600}
+.month-scroll{display:flex;gap:3px;overflow-x:auto;padding:4px 0;scrollbar-width:thin}
+.month-scroll::-webkit-scrollbar{height:3px}
+.month-scroll::-webkit-scrollbar-thumb{background:#ddd;border-radius:3px}
+.mbtn{border:1px solid #e0e0e0;background:#fff;padding:3px 10px;border-radius:12px;cursor:pointer;font-size:11px;color:#555;transition:all .15s;white-space:nowrap;flex-shrink:0}
+.mbtn:hover{border-color:#00B96B;color:#00B96B}
+.mbtn.sel{background:#e6f9f2;color:#00B96B;border-color:#00B96B;font-weight:600}
+.mbtn.all-btn{background:#f0f0f0;border-color:#ccc}
+.mbtn.all-btn.sel{background:#008a50;color:#fff;border-color:#008a50}
 .wrap{padding:20px 36px;max-width:1480px;margin:0 auto}
 .tab{display:none}.tab.on{display:block}
 .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
 .kpi{background:#fff;border-radius:12px;padding:16px 20px;box-shadow:0 2px 8px rgba(0,0,0,.06);position:relative;overflow:hidden}
 .kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
-.kpi.k-red::before{background:#00B96B}.kpi.k-blue::before{background:#FF2442}
-.kpi.k-green::before{background:#4F6EF7}.kpi.k-orange::before{background:#4f6ef7}
+.kpi.k-zi::before{background:#00B96B}.kpi.k-shou::before{background:#FF2442}
+.kpi.k-zou::before{background:#4F6EF7}.kpi.k-total::before{background:#ff9800}
 .kpi-icon{font-size:22px;margin-bottom:4px}
 .kpi-label{font-size:11px;color:#999;margin-bottom:3px}
 .kpi-value{font-size:26px;font-weight:800;color:#111;line-height:1}
 .kpi-unit{font-size:12px;font-weight:400;color:#bbb;margin-left:2px}
 .kpi-sub{margin-top:4px;font-size:11px;color:#bbb}
-.kpi.k-red .kpi-sub b{color:#00B96B}.kpi.k-blue .kpi-sub b{color:#FF2442}
-.kpi.k-green .kpi-sub b{color:#4F6EF7}.kpi.k-orange .kpi-sub b{color:#4f6ef7}
+.period-badge{display:inline-block;background:#00B96B;color:#fff;padding:1px 8px;border-radius:10px;font-size:10px;margin-left:6px;font-weight:600}
 .sec{background:#fff;border-radius:12px;padding:20px 22px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
 .sec-hd{display:flex;align-items:center;gap:8px;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid #f0f0f0}
 .sec-ic{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px}
@@ -58,7 +65,8 @@ tr:hover td{background:#fffbfb}
 .trend-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .trend-item{background:#f8f9fc;border-radius:9px;padding:10px}
 .trend-title{font-size:12px;font-weight:700;color:#333;margin-bottom:6px;padding-left:6px;border-left:3px solid #00B96B}
-@media(max-width:900px){.wrap{padding:12px}.nav{padding:0 8px;flex-wrap:wrap}.month-bar{margin-left:0;padding:4px 0;width:100%;border-top:1px solid #f0f0f0}.kpi-row{grid-template-columns:1fr 1fr}.chart-2,.trend-grid{grid-template-columns:1fr}}
+.mode-indicator{font-size:11px;color:#00B96B;font-weight:600;margin-left:8px}
+@media(max-width:900px){.wrap{padding:12px}.nav{padding:0 8px;flex-wrap:wrap}.ctrl-row{margin-left:0;padding:4px 0;width:100%;border-top:1px solid #f0f0f0}.kpi-row{grid-template-columns:1fr 1fr}.chart-2,.trend-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -67,8 +75,8 @@ tr:hover td{background:#fffbfb}
   <div class="hdr-meta">
     <span>📊 小红书CRM六合平台</span>
     <span>🏢 武汉微思敦网络技术有限公司</span>
-    <span>📅 2026年 2月-4月月</span>
-    <span>🏭 20个专业号行业 · 全部经用户核验</span>
+    <span id="hdr-range"></span>
+    <span>数据更新于 2026-04-24 14:23 | 2026-01 ~ 2026-04</span>
   </div>
 </div>
 
@@ -76,26 +84,30 @@ tr:hover td{background:#fffbfb}
   <button class="nb on" onclick="sw('total',this)">📋 集团总览</button>
   <button class="nb" onclick="sw('detail',this)">🏭 行业拆分</button>
   <button class="nb" onclick="sw('trend',this)">📈 行业趋势</button>
-  <div class="month-bar">
-    <span style="font-size:11px;color:#999;margin-right:2px">月份：</span>
-    <button class="mb" onclick="setMonth('2026-02',this)">2月</button>
-    <button class="mb" onclick="setMonth('2026-03',this)">3月</button>
-    <button class="mb on" onclick="setMonth('2026-04',this)">4月</button>
-    <button class="mb" onclick="setMonth('all',this)">全季度</button>
+
+  <div class="ctrl-row">
+    <span class="ctrl-label">快捷周期：</span>
+    <button class="preset-btn" data-preset="cur" onclick="setPreset('cur',this)">本月</button>
+    <button class="preset-btn" data-preset="m3" onclick="setPreset('m3',this)">近3月</button>
+    <button class="preset-btn" data-preset="m6" onclick="setPreset('m6',this)">近6月</button>
+    <button class="preset-btn" data-preset="ytd" onclick="setPreset('ytd',this)">今年</button>
+    <button class="preset-btn all-btn" data-preset="all" onclick="setPreset('all',this)">所有月份</button>
   </div>
+
+  <div class="month-scroll" id="month-scroll"></div>
 </div>
 
 <div id="tab-total" class="tab on"><div class="wrap">
   <div class="kpi-row" id="kpi-row"></div>
   <div class="sec">
-    <div class="sec-hd"><div class="sec-ic ic-r">📊</div><h2>集团汇总（不分行业）</h2><span class="sec-note">单位：万元 | 三个月对比</span></div>
+    <div class="sec-hd"><div class="sec-ic ic-r">📊</div><h2>逐月明细</h2><span class="sec-note">单位：万元</span></div>
     <div class="tbl-wrap"><table>
       <thead><tr><th>月份</th><th>一代自运营</th><th>占比</th><th>其他收量</th><th>占比</th><th>走量消耗</th><th>占比</th><th>合计(万)</th></tr></thead>
       <tbody id="total-body"></tbody>
     </table></div>
   </div>
   <div class="sec">
-    <div class="sec-hd"><div class="sec-ic ic-b">📈</div><h2>月度消耗结构对比</h2></div>
+    <div class="sec-hd"><div class="sec-ic ic-b">📈</div><h2>消耗结构</h2></div>
     <div class="chart-2">
       <div class="cbox"><div id="c-monthly-bar" style="height:280px"></div></div>
       <div class="cbox"><div id="c-monthly-pie" style="height:280px"></div></div>
@@ -105,7 +117,7 @@ tr:hover td{background:#fffbfb}
 
 <div id="tab-detail" class="tab"><div class="wrap">
   <div class="sec">
-    <div class="sec-hd"><div class="sec-ic ic-g">🏭</div><h2>行业拆分汇总</h2><span class="sec-note" id="detail-note">单位：万元</span></div>
+    <div class="sec-hd"><div class="sec-ic ic-g">🏭</div><h2>行业拆分汇总</h2><span class="sec-note" id="detail-note"></span></div>
     <div class="tbl-wrap"><table>
       <thead><tr><th>排名</th><th>行业</th><th>一代自运营(万)</th><th>占比</th><th>其他收量(万)</th><th>占比</th><th>走量消耗(万)</th><th>占比</th><th>合计(万)</th><th>结构</th></tr></thead>
       <tbody id="detail-body"></tbody>
@@ -115,14 +127,38 @@ tr:hover td{background:#fffbfb}
 
 <div id="tab-trend" class="tab"><div class="wrap">
   <div class="sec">
-    <div class="sec-hd"><div class="sec-ic ic-o">🔍</div><h2>各行业月度趋势</h2>
-    <span class="sec-note">柱=自运营消耗(万，左轴) &nbsp;·&nbsp; 折线=自运营占比%(右轴)</span></div>
+    <div class="sec-hd"><div class="sec-ic ic-o">🔍</div><h2>各行业趋势</h2>
+    <span class="sec-note">柱=自运营消耗(万) &nbsp;·&nbsp; 折线=自运营占比%(右轴)</span></div>
     <div class="trend-grid" id="trend-grid"></div>
   </div>
 </div></div>
 
+<script src="echarts.min.js"></script>
 <script>
-const ALL = {
+// === 数据层 ===
+const ALL = {  "2026-01": {
+    _total: {zi:29882196.94,shou:913204.39,zou:12622799.55,ziR:68.82,shouR:2.1,zouR:29.07},
+    "美妆个护": {zi:3990144.50,shou:0.00,zou:383430.95,ziR:91.23,shouR:0.0,zouR:8.77},
+    "服装配饰": {zi:3004992.21,shou:442007.69,zou:224955.72,ziR:81.84,shouR:12.04,zouR:6.13},
+    "食品饮料": {zi:942398.32,shou:0.00,zou:13707.74,ziR:98.57,shouR:0.0,zouR:1.43},
+    "3C及电器": {zi:5300963.64,shou:53020.41,zou:308619.23,ziR:93.61,shouR:0.94,zouR:5.45},
+    "日用百货": {zi:3663082.15,shou:4163.88,zou:131588.86,ziR:96.43,shouR:0.11,zouR:3.46},
+    "母婴": {zi:181548.45,shou:0.00,zou:3279.29,ziR:98.23,shouR:0.0,zouR:1.77},
+    "餐饮": {zi:136827.38,shou:0.00,zou:22983.77,ziR:85.62,shouR:0.0,zouR:14.38},
+    "互联网": {zi:755021.72,shou:96580.66,zou:176524.34,ziR:73.44,shouR:9.39,zouR:17.17},
+    "生活服务": {zi:1507118.66,shou:2207.57,zou:216888.26,ziR:87.31,shouR:0.13,zouR:12.56},
+    "出行旅游": {zi:161772.03,shou:30.32,zou:116072.26,ziR:58.22,shouR:0.01,zouR:41.77},
+    "商务服务": {zi:27642.43,shou:2872.13,zou:214438.02,ziR:11.28,shouR:1.17,zouR:87.54},
+    "文体娱乐": {zi:555465.46,shou:0.00,zou:23307.51,ziR:95.97,shouR:0.0,zouR:4.03},
+    "房地产": {zi:6966.91,shou:0.00,zou:444325.59,ziR:1.54,shouR:0.0,zouR:98.46},
+    "家居建材": {zi:2088106.32,shou:35240.03,zou:1566342.72,ziR:56.59,shouR:0.96,zouR:42.45},
+    "教育培训": {zi:901579.34,shou:8440.65,zou:162142.38,ziR:84.09,shouR:0.79,zouR:15.12},
+    "游戏": {zi:3369603.99,shou:0.00,zou:4336391.04,ziR:43.73,shouR:0.0,zouR:56.27},
+    "汽车": {zi:5403.88,shou:0.00,zou:662.07,ziR:89.09,shouR:0.0,zouR:10.91},
+    "通信": {zi:0.00,shou:0.00,zou:22897.79,ziR:0.0,shouR:0.0,zouR:100.0},
+    "金融行业": {zi:50665.54,shou:0.00,zou:2101.81,ziR:96.02,shouR:0.0,zouR:3.98},
+    "医疗健康": {zi:3214243.61,shou:260815.48,zou:4232188.76,ziR:41.7,shouR:3.38,zouR:54.91},
+  },
   "2026-02": {
     _total: {zi:34057801.09,shou:590995.46,zou:10989286.31,ziR:74.63,shouR:1.29,zouR:24.08},
     "美妆个护": {zi:5197662.22,shou:19461.34,zou:415166.65,ziR:92.28,shouR:0.35,zouR:7.37},
@@ -191,16 +227,107 @@ const ALL = {
     "通信": {zi:0.00,shou:0.00,zou:9746.77,ziR:0.0,shouR:0.0,zouR:100.0},
     "金融行业": {zi:50117.59,shou:0.00,zou:275.34,ziR:99.45,shouR:0.0,zouR:0.55},
     "医疗健康": {zi:473085.22,shou:0.00,zou:1561.45,ziR:99.67,shouR:0.0,zouR:0.33},
-  },
-};
-const IND_NAMES = ["美妆个护", "游戏", "3C及电器", "日用百货", "服装配饰", "家居建材", "生活服务", "医疗健康", "教育培训", "母婴", "互联网", "食品饮料", "房地产", "商务服务", "文体娱乐", "出行旅游", "餐饮", "通信", "金融行业", "汽车"];
-const MONTHS = ["2026-02", "2026-03", "2026-04"];
-const MONTH_LABELS = {"2026-02": "2月", "2026-03": "3月", "2026-04": "4月"};
+  },};
+const IND_NAMES = ["美妆个护","游戏","3C及电器","日用百货","服装配饰","家居建材","生活服务","医疗健康","教育培训","母婴","互联网","食品饮料","房地产","商务服务","文体娱乐","出行旅游","餐饮","通信","金融行业","汽车"];
 const COLORS = ['#ff2442','#4f6ef7','#00B96B','#4f6ef7','#a259ff','#00bcd4','#e91e63','#3f51b5','#009688','#ff5722','#607d8b','#8bc34a','#795548','#9c27b0','#ffc107','#03a9f4','#673ab7','#ff7043','#26a69a','#ec407a'];
-let curMonth = "2026-04";
+
+// 所有可用月份（排序）
+const ALL_MONTHS = Object.keys(ALL).sort();
+
+// 月份标签
+function mLabel(m){ return parseInt(m.split('-')[1]) + '月'; }
+
+// === 选择器状态 ===
+let preset = 'all';  // 当前快捷周期
+let selMonths = [...ALL_MONTHS];  // 当前选中月份
+
+// === 图表实例 ===
 const CHARTS = {};
+
+// === 工具函数 ===
 const W = v => (v/10000).toFixed(2);
-const fmt = v => v>0?W(v):"0.00";
+const fmt = v => v>0 ? W(v) : '0.00';
+
+// 汇总指定月份
+function agg(months){
+  let zi=0,shou=0,zou=0;
+  const ind={};
+  months.forEach(m=>{
+    const d=ALL[m]; if(!d) return;
+    zi+=d._total.zi; shou+=d._total.shou; zou+=d._total.zou;
+    IND_NAMES.forEach(name=>{
+      if(!ind[name]) ind[name]={zi:0,shou:0,zou:0};
+      const r=d[name]||{zi:0,shou:0,zou:0};
+      ind[name].zi+=r.zi; ind[name].shou+=r.shou; ind[name].zou+=r.zou;
+    });
+  });
+  const total=zi+shou+zou;
+  return {
+    _total:{zi,shou,zou,total,
+      ziR:total>0?(zi/total*100).toFixed(2):0,
+      shouR:total>0?(shou/total*100).toFixed(2):0,
+      zouR:total>0?(zou/total*100).toFixed(2):0},
+    industries:ind
+  };
+}
+
+function presetLabel(p){
+  const labels={cur:'本月',m3:'近3月',m6:'近6月',ytd:'今年',all:'所有月份'};
+  return labels[p]||'自定义';
+}
+
+function resolveMonths(preset){
+  if(!ALL_MONTHS.length) return [];
+  if(preset==='all') return [...ALL_MONTHS];
+  if(preset==='cur') return [ALL_MONTHS[ALL_MONTHS.length-1]];
+  if(preset==='m3') return ALL_MONTHS.slice(-3);
+  if(preset==='m6') return ALL_MONTHS.slice(-6);
+  if(preset==='ytd'){
+    const y=ALL_MONTHS[ALL_MONTHS.length-1].split('-')[0];
+    return ALL_MONTHS.filter(m=>m.startsWith(y));
+  }
+  return [...selMonths];
+}
+
+// === UI ===
+function buildMonthButtons(){
+  const c=document.getElementById('month-scroll');
+  let html='<button class="mbtn all-btn'+(preset==='all'?' sel':'')+'" onclick="setPreset(\'all\',this)">所有</button>';
+  ALL_MONTHS.forEach(m=>{
+    const sel=selMonths.includes(m);
+    html+=`<button class="mbtn${sel?' sel':''}" data-month="${m}" onclick="toggleMonth('${m}',this)">${mLabel(m)}</button>`;
+  });
+  c.innerHTML=html;
+}
+
+function updatePresetBtns(){
+  document.querySelectorAll('.preset-btn').forEach(b=>{
+    b.classList.toggle('on', b.dataset.preset===preset);
+  });
+}
+
+function setPreset(p, btn){
+  preset=p;
+  selMonths=resolveMonths(p);
+  updatePresetBtns();
+  buildMonthButtons();
+  render();
+}
+
+function toggleMonth(m, btn){
+  // 清除预设
+  preset='custom';
+  updatePresetBtns();
+
+  if(selMonths.includes(m)){
+    selMonths=selMonths.filter(x=>x!==m);
+  } else {
+    selMonths.push(m);
+    selMonths.sort();
+  }
+  btn.classList.toggle('sel');
+  render();
+}
 
 function sw(name,btn){
   document.querySelectorAll('.tab').forEach(e=>e.classList.remove('on'));
@@ -210,108 +337,100 @@ function sw(name,btn){
   setTimeout(()=>Object.values(CHARTS).forEach(c=>c&&c.resize()),60);
 }
 
-function setMonth(m,btn){
-  document.querySelectorAll('.mb').forEach(e=>e.classList.remove('on'));
-  btn.classList.add('on');
-  curMonth=m;
-  renderTotal();
-  renderDetail();
-}
+function render(){
+  const months=resolveMonths(preset);
+  const d=agg(months);
+  const t=d._total;
 
-function getAllTotal(){
-  let zi=0,shou=0,zou=0;
-  MONTHS.forEach(m=>{zi+=ALL[m]._total.zi;shou+=ALL[m]._total.shou;zou+=ALL[m]._total.zou;});
-  const t=zi+shou+zou;
-  return {zi,shou,zou,ziR:(zi/t*100).toFixed(2),shouR:(shou/t*100).toFixed(2),zouR:(zou/t*100).toFixed(2)};
-}
+  // Header range
+  const rangeLabel=months.length===ALL_MONTHS.length?'共 '+months.length+' 个月':
+    months.length===1?mLabel(months[0]):
+    mLabel(months[0])+' ~ '+mLabel(months[months.length-1]);
+  document.getElementById('hdr-range').textContent='📅 '+rangeLabel;
 
-function renderTotal(){
-  const isAll=curMonth==='all';
-  const label=isAll?'Q1合计':MONTH_LABELS[curMonth];
-  const d=isAll?getAllTotal():ALL[curMonth]._total;
-  const total=d.zi+d.shou+d.zou;
+  // KPI
+  const modeLabel=presetLabel(preset);
   document.getElementById('kpi-row').innerHTML=`
-    <div class="kpi k-red"><div class="kpi-icon">💰</div><div class="kpi-label">总消耗</div>
-      <div class="kpi-value">${W(total)}<span class="kpi-unit">万</span></div>
-      <div class="kpi-sub">${label}</div></div>
-    <div class="kpi k-blue"><div class="kpi-icon">⚡</div><div class="kpi-label">一代自运营</div>
-      <div class="kpi-value">${W(d.zi)}<span class="kpi-unit">万</span></div>
-      <div class="kpi-sub">占比 <b>${d.ziR}%</b></div></div>
-    <div class="kpi k-green"><div class="kpi-icon">📥</div><div class="kpi-label">其他收量</div>
-      <div class="kpi-value">${W(d.shou)}<span class="kpi-unit">万</span></div>
-      <div class="kpi-sub">占比 <b>${d.shouR}%</b></div></div>
-    <div class="kpi k-orange"><div class="kpi-icon">🚀</div><div class="kpi-label">走量消耗</div>
-      <div class="kpi-value">${W(d.zou)}<span class="kpi-unit">万</span></div>
-      <div class="kpi-sub">占比 <b>${d.zouR}%</b></div></div>`;
+    <div class="kpi k-total"><div class="kpi-icon">💰</div><div class="kpi-label">总消耗</div>
+      <div class="kpi-value">${W(t.total)}<span class="kpi-unit">万</span></div>
+      <div class="kpi-sub">${modeLabel}<span class="period-badge">${months.length}个月</span></div></div>
+    <div class="kpi k-zi"><div class="kpi-icon">⚡</div><div class="kpi-label">一代自运营</div>
+      <div class="kpi-value">${W(t.zi)}<span class="kpi-unit">万</span></div>
+      <div class="kpi-sub">占比 <b>${t.ziR}%</b></div></div>
+    <div class="kpi k-shou"><div class="kpi-icon">📥</div><div class="kpi-label">其他收量</div>
+      <div class="kpi-value">${W(t.shou)}<span class="kpi-unit">万</span></div>
+      <div class="kpi-sub">占比 <b>${t.shouR}%</b></div></div>
+    <div class="kpi k-zou"><div class="kpi-icon">🚀</div><div class="kpi-label">走量消耗</div>
+      <div class="kpi-value">${W(t.zou)}<span class="kpi-unit">万</span></div>
+      <div class="kpi-sub">占比 <b>${t.zouR}%</b></div></div>`;
 
-  let rows=MONTHS.map(m=>{
-    const r=ALL[m]._total;const t=r.zi+r.shou+r.zou;
-    return `<tr><td>${MONTH_LABELS[m]}</td>
+  // 逐月明细表
+  let rows=months.map(m=>{
+    const r=ALL[m]._total;
+    const tot=r.zi+r.shou+r.zou;
+    return `<tr><td>${mLabel(m)}</td>
       <td class="td-amt">${W(r.zi)}</td><td class="td-pct">${r.ziR}%</td>
       <td class="td-amt">${W(r.shou)}</td><td class="td-pct">${r.shouR}%</td>
       <td class="td-amt">${W(r.zou)}</td><td class="td-pct">${r.zouR}%</td>
-      <td class="td-total">${W(t)}</td></tr>`;
+      <td class="td-total">${W(tot)}</td></tr>`;
   });
-  const at=getAllTotal();const atT=at.zi+at.shou+at.zou;
-  rows.push(`<tr class="tr-total"><td>Q1合计</td>
-    <td>${W(at.zi)}</td><td>${at.ziR}%</td>
-    <td>${W(at.shou)}</td><td>${at.shouR}%</td>
-    <td>${W(at.zou)}</td><td>${at.zouR}%</td>
-    <td>${W(atT)}</td></tr>`);
+  rows.push(`<tr class="tr-total"><td>汇总</td>
+    <td>${W(t.zi)}</td><td>${t.ziR}%</td>
+    <td>${W(t.shou)}</td><td>${t.shouR}%</td>
+    <td>${W(t.zou)}</td><td>${t.zouR}%</td>
+    <td>${W(t.total)}</td></tr>`);
   document.getElementById('total-body').innerHTML=rows.join('');
 
-  const zi3=MONTHS.map(m=>+(ALL[m]._total.zi/10000).toFixed(2));
-  const sh3=MONTHS.map(m=>+(ALL[m]._total.shou/10000).toFixed(2));
-  const zo3=MONTHS.map(m=>+(ALL[m]._total.zou/10000).toFixed(2));
-  const tot3=MONTHS.map(m=>+((ALL[m]._total.zi+ALL[m]._total.shou+ALL[m]._total.zou)/10000).toFixed(2));
+  // 柱状图
+  const ziData=months.map(m=>+(ALL[m]._total.zi/10000).toFixed(2));
+  const shData=months.map(m=>+(ALL[m]._total.shou/10000).toFixed(2));
+  const zoData=months.map(m=>+(ALL[m]._total.zou/10000).toFixed(2));
+  const totData=months.map(m=>+((ALL[m]._total.zi+ALL[m]._total.shou+ALL[m]._total.zou)/10000).toFixed(2));
   if(!CHARTS.mbar)CHARTS.mbar=echarts.init(document.getElementById('c-monthly-bar'));
   CHARTS.mbar.setOption({
-    title:{text:'月度消耗结构对比（万元）',left:'center',top:4,textStyle:{fontSize:12,fontWeight:700,color:'#333'}},
+    title:{text:'月度消耗结构（万元）',left:'center',top:4,textStyle:{fontSize:12,fontWeight:700,color:'#333'}},
     tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
     legend:{bottom:0,data:['一代自运营','其他收量','走量消耗'],itemWidth:10,itemHeight:10,textStyle:{fontSize:11}},
     grid:{left:50,right:10,bottom:40,top:44},
-    xAxis:{type:'category',data:["2月", "3月", "4月"]},
+    xAxis:{type:'category',data:months.map(m=>mLabel(m))},
     yAxis:{type:'value',name:'万元'},
     series:[
-      {name:'一代自运营',type:'bar',stack:'S',data:zi3,itemStyle:{color:'#00B96B'}},
-      {name:'其他收量',type:'bar',stack:'S',data:sh3,itemStyle:{color:'#FF2442'}},
-      {name:'走量消耗',type:'bar',stack:'S',data:zo3,itemStyle:{color:'#4F6EF7'},
-        label:{show:true,position:'top',formatter:p=>tot3[p.dataIndex]+'万',fontSize:10,fontWeight:700,color:'#555'}},
+      {name:'一代自运营',type:'bar',stack:'S',data:ziData,itemStyle:{color:'#00B96B'}},
+      {name:'其他收量',type:'bar',stack:'S',data:shData,itemStyle:{color:'#FF2442'}},
+      {name:'走量消耗',type:'bar',stack:'S',data:zoData,itemStyle:{color:'#4F6EF7'},
+        label:{show:true,position:'top',formatter:p=>totData[p.dataIndex]+'万',fontSize:10,fontWeight:700,color:'#555'}},
     ]
   });
 
-  const pd=isAll?at:d;
+  // 饼图
   if(!CHARTS.mpie)CHARTS.mpie=echarts.init(document.getElementById('c-monthly-pie'));
   CHARTS.mpie.setOption({
-    title:{text:label+'消耗结构',left:'center',top:4,textStyle:{fontSize:12,fontWeight:700,color:'#333'}},
+    title:{text:(months.length===1?mLabel(months[0]):modeLabel)+' 消耗结构',left:'center',top:4,textStyle:{fontSize:12,fontWeight:700,color:'#333'}},
     tooltip:{trigger:'item',formatter:'{b}: {c}万元 ({d}%)'},
     legend:{bottom:0,itemWidth:10,itemHeight:10,textStyle:{fontSize:11}},
     series:[{type:'pie',radius:['38%','65%'],center:['50%','46%'],
       label:{formatter:'{b}\n{d}%',fontSize:11,lineHeight:16},
       data:[
-        {value:+(pd.zi/10000).toFixed(2),name:'一代自运营',itemStyle:{color:'#00B96B'}},
-        {value:+(pd.shou/10000).toFixed(2),name:'其他收量',itemStyle:{color:'#FF2442'}},
-        {value:+(pd.zou/10000).toFixed(2),name:'走量消耗',itemStyle:{color:'#4F6EF7'}},
+        {value:+(t.zi/10000).toFixed(2),name:'一代自运营',itemStyle:{color:'#00B96B'}},
+        {value:+(t.shou/10000).toFixed(2),name:'其他收量',itemStyle:{color:'#FF2442'}},
+        {value:+(t.zou/10000).toFixed(2),name:'走量消耗',itemStyle:{color:'#4F6EF7'}},
       ]
     }]
   });
-}
 
-function renderDetail(){
-  const isAll=curMonth==='all';
-  const months=isAll?MONTHS:[curMonth];
-  document.getElementById('detail-note').textContent=(isAll?'Q1合计':MONTH_LABELS[curMonth])+' | 单位：万元 | 按合计排序';
-  const agg=IND_NAMES.map((name,idx)=>{
-    let zi=0,shou=0,zou=0;
-    months.forEach(m=>{const r=ALL[m][name]||{zi:0,shou:0,zou:0};zi+=r.zi;shou+=r.shou;zou+=r.zou;});
-    const total=zi+shou+zou;
-    return {name,idx,zi,shou,zou,total,
-      ziR:total>0?(zi/total*100).toFixed(1):0,
-      shouR:total>0?(shou/total*100).toFixed(1):0,
-      zouR:total>0?(zou/total*100).toFixed(1):0};
+  // 行业拆分
+  const indAgg=d.industries;
+  document.getElementById('detail-note').textContent=modeLabel+' | 按合计排序';
+  const indList=IND_NAMES.map((name,idx)=>{
+    const r=indAgg[name]||{zi:0,shou:0,zou:0};
+    const total=r.zi+r.shou+r.zou;
+    return {name,idx,...r,total,
+      ziR:total>0?(r.zi/total*100).toFixed(1):0,
+      shouR:total>0?(r.shou/total*100).toFixed(1):0,
+      zouR:total>0?(r.zou/total*100).toFixed(1):0};
   });
-  agg.sort((a,b)=>b.total-a.total);
-  let rows=agg.map((r,i)=>{
+  indList.sort((a,b)=>b.total-a.total);
+  let irows=indList.map((r,i)=>{
     const color=COLORS[r.idx];
     const zp=r.total>0?r.zi/r.total*100:0;
     const sp=r.total>0?r.shou/r.total*100:0;
@@ -332,18 +451,17 @@ function renderDetail(){
         <div style="font-size:10px;color:#bbb;margin-top:2px">自${r.ziR}% 收${r.shouR}% 走${r.zouR}%</div>
       </td></tr>`;
   });
-  let tz=0,ts=0,tzo=0;agg.forEach(r=>{tz+=r.zi;ts+=r.shou;tzo+=r.zou;});
+  let tz=0,ts=0,tzo=0;
+  indList.forEach(r=>{tz+=r.zi;ts+=r.shou;tzo+=r.zou;});
   const ta=tz+ts+tzo;
-  rows.push(`<tr class="tr-total"><td>—</td><td>合计</td>
+  irows.push(`<tr class="tr-total"><td>—</td><td>合计</td>
     <td>${fmt(tz)}</td><td>${ta>0?(tz/ta*100).toFixed(1):0}%</td>
     <td>${fmt(ts)}</td><td>${ta>0?(ts/ta*100).toFixed(1):0}%</td>
     <td>${fmt(tzo)}</td><td>${ta>0?(tzo/ta*100).toFixed(1):0}%</td>
     <td>${fmt(ta)}</td><td></td></tr>`);
-  document.getElementById('detail-body').innerHTML=rows.join('');
-}
+  document.getElementById('detail-body').innerHTML=irows.join('');
 
-function renderTrend(){
-  // 行业小图：柱=消耗(万,左轴) + 实线=自运营占比%(右轴)
+  // 行业趋势（始终展示 ALL_MONTHS）
   const grid=document.getElementById('trend-grid');
   grid.innerHTML='';
   IND_NAMES.forEach((name,idx)=>{
@@ -355,49 +473,35 @@ function renderTrend(){
     grid.appendChild(div);
     const c=echarts.init(document.getElementById(cid));
     CHARTS['i'+idx]=c;
-
-    const ziData=MONTHS.map(m=>+(ALL[m][name].zi/10000).toFixed(2));
-    const ziRData=MONTHS.map(m=>+ALL[m][name].ziR);
-
+    const ziD=ALL_MONTHS.map(m=>+(ALL[m][name].zi/10000).toFixed(2));
+    const ziRD=ALL_MONTHS.map(m=>+ALL[m][name].ziR);
     c.setOption({
-      tooltip:{
-        trigger:'axis',
-        formatter:params=>{
-          let s=`<b>${params[0].axisValue}</b><br/>`;
-          params.forEach(p=>{
-            const unit=p.seriesName.includes('%')?'%':'万';
-            s+=`${p.marker}${p.seriesName}：${p.value}${unit}<br/>`;
-          });
-          return s;
-        }
-      },
-      legend:{top:0,right:0,itemWidth:8,itemHeight:8,textStyle:{fontSize:9},
-        data:[{name:'消耗(万)',icon:'rect'},{name:'自运营%',icon:'line'}]
-      },
+      tooltip:{trigger:'axis',formatter:ps=>{
+        let s=`<b>${ps[0].axisValue}</b><br/>`;
+        ps.forEach(p=>s+=`${p.marker}${p.seriesName}：${p.value}${p.seriesName.includes('%')?'%':'万'}<br/>`);
+        return s;
+      }},
+      legend:{top:0,right:0,itemWidth:8,itemHeight:8,textStyle:{fontSize:9},data:[{name:'消耗(万)',icon:'rect'},{name:'自运营%',icon:'line'}]},
       grid:{left:38,right:38,bottom:22,top:26},
-      xAxis:{type:'category',data:["2月", "3月", "4月"],axisLabel:{fontSize:10}},
+      xAxis:{type:'category',data:ALL_MONTHS.map(m=>mLabel(m)),axisLabel:{fontSize:10}},
       yAxis:[
-        {type:'value',name:'万',nameTextStyle:{fontSize:9},axisLabel:{fontSize:9},splitNumber:3,position:'left'},
-        {type:'value',name:'%',nameTextStyle:{fontSize:9},axisLabel:{fontSize:9,formatter:v=>v+'%'},
-          min:0,max:100,splitNumber:4,position:'right',
-          axisLine:{show:false},axisTick:{show:false},splitLine:{show:false}},
+        {type:'value',name:'万',nameTextStyle:{fontSize:9},axisLabel:{fontSize:9},splitNumber:3},
+        {type:'value',name:'%',nameTextStyle:{fontSize:9},axisLabel:{fontSize:9,formatter:v=>v+'%'},min:0,max:100,splitNumber:4,position:'right',axisLine:{show:false},axisTick:{show:false},splitLine:{show:false}},
       ],
       series:[
-        {name:'消耗(万)',type:'bar',yAxisIndex:0,data:ziData,itemStyle:{color,opacity:0.85},
-          label:{show:true,position:'top',formatter:p=>p.value>0?p.value:'',fontSize:9,color:'#555'}},
-        {name:'自运营%',type:'line',yAxisIndex:1,data:ziRData,smooth:true,
-          symbol:'circle',symbolSize:5,
-          lineStyle:{color:'#00B96B',width:2},itemStyle:{color:'#00B96B'},
-          label:{show:true,position:'top',formatter:p=>p.value>0?p.value+'%':'',fontSize:9,color:'#00B96B'}},
+        {name:'消耗(万)',type:'bar',yAxisIndex:0,data:ziD,itemStyle:{color,opacity:0.85},label:{show:true,position:'top',formatter:p=>p.value>0?p.value:'',fontSize:9}},
+        {name:'自运营%',type:'line',yAxisIndex:1,data:ziRD,smooth:true,symbol:'circle',symbolSize:5,lineStyle:{color:'#00B96B',width:2},itemStyle:{color:'#00B96B'},label:{show:true,position:'top',formatter:p=>p.value>0?p.value+'%':'',fontSize:9,color:'#00B96B'}},
       ]
     });
   });
 }
 
-renderTotal();
-renderDetail();
-renderTrend();
+// === 初始化 ===
+buildMonthButtons();
+updatePresetBtns();
+render();
 window.addEventListener('resize',()=>Object.values(CHARTS).forEach(c=>c&&c.resize()));
 </script>
 </body>
-<!-- build:1777011269002973440 --></html>
+
+<!-- build:1777011796412338176 --></html>
