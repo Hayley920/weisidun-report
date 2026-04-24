@@ -67,7 +67,7 @@ tr:hover td{background:#fffbfb}
   <div class="hdr-meta">
     <span>📊 小红书CRM六合平台</span>
     <span>🏢 武汉微思敦网络技术有限公司</span>
-    <span>📅 2026年 Q1（1月-3月）</span>
+    <span>📅 2026年 2月-4月月</span>
     <span>🏭 20个专业号行业 · 全部经用户核验</span>
   </div>
 </div>
@@ -78,9 +78,9 @@ tr:hover td{background:#fffbfb}
   <button class="nb" onclick="sw('trend',this)">📈 行业趋势</button>
   <div class="month-bar">
     <span style="font-size:11px;color:#999;margin-right:2px">月份：</span>
-    <button class="mb" onclick="setMonth('2026-01',this)">1月</button>
     <button class="mb" onclick="setMonth('2026-02',this)">2月</button>
-    <button class="mb on" onclick="setMonth('2026-03',this)">3月</button>
+    <button class="mb" onclick="setMonth('2026-03',this)">3月</button>
+    <button class="mb on" onclick="setMonth('2026-04',this)">4月</button>
     <button class="mb" onclick="setMonth('all',this)">全季度</button>
   </div>
 </div>
@@ -270,7 +270,7 @@ function renderTotal(){
     tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
     legend:{bottom:0,data:['一代自运营','其他收量','走量消耗'],itemWidth:10,itemHeight:10,textStyle:{fontSize:11}},
     grid:{left:50,right:10,bottom:40,top:44},
-    xAxis:{type:'category',data:['1月','2月','3月']},
+    xAxis:{type:'category',data:["2月", "3月", "4月"]},
     yAxis:{type:'value',name:'万元'},
     series:[
       {name:'一代自运营',type:'bar',stack:'S',data:zi3,itemStyle:{color:'#00B96B'}},
@@ -375,7 +375,7 @@ function renderTrend(){
         data:[{name:'消耗(万)',icon:'rect'},{name:'自运营%',icon:'line'}]
       },
       grid:{left:38,right:38,bottom:22,top:26},
-      xAxis:{type:'category',data:['1月','2月','3月'],axisLabel:{fontSize:10}},
+      xAxis:{type:'category',data:["2月", "3月", "4月"],axisLabel:{fontSize:10}},
       yAxis:[
         {type:'value',name:'万',nameTextStyle:{fontSize:9},axisLabel:{fontSize:9},splitNumber:3,position:'left'},
         {type:'value',name:'%',nameTextStyle:{fontSize:9},axisLabel:{fontSize:9,formatter:v=>v+'%'},
@@ -400,4 +400,4 @@ renderTrend();
 window.addEventListener('resize',()=>Object.values(CHARTS).forEach(c=>c&&c.resize()));
 </script>
 </body>
-<!-- build:1777002947594832384 --></html>
+<!-- build:1777011269002973440 --></html>
