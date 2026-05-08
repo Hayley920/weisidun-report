@@ -31,11 +31,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue"
 .mbtn.all-btn.sel{background:#008a50;color:#fff;border-color:#008a50}
 .wrap{padding:20px 36px;max-width:1480px;margin:0 auto}
 .tab{display:none}.tab.on{display:block}
-.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+.kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:18px}
 .kpi{background:#fff;border-radius:12px;padding:16px 20px;box-shadow:0 2px 8px rgba(0,0,0,.06);position:relative;overflow:hidden}
 .kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
-.kpi.k-zi::before{background:#00B96B}.kpi.k-shou::before{background:#FF2442}
-.kpi.k-zou::before{background:#4F6EF7}.kpi.k-total::before{background:#ff9800}
+.kpi.k-zi::before{background:#00B96B}.kpi.k-sec::before{background:#a259ff}
+.kpi.k-shou::before{background:#FF2442}.kpi.k-zou::before{background:#4F6EF7}
+.kpi.k-total::before{background:#ff9800}
 .kpi-icon{font-size:22px;margin-bottom:4px}
 .kpi-label{font-size:11px;color:#999;margin-bottom:3px}
 .kpi-value{font-size:26px;font-weight:800;color:#111;line-height:1}
@@ -65,7 +66,6 @@ tr:hover td{background:#fffbfb}
 .trend-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .trend-item{background:#f8f9fc;border-radius:9px;padding:10px}
 .trend-title{font-size:12px;font-weight:700;color:#333;margin-bottom:6px;padding-left:6px;border-left:3px solid #00B96B}
-.mode-indicator{font-size:11px;color:#00B96B;font-weight:600;margin-left:8px}
 @media(max-width:900px){.wrap{padding:12px}.nav{padding:0 8px;flex-wrap:wrap}.ctrl-row{margin-left:0;padding:4px 0;width:100%;border-top:1px solid #f0f0f0}.kpi-row{grid-template-columns:1fr 1fr}.chart-2,.trend-grid{grid-template-columns:1fr}}
 </style>
 </head>
@@ -76,7 +76,7 @@ tr:hover td{background:#fffbfb}
     <span>📊 小红书CRM六合平台</span>
     <span>🏢 武汉微思敦网络技术有限公司</span>
     <span id="hdr-range"></span>
-    <span>数据更新于 2026-05-08 17:28 | 2026-01 ~ 2026-05</span>
+    <span>数据更新于 2026-05-08 17:41 | 2026-01 ~ 2026-05</span>
   </div>
 </div>
 
@@ -102,7 +102,7 @@ tr:hover td{background:#fffbfb}
   <div class="sec">
     <div class="sec-hd"><div class="sec-ic ic-r">📊</div><h2>逐月明细</h2><span class="sec-note">单位：万元</span></div>
     <div class="tbl-wrap"><table>
-      <thead><tr><th>月份</th><th>一代自运营</th><th>占比</th><th>其他收量</th><th>占比</th><th>走量消耗</th><th>占比</th><th>合计(万)</th></tr></thead>
+      <thead><tr><th>月份</th><th>一代自运营</th><th>占比</th><th>二代自运营</th><th>占比</th><th>其他收量</th><th>占比</th><th>走量消耗</th><th>占比</th><th>合计(万)</th></tr></thead>
       <tbody id="total-body"></tbody>
     </table></div>
   </div>
@@ -119,7 +119,7 @@ tr:hover td{background:#fffbfb}
   <div class="sec">
     <div class="sec-hd"><div class="sec-ic ic-g">🏭</div><h2>行业拆分汇总</h2><span class="sec-note" id="detail-note"></span></div>
     <div class="tbl-wrap"><table>
-      <thead><tr><th>排名</th><th>行业</th><th>一代自运营(万)</th><th>占比</th><th>其他收量(万)</th><th>占比</th><th>走量消耗(万)</th><th>占比</th><th>合计(万)</th><th>结构</th></tr></thead>
+      <thead><tr><th>排名</th><th>行业</th><th>一代自运营(万)</th><th>占比</th><th>二代自运营(万)</th><th>占比</th><th>其他收量(万)</th><th>占比</th><th>走量消耗(万)</th><th>占比</th><th>合计(万)</th><th>结构</th></tr></thead>
       <tbody id="detail-body"></tbody>
     </table></div>
   </div>
@@ -137,7 +137,7 @@ tr:hover td{background:#fffbfb}
 <script>
 // === 数据层 ===
 const ALL = {  "2026-01": {
-    _total: {zi:29882196.94,shou:913204.39,zou:12622799.55,ziR:68.82,shouR:2.1,zouR:29.07},
+    _total: {zi:29882196.94,secZi:0.00,shou:913204.39,zou:12622799.55,ziR:68.82,secZiR:0.0,shouR:2.1,zouR:29.07},
     "美妆个护": {zi:3990144.50,shou:0.00,zou:383430.95,ziR:91.23,shouR:0.0,zouR:8.77},
     "服装配饰": {zi:3004992.21,shou:442007.69,zou:224955.72,ziR:81.84,shouR:12.04,zouR:6.13},
     "食品饮料": {zi:942398.32,shou:0.00,zou:13707.74,ziR:98.57,shouR:0.0,zouR:1.43},
@@ -160,7 +160,7 @@ const ALL = {  "2026-01": {
     "医疗健康": {zi:3214243.61,shou:260815.48,zou:4232188.76,ziR:41.7,shouR:3.38,zouR:54.91},
   },
   "2026-02": {
-    _total: {zi:34057801.09,shou:590995.46,zou:10989286.31,ziR:74.63,shouR:1.29,zouR:24.08},
+    _total: {zi:34057801.09,secZi:0.00,shou:590995.46,zou:10989286.31,ziR:74.63,secZiR:0.0,shouR:1.29,zouR:24.08},
     "美妆个护": {zi:5197662.22,shou:19461.34,zou:415166.65,ziR:92.28,shouR:0.35,zouR:7.37},
     "服装配饰": {zi:3493785.90,shou:7260.15,zou:196703.40,ziR:94.48,shouR:0.2,zouR:5.32},
     "食品饮料": {zi:1231730.98,shou:0.00,zou:2381.54,ziR:99.81,shouR:0.0,zouR:0.19},
@@ -183,7 +183,7 @@ const ALL = {  "2026-01": {
     "医疗健康": {zi:3380880.00,shou:55467.76,zou:2682442.01,ziR:55.25,shouR:0.91,zouR:43.84},
   },
   "2026-03": {
-    _total: {zi:41844955.51,shou:1820881.54,zou:8135792.16,ziR:80.78,shouR:3.52,zouR:15.71},
+    _total: {zi:41844955.51,secZi:0.00,shou:1820881.54,zou:8135792.16,ziR:80.78,secZiR:0.0,shouR:3.52,zouR:15.71},
     "美妆个护": {zi:10089979.99,shou:1220534.06,zou:456048.52,ziR:85.75,shouR:10.37,zouR:3.88},
     "服装配饰": {zi:5066579.42,shou:9847.03,zou:245827.25,ziR:95.2,shouR:0.19,zouR:4.62},
     "食品饮料": {zi:695123.41,shou:0.00,zou:6224.55,ziR:99.11,shouR:0.0,zouR:0.89},
@@ -206,7 +206,7 @@ const ALL = {  "2026-01": {
     "医疗健康": {zi:1390063.94,shou:0.00,zou:18983.41,ziR:98.65,shouR:0.0,zouR:1.35},
   },
   "2026-04": {
-    _total: {zi:43211804.52,shou:1015328.61,zou:8174173.53,ziR:80.97,shouR:1.9,zouR:15.32},
+    _total: {zi:43211804.52,secZi:969661.03,shou:1015328.61,zou:8174173.53,ziR:80.97,secZiR:1.82,shouR:1.9,zouR:15.32},
     "美妆个护": {zi:0.00,shou:0.00,zou:0.00,ziR:0,shouR:0,zouR:0},
     "服装配饰": {zi:0.00,shou:0.00,zou:0.00,ziR:0,shouR:0,zouR:0},
     "食品饮料": {zi:0.00,shou:0.00,zou:0.00,ziR:0,shouR:0,zouR:0},
@@ -229,7 +229,7 @@ const ALL = {  "2026-01": {
     "医疗健康": {zi:0.00,shou:0.00,zou:0.00,ziR:0,shouR:0,zouR:0},
   },
   "2026-05": {
-    _total: {zi:3941154.79,shou:1418639.09,zou:851035.53,ziR:62.75,shouR:22.59,zouR:13.55},
+    _total: {zi:3941154.79,secZi:70000.00,shou:1418639.09,zou:851035.53,ziR:62.75,secZiR:1.11,shouR:22.59,zouR:13.55},
     "美妆个护": {zi:1419653.40,shou:360851.33,zou:56630.46,ziR:77.28,shouR:19.64,zouR:3.08},
     "服装配饰": {zi:441727.05,shou:161569.49,zou:71172.66,ziR:65.49,shouR:23.96,zouR:10.55},
     "食品饮料": {zi:36681.98,shou:22381.78,zou:0.00,ziR:28.68,shouR:17.5,zouR:0.0},
@@ -261,8 +261,8 @@ const ALL_MONTHS = Object.keys(ALL).sort();
 function mLabel(m){ return parseInt(m.split('-')[1]) + '月'; }
 
 // === 选择器状态 ===
-let preset = 'all';  // 当前快捷周期
-let selMonths = [...ALL_MONTHS];  // 当前选中月份
+let preset = 'all';
+let selMonths = [...ALL_MONTHS];
 
 // === 图表实例 ===
 const CHARTS = {};
@@ -273,21 +273,22 @@ const fmt = v => v>0 ? W(v) : '0.00';
 
 // 汇总指定月份
 function agg(months){
-  let zi=0,shou=0,zou=0;
+  let zi=0,secZi=0,shou=0,zou=0;
   const ind={};
   months.forEach(m=>{
     const d=ALL[m]; if(!d) return;
-    zi+=d._total.zi; shou+=d._total.shou; zou+=d._total.zou;
+    zi+=d._total.zi; secZi+=d._total.secZi||0; shou+=d._total.shou; zou+=d._total.zou;
     IND_NAMES.forEach(name=>{
-      if(!ind[name]) ind[name]={zi:0,shou:0,zou:0};
+      if(!ind[name]) ind[name]={zi:0,secZi:0,shou:0,zou:0};
       const r=d[name]||{zi:0,shou:0,zou:0};
       ind[name].zi+=r.zi; ind[name].shou+=r.shou; ind[name].zou+=r.zou;
     });
   });
-  const total=zi+shou+zou;
+  const total=zi+secZi+shou+zou;
   return {
-    _total:{zi,shou,zou,total,
+    _total:{zi,secZi,shou,zou,total,
       ziR:total>0?(zi/total*100).toFixed(2):0,
+      secZiR:total>0?(secZi/total*100).toFixed(2):0,
       shouR:total>0?(shou/total*100).toFixed(2):0,
       zouR:total>0?(zou/total*100).toFixed(2):0},
     industries:ind
@@ -338,10 +339,8 @@ function setPreset(p, btn){
 }
 
 function toggleMonth(m, btn){
-  // 清除预设
   preset='custom';
   updatePresetBtns();
-
   if(selMonths.includes(m)){
     selMonths=selMonths.filter(x=>x!==m);
   } else {
@@ -371,15 +370,18 @@ function render(){
     mLabel(months[0])+' ~ '+mLabel(months[months.length-1]);
   document.getElementById('hdr-range').textContent='📅 '+rangeLabel;
 
-  // KPI
+  // KPI（5列：总消耗+四项）
   const modeLabel=presetLabel(preset);
   document.getElementById('kpi-row').innerHTML=`
     <div class="kpi k-total"><div class="kpi-icon">💰</div><div class="kpi-label">总消耗</div>
       <div class="kpi-value">${W(t.total)}<span class="kpi-unit">万</span></div>
       <div class="kpi-sub">${modeLabel}<span class="period-badge">${months.length}个月</span></div></div>
-    <div class="kpi k-zi"><div class="kpi-icon">⚡</div><div class="kpi-label">一代自运营</div>
+    <div class="kpi k-zi"><div class="kpi-icon"></div><div class="kpi-label">一代自运营</div>
       <div class="kpi-value">${W(t.zi)}<span class="kpi-unit">万</span></div>
       <div class="kpi-sub">占比 <b>${t.ziR}%</b></div></div>
+    <div class="kpi k-sec"><div class="kpi-icon">🔮</div><div class="kpi-label">二代自运营</div>
+      <div class="kpi-value">${W(t.secZi)}<span class="kpi-unit">万</span></div>
+      <div class="kpi-sub">占比 <b>${t.secZiR}%</b></div></div>
     <div class="kpi k-shou"><div class="kpi-icon">📥</div><div class="kpi-label">其他收量</div>
       <div class="kpi-value">${W(t.shou)}<span class="kpi-unit">万</span></div>
       <div class="kpi-sub">占比 <b>${t.shouR}%</b></div></div>
@@ -387,45 +389,50 @@ function render(){
       <div class="kpi-value">${W(t.zou)}<span class="kpi-unit">万</span></div>
       <div class="kpi-sub">占比 <b>${t.zouR}%</b></div></div>`;
 
-  // 逐月明细表
+  // 逐月明细表（含二代）
   let rows=months.map(m=>{
     const r=ALL[m]._total;
-    const tot=r.zi+r.shou+r.zou;
+    const sec=r.secZi||0;
+    const tot=r.zi+sec+r.shou+r.zou;
     return `<tr><td>${mLabel(m)}</td>
       <td class="td-amt">${W(r.zi)}</td><td class="td-pct">${r.ziR}%</td>
+      <td class="${sec>0?'td-amt':'td-zero'}">${W(sec)}</td><td class="td-pct">${r.secZiR||0}%</td>
       <td class="td-amt">${W(r.shou)}</td><td class="td-pct">${r.shouR}%</td>
       <td class="td-amt">${W(r.zou)}</td><td class="td-pct">${r.zouR}%</td>
       <td class="td-total">${W(tot)}</td></tr>`;
   });
   rows.push(`<tr class="tr-total"><td>汇总</td>
     <td>${W(t.zi)}</td><td>${t.ziR}%</td>
+    <td>${W(t.secZi)}</td><td>${t.secZiR}%</td>
     <td>${W(t.shou)}</td><td>${t.shouR}%</td>
     <td>${W(t.zou)}</td><td>${t.zouR}%</td>
     <td>${W(t.total)}</td></tr>`);
   document.getElementById('total-body').innerHTML=rows.join('');
 
-  // 柱状图
+  // 柱状图（四列堆叠）
   const ziData=months.map(m=>+(ALL[m]._total.zi/10000).toFixed(2));
+  const secData=months.map(m=>+((ALL[m]._total.secZi||0)/10000).toFixed(2));
   const shData=months.map(m=>+(ALL[m]._total.shou/10000).toFixed(2));
   const zoData=months.map(m=>+(ALL[m]._total.zou/10000).toFixed(2));
-  const totData=months.map(m=>+((ALL[m]._total.zi+ALL[m]._total.shou+ALL[m]._total.zou)/10000).toFixed(2));
+  const totData=months.map(m=>+((ALL[m]._total.zi+(ALL[m]._total.secZi||0)+ALL[m]._total.shou+ALL[m]._total.zou)/10000).toFixed(2));
   if(!CHARTS.mbar)CHARTS.mbar=echarts.init(document.getElementById('c-monthly-bar'));
   CHARTS.mbar.setOption({
     title:{text:'月度消耗结构（万元）',left:'center',top:4,textStyle:{fontSize:12,fontWeight:700,color:'#333'}},
     tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
-    legend:{bottom:0,data:['一代自运营','其他收量','走量消耗'],itemWidth:10,itemHeight:10,textStyle:{fontSize:11}},
-    grid:{left:50,right:10,bottom:40,top:44},
+    legend:{bottom:0,data:['一代自运营','二代自运营','其他收量','走量消耗'],itemWidth:10,itemHeight:10,textStyle:{fontSize:11}},
+    grid:{left:50,right:10,bottom:44,top:44},
     xAxis:{type:'category',data:months.map(m=>mLabel(m))},
     yAxis:{type:'value',name:'万元'},
     series:[
       {name:'一代自运营',type:'bar',stack:'S',data:ziData,itemStyle:{color:'#00B96B'}},
+      {name:'二代自运营',type:'bar',stack:'S',data:secData,itemStyle:{color:'#a259ff'}},
       {name:'其他收量',type:'bar',stack:'S',data:shData,itemStyle:{color:'#FF2442'}},
       {name:'走量消耗',type:'bar',stack:'S',data:zoData,itemStyle:{color:'#4F6EF7'},
         label:{show:true,position:'top',formatter:p=>totData[p.dataIndex]+'万',fontSize:10,fontWeight:700,color:'#555'}},
     ]
   });
 
-  // 饼图
+  // 饼图（四项）
   if(!CHARTS.mpie)CHARTS.mpie=echarts.init(document.getElementById('c-monthly-pie'));
   CHARTS.mpie.setOption({
     title:{text:(months.length===1?mLabel(months[0]):modeLabel)+' 消耗结构',left:'center',top:4,textStyle:{fontSize:12,fontWeight:700,color:'#333'}},
@@ -435,13 +442,14 @@ function render(){
       label:{formatter:'{b}\n{d}%',fontSize:11,lineHeight:16},
       data:[
         {value:+(t.zi/10000).toFixed(2),name:'一代自运营',itemStyle:{color:'#00B96B'}},
+        {value:+(t.secZi/10000).toFixed(2),name:'二代自运营',itemStyle:{color:'#a259ff'}},
         {value:+(t.shou/10000).toFixed(2),name:'其他收量',itemStyle:{color:'#FF2442'}},
         {value:+(t.zou/10000).toFixed(2),name:'走量消耗',itemStyle:{color:'#4F6EF7'}},
       ]
     }]
   });
 
-  // 行业拆分
+  // 行业拆分（不含二代，行业数据无二代）
   const indAgg=d.industries;
   document.getElementById('detail-note').textContent=modeLabel+' | 按合计排序';
   const indList=IND_NAMES.map((name,idx)=>{
@@ -462,6 +470,7 @@ function render(){
       <td class="td-rank">${i+1}</td>
       <td><span class="dot" style="background:${color}"></span>${r.name}</td>
       <td class="${r.zi>0?'td-amt':'td-zero'}">${fmt(r.zi)}</td><td class="td-pct">${r.ziR}%</td>
+      <td class="td-zero">—</td><td class="td-pct">—</td>
       <td class="${r.shou>0?'td-amt':'td-zero'}">${fmt(r.shou)}</td><td class="td-pct">${r.shouR}%</td>
       <td class="${r.zou>0?'td-amt':'td-zero'}">${fmt(r.zou)}</td><td class="td-pct">${r.zouR}%</td>
       <td class="td-total">${fmt(r.total)}</td>
@@ -479,6 +488,7 @@ function render(){
   const ta=tz+ts+tzo;
   irows.push(`<tr class="tr-total"><td>—</td><td>合计</td>
     <td>${fmt(tz)}</td><td>${ta>0?(tz/ta*100).toFixed(1):0}%</td>
+    <td>—</td><td>—</td>
     <td>${fmt(ts)}</td><td>${ta>0?(ts/ta*100).toFixed(1):0}%</td>
     <td>${fmt(tzo)}</td><td>${ta>0?(tzo/ta*100).toFixed(1):0}%</td>
     <td>${fmt(ta)}</td><td></td></tr>`);
@@ -527,4 +537,4 @@ window.addEventListener('resize',()=>Object.values(CHARTS).forEach(c=>c&&c.resiz
 </script>
 </body>
 
-<!-- build:1778232521615193088 --></html>
+<!-- build:1778233263954200576 --></html>
