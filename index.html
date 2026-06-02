@@ -77,7 +77,7 @@ tr:hover td{background:#fffbfb}
     <span>📊 小红书CRM六合平台</span>
     <span>🏢 武汉微思敦网络技术有限公司</span>
     <span id="hdr-range"></span>
-    <span>数据更新于 2026-06-02 16:54 | 2026-01 ~ 2026-06</span>
+    <span>数据更新于 2026-06-02 16:56 | 2026-01 ~ 2026-06</span>
   </div>
 </div>
 
@@ -439,7 +439,7 @@ function render(){
   const edData=months.map(m=>+((ALL[m]._total.erdai||0)/10000).toFixed(2));
   const shData=months.map(m=>+(ALL[m]._total.shou/10000).toFixed(2));
   const zoData=months.map(m=>+(ALL[m]._total.zou/10000).toFixed(2));
-  const totData=months.map(m=>+((ALL[m]._total.zi+ALL[m]._total.shou+ALL[m]._total.zou)/10000).toFixed(2));
+  const totData=months.map(m=>+((ALL[m]._total.zi+(ALL[m]._total.erdai||0)+ALL[m]._total.shou+ALL[m]._total.zou)/10000).toFixed(2));
   if(!CHARTS.mbar)CHARTS.mbar=echarts.init(document.getElementById('c-monthly-bar'));
   CHARTS.mbar.setOption({
     title:{text:'月度消耗结构（万元）',left:'center',top:4,textStyle:{fontSize:12,fontWeight:700,color:'#333'}},
@@ -467,6 +467,7 @@ function render(){
       label:{formatter:'{b}\n{d}%',fontSize:11,lineHeight:16},
       data:[
         {value:+(t.zi/10000).toFixed(2),name:'一代自运营',itemStyle:{color:'#00B96B'}},
+        {value:+((t.erdai||0)/10000).toFixed(2),name:'二代自运营',itemStyle:{color:'#9c27b0'}},
         {value:+(t.shou/10000).toFixed(2),name:'其他收量',itemStyle:{color:'#FF2442'}},
         {value:+(t.zou/10000).toFixed(2),name:'走量消耗',itemStyle:{color:'#4F6EF7'}},
       ]
@@ -563,4 +564,4 @@ window.addEventListener('resize',()=>Object.values(CHARTS).forEach(c=>c&&c.resiz
 </script>
 </body>
 
-<!-- build:1780390470849469696 --></html>
+<!-- build:1780390569304544768 --></html>
