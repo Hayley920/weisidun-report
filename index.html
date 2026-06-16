@@ -77,7 +77,7 @@ tr:hover td{background:#fffbfb}
     <span>📊 小红书CRM六合平台</span>
     <span>🏢 武汉微思敦网络技术有限公司</span>
     <span id="hdr-range"></span>
-    <span>数据更新于 2026-06-16 12:32 | 2026-01 ~ 2026-06</span>
+    <span>数据更新于 2026-06-16 12:37 | 2026-01 ~ 2026-06</span>
   </div>
 </div>
 
@@ -309,13 +309,26 @@ function agg(months){
     });
   });
   const total=zi+erdai+shou+zou;
+  // 计算每个行业的占比
+  const industries={};
+  IND_NAMES.forEach(name=>{
+    const d=ind[name]||{zi:0,erdai:0,shou:0,zou:0};
+    const t=d.zi+d.erdai+d.shou+d.zou;
+    industries[name]={
+      zi:d.zi, erdai:d.erdai, shou:d.shou, zou:d.zou,
+      ziR:t>0?(d.zi/t*100).toFixed(1):'0.0',
+      erdaiR:t>0?(d.erdai/t*100).toFixed(1):'0.0',
+      shouR:t>0?(d.shou/t*100).toFixed(1):'0.0',
+      zouR:t>0?(d.zou/t*100).toFixed(1):'0.0'
+    };
+  });
   return {
     _total:{zi,erdai,shou,zou,total,
       ziR:total>0?(zi/total*100).toFixed(2):0,
       erdaiR:total>0?(erdai/total*100).toFixed(2):0,
       shouR:total>0?(shou/total*100).toFixed(2):0,
       zouR:total>0?(zou/total*100).toFixed(2):0},
-    industries:ind
+    industries
   };
 }
 
@@ -564,4 +577,4 @@ window.addEventListener('resize',()=>Object.values(CHARTS).forEach(c=>c&&c.resiz
 </script>
 </body>
 
-<!-- build:1781584345535953664 --></html>
+<!-- build:1781584641318368512 --></html>
