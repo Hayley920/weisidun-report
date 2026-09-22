@@ -77,7 +77,7 @@ tr:hover td{background:#fffbfb}
     <span>📊 小红书CRM六合平台</span>
     <span>🏢 武汉微思敦网络技术有限公司</span>
     <span id="hdr-range"></span>
-    <span>数据更新于 2026-09-22 09:02 | 2026-01 ~ 2026-09</span>
+    <span>数据更新于 2026-09-22 09:06 | 2026-01 ~ 2026-09</span>
   </div>
 </div>
 
@@ -676,7 +676,7 @@ function render(){
       ],
       series:[
         {name:'消耗(万)',type:'bar',yAxisIndex:0,data:ziD,itemStyle:{color,opacity:0.85},label:{show:true,position:'top',formatter:p=>p.value>0?p.value:'',fontSize:9}},
-        {name:'自运营%',type:'line',yAxisIndex:1,data:ziRD,smooth:true,symbol:'circle',symbolSize:5,lineStyle:{color:'#00B96B',width:2},itemStyle:{color:'#00B96B'},label:{show:true,position:'top',formatter:p=>p.value>0?p.value+'%':'',fontSize:9,color:'#00B96B'}},
+        {name:'自运营%',type:'line',yAxisIndex:1,data:ziRD,smooth:true,symbol:'circle',symbolSize:5,lineStyle:{color,width:2},itemStyle:{color},label:{show:true,position:'top',formatter:p=>p.value>0?p.value+'%':'',fontSize:9,color}},
       ]
     });
   });
@@ -690,4 +690,4 @@ window.addEventListener('resize',()=>Object.values(CHARTS).forEach(c=>c&&c.resiz
 </script>
 </body>
 
-<!-- build:1790038929686616832 --></html>
+<!-- build:1790039210039299328 --></html>
